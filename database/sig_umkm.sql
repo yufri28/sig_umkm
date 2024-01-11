@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Jan 2024 pada 04.48
--- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.2.34
+-- Waktu pembuatan: 11 Jan 2024 pada 17.29
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,6 +52,14 @@ CREATE TABLE `deskel` (
   `nm_deskel` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `deskel`
+--
+
+INSERT INTO `deskel` (`id_deskel`, `nm_deskel`) VALUES
+(2, 'Amanatun'),
+(3, 'Amanatuns');
+
 -- --------------------------------------------------------
 
 --
@@ -92,8 +100,17 @@ INSERT INTO `jenis_user` (`id_jenus`, `nama_jenus`, `level`) VALUES
 
 CREATE TABLE `kecamatan` (
   `id_kec` int(2) NOT NULL,
-  `nm_kec` varchar(25) NOT NULL
+  `nm_kec` varchar(25) NOT NULL,
+  `polygon` text NOT NULL,
+  `warna` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `kecamatan`
+--
+
+INSERT INTO `kecamatan` (`id_kec`, `nm_kec`, `polygon`, `warna`) VALUES
+(2, 'Rote Barat', 'add-kecamatan', '#b65d5d');
 
 -- --------------------------------------------------------
 
@@ -116,6 +133,13 @@ CREATE TABLE `sektor_usaha` (
   `id_su` int(1) NOT NULL,
   `nm_su` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `sektor_usaha`
+--
+
+INSERT INTO `sektor_usaha` (`id_su`, `nm_su`) VALUES
+(1, 'Haloos');
 
 -- --------------------------------------------------------
 
@@ -217,7 +241,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT untuk tabel `deskel`
 --
 ALTER TABLE `deskel`
-  MODIFY `id_deskel` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_deskel` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `faq`
@@ -235,7 +259,7 @@ ALTER TABLE `jenis_user`
 -- AUTO_INCREMENT untuk tabel `kecamatan`
 --
 ALTER TABLE `kecamatan`
-  MODIFY `id_kec` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kec` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `klasifikasi_usaha`
@@ -247,7 +271,7 @@ ALTER TABLE `klasifikasi_usaha`
 -- AUTO_INCREMENT untuk tabel `sektor_usaha`
 --
 ALTER TABLE `sektor_usaha`
-  MODIFY `id_su` int(1) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_su` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `usaha`
