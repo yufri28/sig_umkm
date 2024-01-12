@@ -4,7 +4,95 @@ $data_kecamatan = $Kecamatan->get();
 $data_deskel = $Deskel->get();
 $data_sektor = $Sektor->get();
 $data_klasifikasi = $Klasifikasi->get();
+
+
+if (isset($_POST['Simpan'])) {
+    $data = array();
+    $nama_usaha = htmlspecialchars($_POST['nama_usaha']);
+    $id_kec = htmlspecialchars($_POST['id_kec']);
+    $id_deskel = htmlspecialchars($_POST['id_deskel']);
+    $id_su = htmlspecialchars($_POST['id_su']);
+    $id_ku = htmlspecialchars($_POST['id_ku']);
+    $tahun_pembentukan = htmlspecialchars($_POST['tahun_pembentukan']);
+    $jenis_usaha = htmlspecialchars($_POST['jenis_usaha']);
+    $no_izin = htmlspecialchars($_POST['no_izin']);
+    $nama_pemilik = htmlspecialchars($_POST['nama_pemilik']);
+    $alamat = htmlspecialchars($_POST['alamat']);
+    $tk_laki = htmlspecialchars($_POST['tk_laki']);
+    $tk_perempuan = htmlspecialchars($_POST['tk_perempuan']);
+    $modal_sendiri = htmlspecialchars($_POST['modal_sendiri']);
+    $modal_luar = htmlspecialchars($_POST['modal_luar']);
+    $asset = htmlspecialchars($_POST['asset']);
+    $omset = htmlspecialchars($_POST['omset']);
+    $latitude = htmlspecialchars($_POST['latitude']);
+    $longitude = htmlspecialchars($_POST['longitude']);
+
+    $data = [
+        'nama_usaha' => $nama_usaha,
+        'id_kec' => $id_kec,
+        'id_deskel' => $id_deskel,
+        'id_su' => $id_su,
+        'id_ku' => $id_ku,
+        'tahun_pembentukan' => $tahun_pembentukan,
+        'jenis_usaha' => $jenis_usaha,
+        'no_izin' => $no_izin,
+        'nama_pemilik' => $nama_pemilik,
+        'alamat' => $alamat,
+        'tk_laki' => $tk_laki,
+        'tk_perempuan' => $tk_perempuan,
+        'modal_sendiri' => $modal_sendiri,
+        'modal_luar' => $modal_luar,
+        'asset' => $asset,
+        'omset' => $omset,
+        'latitude' => $latitude,
+        'longitude' => $longitude
+    ];
+    $Usaha->add($data);
+}
+
 ?>
+<?php if (isset($_SESSION['success'])) : ?>
+    <script>
+        Swal.fire({
+            title: 'Sukses!',
+            text: '<?php echo $_SESSION['success']; ?>',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.value) {
+                window.location = 'index.php?page=data-usaha';
+            }
+        });
+    </script>
+    <?php unset($_SESSION['success']); // Menghapus session setelah ditampilkan 
+    ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['warning'])) : ?>
+    <script>
+        Swal.fire({
+            title: 'Warning!',
+            text: '<?php echo $_SESSION['warning']; ?>',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    <?php unset($_SESSION['warning']); // Menghapus session setelah ditampilkan 
+    ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['error'])) : ?>
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: '<?php echo $_SESSION['error']; ?>',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    <?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
+    ?>
+<?php endif; ?>
 <div class="card card-primary">
     <div class="card-header">
         <h3 class="card-title">
@@ -49,7 +137,7 @@ $data_klasifikasi = $Klasifikasi->get();
                     <select name="id_su" id="id_su" class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_sektor as $key => $sektor) : ?>
-                            <option value="<?= $sektor['id_su']; ?>"><?= $sektor['nm_ku']; ?></option>
+                            <option value="<?= $sektor['id_su']; ?>"><?= $sektor['nm_su']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -159,37 +247,3 @@ $data_klasifikasi = $Klasifikasi->get();
         </div>
     </form>
 </div>
-
-<?php
-if (isset($_POST['Simpan'])) {
-    $sql_simpan = "INSERT INTO data_pegawai (nip, nama, alamat, no_hp, tempat_lahir, tanggal_lahir, jk, agama, status,id_periode) VALUES (
-			'" . $_POST['nip'] . "',
-			'" . $_POST['nama'] . "',
-			'" . $_POST['alamat'] . "',
-			'" . $_POST['no_hp'] . "',
-			'" . $_POST['tempat_lahir'] . "',
-			'" . $_POST['tanggal_lahir'] . "',
-			'" . $_POST['jk'] . "',
-			'" . $_POST['agama'] . "',
-			'" . $_POST['status'] . "',
-            '" . $_POST['id_periode'] . "')";
-    $query_simpan = mysqli_query($koneksi, $sql_simpan);
-    mysqli_close($koneksi);
-
-    if ($query_simpan) {
-        echo "<script>
-			Swal.fire({title: 'Tambah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
-			}).then((result) => {if (result.value){
-				window.location = 'index.php?page=data-pegawai';
-				}
-			})</script>";
-    } else {
-        echo "<script>
-			Swal.fire({title: 'Tambah Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
-			}).then((result) => {if (result.value){
-				window.location = 'index.php?page=add-pegawai';
-				}
-			})</script>";
-    }
-}
-     //selesai proses simpan data

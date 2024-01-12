@@ -15,7 +15,7 @@
                 <a href="?page=add-usaha" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Tambah Data Usaha</a>
                 <!-- <a href="./report/cetak-pegawai.php" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i> Laporan</a> -->
-                <div class="dropdown ml-1">
+                <!-- <div class="dropdown ml-1">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-print"></i> Laporan
                     </button>
@@ -33,7 +33,7 @@
                         <li><a class="dropdown-item" href="?page=data-pegawai">Semua</a></li>
 
                     </ul>
-                </div>
+                </div> -->
             </div>
             <br>
             <table id="example1" class="table nowrap table-bordered table-striped" style="width:100%;">

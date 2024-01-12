@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_GET['kode'])) {
-    $Usaha->delete($_GET['kode']);
+    $Klasifikasi->delete($_GET['kode']);
 }
 ?>
 
@@ -14,7 +14,7 @@ if (isset($_GET['kode'])) {
             confirmButtonText: 'OK'
         }).then((result) => {
             if (result.value) {
-                window.location = 'index.php?page=data-usaha';
+                window.location = 'index.php?page=data-ku';
             }
         });
     </script>
