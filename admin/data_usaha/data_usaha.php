@@ -40,11 +40,11 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Nama Usaha</th>
                         <th>Kecamatan</th>
                         <th>Desa/Kelurahan</th>
                         <th>Sektor Usaha</th>
                         <th>Klasifikasi Usaha</th>
-                        <th>Nama Usaha</th>
                         <th>Tahun Pembentukan</th>
                         <th>Jenis Usaha</th>
                         <th>No Izin</th>
@@ -71,6 +71,9 @@
                                 <?php echo $no++; ?>
                             </td>
                             <td>
+                                <?php echo $data['nm_usaha']; ?>
+                            </td>
+                            <td>
                                 <?php echo $data['nm_kec']; ?>
                             </td>
                             <td>
@@ -81,9 +84,6 @@
                             </td>
                             <td>
                                 <?php echo $data['nm_ku']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['nm_usaha']; ?>
                             </td>
                             <td>
                                 <?php echo $data['thn_pmtkn']; ?>

@@ -9,7 +9,6 @@ $data_klasifikasi = $Klasifikasi->get();
 if (isset($_POST['Simpan'])) {
     $data = array();
     $nama_usaha = htmlspecialchars($_POST['nama_usaha']);
-    $id_kec = htmlspecialchars($_POST['id_kec']);
     $id_deskel = htmlspecialchars($_POST['id_deskel']);
     $id_su = htmlspecialchars($_POST['id_su']);
     $id_ku = htmlspecialchars($_POST['id_ku']);
@@ -29,7 +28,6 @@ if (isset($_POST['Simpan'])) {
 
     $data = [
         'nama_usaha' => $nama_usaha,
-        'id_kec' => $id_kec,
         'id_deskel' => $id_deskel,
         'id_su' => $id_su,
         'id_ku' => $id_ku,
@@ -110,17 +108,6 @@ if (isset($_POST['Simpan'])) {
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Kecamatan</label>
-                <div class="col-sm-5">
-                    <select name="id_kec" id="id_kec" class="form-control">
-                        <option value="">- Pilih -</option>
-                        <?php foreach ($data_kecamatan as $key => $kecamatan) : ?>
-                            <option value="<?= $kecamatan['id_kec']; ?>"><?= $kecamatan['nm_kec']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Desa/Kelurahan</label>
                 <div class="col-sm-5">
                     <select name="id_deskel" id="id_deskel" class="form-control">
@@ -131,6 +118,7 @@ if (isset($_POST['Simpan'])) {
                     </select>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Sektor Usaha</label>
                 <div class="col-sm-5">

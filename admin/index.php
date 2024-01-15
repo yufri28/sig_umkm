@@ -16,7 +16,7 @@ $data_level = "Administrator";
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SIG UMKM TTS</title>
+    <title>SIG UMKM TTU</title>
     <link rel="icon" href="../assets/dist/img/logo.png">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,7 +75,7 @@ $data_level = "Administrator";
             <!-- Brand Logo -->
             <a href="index.php" class="brand-link">
                 <img src="../assets/dist/img/logo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
-                <span class="brand-text"> SIG UMKM TTS</span>
+                <span class="brand-text"> SIG UMKM TTU</span>
             </a>
 
             <!-- Sidebar -->

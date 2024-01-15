@@ -1,9 +1,9 @@
 <?php
 
-    if(isset($_GET['kode'])){
-        $sql_cek = $Deskel->getById($_GET['kode']);
-        $data_cek = mysqli_fetch_array($sql_cek,MYSQLI_BOTH);
-    }
+if (isset($_GET['kode'])) {
+    $sql_cek = $Deskel->getById($_GET['kode']);
+    $data_cek = mysqli_fetch_array($sql_cek, MYSQLI_BOTH);
+}
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -23,6 +23,14 @@
                             </td>
                             <td>:
                                 <?php echo $data_cek['nm_deskel']; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                <b>Nama Kecamatan</b>
+                            </td>
+                            <td>:
+                                <?php echo $data_cek['nm_kec']; ?>
                             </td>
                         </tr>
                     </tbody>

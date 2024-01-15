@@ -5,12 +5,55 @@ if (isset($_GET['kode'])) {
     $data_cek = mysqli_fetch_array($sql_cek, MYSQLI_BOTH);
 }
 if (isset($_POST['Ubah'])) {
+    $data = array();
+    $id_datum = htmlspecialchars($_GET['kode']);
+    $nama_usaha = htmlspecialchars($_POST['nama_usaha']);
+    $id_deskel = htmlspecialchars($_POST['id_deskel']);
+    $id_su = htmlspecialchars($_POST['id_su']);
+    $id_ku = htmlspecialchars($_POST['id_ku']);
+    $tahun_pembentukan = htmlspecialchars($_POST['tahun_pembentukan']);
+    $jenis_usaha = htmlspecialchars($_POST['jenis_usaha']);
+    $no_izin = htmlspecialchars($_POST['no_izin']);
+    $nama_pemilik = htmlspecialchars($_POST['nama_pemilik']);
+    $alamat = htmlspecialchars($_POST['alamat']);
+    $tk_laki = htmlspecialchars($_POST['tk_laki']);
+    $tk_perempuan = htmlspecialchars($_POST['tk_perempuan']);
+    $modal_sendiri = htmlspecialchars($_POST['modal_sendiri']);
+    $modal_luar = htmlspecialchars($_POST['modal_luar']);
+    $asset = htmlspecialchars($_POST['asset']);
+    $omset = htmlspecialchars($_POST['omset']);
+    $latitude = htmlspecialchars($_POST['latitude']);
+    $longitude = htmlspecialchars($_POST['longitude']);
+
     $data = [
-        'id_ku' => htmlspecialchars($_GET['kode']),
-        'nama_ku' => htmlspecialchars($_POST['nama_ku'])
+        'id_datum' => $id_datum,
+        'nama_usaha' => $nama_usaha,
+        'id_deskel' => $id_deskel,
+        'id_su' => $id_su,
+        'id_ku' => $id_ku,
+        'tahun_pembentukan' => $tahun_pembentukan,
+        'jenis_usaha' => $jenis_usaha,
+        'no_izin' => $no_izin,
+        'nama_pemilik' => $nama_pemilik,
+        'alamat' => $alamat,
+        'tk_laki' => $tk_laki,
+        'tk_perempuan' => $tk_perempuan,
+        'modal_sendiri' => $modal_sendiri,
+        'modal_luar' => $modal_luar,
+        'asset' => $asset,
+        'omset' => $omset,
+        'latitude' => $latitude,
+        'longitude' => $longitude
     ];
+
+
     $Usaha->update($data);
 }
+
+// $data_kecamatan = $Kecamatan->get();
+$data_deskel = $Deskel->get();
+$data_sektor = $Sektor->get();
+$data_klasifikasi = $Klasifikasi->get();
 ?>
 <?php if (isset($_SESSION['success'])) : ?>
     <script>
@@ -66,19 +109,7 @@ if (isset($_POST['Ubah'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nama Usaha</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="nama_usaha" name="nama_usaha" placeholder="Nama Usaha" required>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Kecamatan</label>
-                <div class="col-sm-5">
-                    <select name="id_kec" id="id_kec" class="form-control">
-                        <option value="">- Pilih -</option>
-                        <?php foreach ($data_kecamatan as $key => $kecamatan) : ?>
-                            <option value="<?= $kecamatan['id_kec']; ?>"><?= $kecamatan['nm_kec']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                    <input type="text" class="form-control" id="nama_usaha" value="<?= $data_cek['nm_usaha']; ?>" name="nama_usaha" placeholder="Nama Usaha" required>
                 </div>
             </div>
             <div class="form-group row">
@@ -87,7 +118,7 @@ if (isset($_POST['Ubah'])) {
                     <select name="id_deskel" id="id_deskel" class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_deskel as $key => $deskel) : ?>
-                            <option value="<?= $deskel['id_deskel']; ?>"><?= $deskel['nm_deskel']; ?></option>
+                            <option <?= $data_cek['id_deskel'] == $deskel['id_deskel'] ? 'selected' : ''; ?> value="<?= $deskel['id_deskel']; ?>"><?= $deskel['nm_deskel']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -98,7 +129,7 @@ if (isset($_POST['Ubah'])) {
                     <select name="id_su" id="id_su" class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_sektor as $key => $sektor) : ?>
-                            <option value="<?= $sektor['id_su']; ?>"><?= $sektor['nm_su']; ?></option>
+                            <option <?= $data_cek['id_su'] == $sektor['id_su'] ? 'selected' : ''; ?> value="<?= $sektor['id_su']; ?>"><?= $sektor['nm_su']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -109,7 +140,7 @@ if (isset($_POST['Ubah'])) {
                     <select name="id_ku" id="id_ku" class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_klasifikasi as $key => $klasifikasi) : ?>
-                            <option value="<?= $klasifikasi['id_ku']; ?>"><?= $klasifikasi['nm_ku']; ?></option>
+                            <option <?= $data_cek['id_ku'] == $klasifikasi['id_ku'] ? 'selected' : ''; ?> value="<?= $klasifikasi['id_ku']; ?>"><?= $klasifikasi['nm_ku']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -118,14 +149,14 @@ if (isset($_POST['Ubah'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tahun Pembentukan</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="tahun_pembentukan" name="tahun_pembentukan" placeholder="Contoh: 2019" required>
+                    <input type="number" class="form-control" value="<?= $data_cek['thn_pmtkn']; ?>" id="tahun_pembentukan" name="tahun_pembentukan" placeholder="Contoh: 2019" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Jenis Usaha</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="jenis_usaha" name="jenis_usaha" placeholder="Jenis Usaha" required>
+                    <input type="text" class="form-control" value="<?= $data_cek['jns_ush']; ?>" id="jenis_usaha" name="jenis_usaha" placeholder="Jenis Usaha" required>
                 </div>
             </div>
 
@@ -134,7 +165,7 @@ if (isset($_POST['Ubah'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nomor Izin</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="no_izin" name="no_izin" placeholder="Nomor Izin" required>
+                    <input type="text" class="form-control" value="<?= $data_cek['nmr_izin']; ?>" id="no_izin" name="no_izin" placeholder="Nomor Izin" required>
                 </div>
             </div>
 
@@ -142,63 +173,63 @@ if (isset($_POST['Ubah'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nama Pemilik</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="nama_pemilik" name="nama_pemilik" placeholder="Nama Pemilik" required>
+                    <input type="text" class="form-control" value="<?= $data_cek['nm_pemilik']; ?>" id="nama_pemilik" name="nama_pemilik" placeholder="Nama Pemilik" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                 <div class="col-sm-5">
-                    <textarea class="form-control" name="alamat" id="alamat" rows="3"></textarea>
+                    <textarea class="form-control" name="alamat" id="alamat" rows="3"><?= $data_cek['alamat']; ?></textarea>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Jumlah Pekerja Laki-laki</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="tk_laki" name="tk_laki" placeholder="Jumlah Pekerja Laki-laki" required>
+                    <input type="number" class="form-control" id="tk_laki" value="<?= $data_cek['tng_kerja_lki']; ?>" name="tk_laki" placeholder="Jumlah Pekerja Laki-laki" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Jumlah Pekerja Perempuan</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="tk_perempuan" name="tk_perempuan" placeholder="Jumlah Pekerja Perempuan" required>
+                    <input type="number" class="form-control" id="tk_perempuan" name="tk_perempuan" value="<?= $data_cek['tng_kerja_prmpn']; ?>" placeholder="Jumlah Pekerja Perempuan" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Modal Sendiri</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="modal_sendiri" name="modal_sendiri" placeholder="Modal Sendiri" required>
+                    <input type="number" class="form-control" id="modal_sendiri" value="<?= $data_cek['mdl_sendiri']; ?>" name="modal_sendiri" placeholder="Modal Sendiri" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Modal Luar</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="modal_luar" name="modal_luar" placeholder="Modal Luar" required>
+                    <input type="number" class="form-control" id="modal_luar" name="modal_luar" value="<?= $data_cek['mdl_luar']; ?>" placeholder="Modal Luar" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Asset</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="asset" name="asset" placeholder="Asset" required>
+                    <input type="number" class="form-control" id="asset" value="<?= $data_cek['asset']; ?>" name="asset" placeholder="Asset" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Omset</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="omset" name="omset" placeholder="Omset" required>
+                    <input type="number" class="form-control" id="omset" name="omset" value="<?= $data_cek['omset']; ?>" placeholder="Omset" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Latitude</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Latitude" required>
+                    <input type="text" class="form-control" id="latitude" name="latitude" value="<?= $data_cek['latitude']; ?>" placeholder="Latitude" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Longitude</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="longitude" name="longitude" placeholder="Longitude" required>
+                    <input type="text" class="form-control" id="longitude" name="longitude" value="<?= $data_cek['longitude']; ?>" placeholder="Longitude" required>
                 </div>
             </div>
         </div>
@@ -208,40 +239,3 @@ if (isset($_POST['Ubah'])) {
         </div>
     </form>
 </div>
-
-<?php
-
-if (isset($_POST['Ubah'])) {
-    $sql_ubah = "UPDATE data_pegawai SET
-		nip='" . $_POST['nip'] . "',
-		nama='" . $_POST['nama'] . "',
-		alamat='" . $_POST['alamat'] . "',
-		no_hp='" . $_POST['no_hp'] . "',
-		tempat_lahir='" . $_POST['tempat_lahir'] . "',
-		tanggal_lahir='" . $_POST['tanggal_lahir'] . "',
-		jk='" . $_POST['jk'] . "',
-		agama='" . $_POST['agama'] . "',
-		status='" . $_POST['status'] . "',
-		id_periode='" . $_POST['id_periode'] . "'
-		WHERE id_pegawai='" . $_POST['id_pegawai'] . "'";
-
-    $query_ubah = mysqli_query($koneksi, $sql_ubah);
-
-    if ($query_ubah) {
-        echo "<script>
-        Swal.fire({title: 'Ubah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.value) {
-                window.location = 'index.php?page=data-pegawai';
-            }
-        })</script>";
-    } else {
-        echo "<script>
-        Swal.fire({title: 'Ubah Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.value) {
-                window.location = 'index.php?page=data-pegawai';
-            }
-        })</script>";
-    }
-}

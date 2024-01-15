@@ -22,6 +22,7 @@ $data_deskel = $Deskel->get();
                     <tr>
                         <th>No</th>
                         <th>Nama Desa/Kelurahan</th>
+                        <th>Kecamatan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -31,29 +32,28 @@ $data_deskel = $Deskel->get();
                     while ($deskel = $data_deskel->fetch_assoc()) {
                     ?>
 
-                    <tr>
-                        <td>
-                            <?php echo $no++; ?>
-                        </td>
-                        <td>
-                            <?php echo $deskel['nm_deskel']; ?>
-                        </td>
-                        <td>
-                            <a href="?page=view-deskel&kode=<?php echo $deskel['id_deskel']; ?>" title="Detail"
-                                class="btn btn-info btn-sm">
-                                <i class="fa fa-eye"></i>
-                            </a>
-                            </a>
-                            <a href="?page=edit-deskel&kode=<?php echo $deskel['id_deskel']; ?>" title="Ubah"
-                                class="btn btn-success btn-sm">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <a href="?page=del-deskel&kode=<?php echo $deskel['id_deskel']; ?>"
-                                onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus"
-                                class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash"></i>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <?php echo $no++; ?>
+                            </td>
+                            <td>
+                                <?php echo $deskel['nm_deskel']; ?>
+                            </td>
+                            <td>
+                                <?php echo $deskel['nm_kec']; ?>
+                            </td>
+                            <td>
+                                <a href="?page=view-deskel&kode=<?php echo $deskel['id_deskel']; ?>" title="Detail" class="btn btn-info btn-sm">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                </a>
+                                <a href="?page=edit-deskel&kode=<?php echo $deskel['id_deskel']; ?>" title="Ubah" class="btn btn-success btn-sm">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="?page=del-deskel&kode=<?php echo $deskel['id_deskel']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i>
+                            </td>
+                        </tr>
 
                     <?php
                     }
