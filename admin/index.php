@@ -7,6 +7,9 @@ require_once './functions/kecamatan.php';
 require_once './functions/deskel.php';
 require_once './functions/sektor_usaha.php';
 require_once './functions/klasifikasi_usaha.php';
+if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
+    header("Location: ../index.php");
+}
 
 $data_level = "Administrator";
 ?>
@@ -60,7 +63,7 @@ $data_level = "Administrator";
                     <a href="index.php" class="nav-link">
                         <font color="white">
                             <b>
-                                <?php echo "Default"; ?>
+                                <?php echo $_SESSION['username']; ?>
                             </b>
                         </font>
                     </a>
@@ -87,10 +90,10 @@ $data_level = "Administrator";
                     </div>
                     <div class="info">
                         <a href="index.php" class="d-block">
-                            <?php echo "Default Name"; ?>
+                            <?php echo $_SESSION['username']; ?>
                         </a>
                         <span class="badge badge-success">
-                            <?php echo "Default Level"; ?>
+                            <?php echo $_SESSION['level']; ?>
                         </span>
                     </div>
                 </div>
@@ -151,66 +154,12 @@ $data_level = "Administrator";
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <?php if (isset($_GET['page']) && ($_GET['page'] == 'data-pensiun' || $_GET['page'] == 'data-mutasi' || $_GET['page'] == 'data-pendidikan' || $_GET['page'] == 'data-golongan' || $_GET['page'] == 'data-jabatan')) : ?>
-                                    <a href="#" class="nav-link active">
-                                    <?php else : ?>
-                                        <a href="#" class="nav-link">
-                                        <?php endif; ?>
-                                        <i class="nav-icon fas fa-database"></i>
-                                        <p>
-                                            Master Data
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                        </a>
-
-                                        <ul class="nav nav-treeview nav-pills nav-sidebar">
-                                            <li class="nav-item">
-                                                <a href="?page=data-pensiun" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-pensiun' ? 'active' : '') : '' ?>">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Data Pensiun</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="?page=data-mutasi" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-mutasi' ? 'active' : '') : '' ?>">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Data Mutasi</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="?page=data-pendidikan" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-pendidikan' ? 'active' : '') : '' ?>">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Data Pendidikan</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="?page=data-golongan" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-golongan' ? 'active' : '') : '' ?>">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Data Golongan</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="?page=data-jabatan" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-jabatan' ? 'active' : '') : '' ?>">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Data Jabatan</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                            </li>
                             <li class="nav-header">Setting</li>
                             <li class="nav-item">
                                 <a href="?page=data-pengguna" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-pengguna' ? 'active' : '') : '' ?>">
                                     <i class="nav-icon far fa-user"></i>
                                     <p>
                                         Administrator
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="?page=data-periode" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-periode' ? 'active' : '') : '' ?>">
-                                    <i class="nav-icon fa fa-calendar"></i>
-                                    <p>
-                                        Periode
                                     </p>
                                 </a>
                             </li>
