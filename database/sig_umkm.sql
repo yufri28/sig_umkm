@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Jan 2024 pada 09.27
+-- Waktu pembuatan: 17 Jan 2024 pada 09.42
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.2.34
 
@@ -179,6 +179,28 @@ INSERT INTO `klasifikasi_usaha` (`id_ku`, `nm_ku`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `konten`
+--
+
+CREATE TABLE `konten` (
+  `id_konten` int(11) NOT NULL,
+  `nm_konten` varchar(30) NOT NULL,
+  `gambar` text NOT NULL,
+  `deskripsi` longtext NOT NULL,
+  `jns_konten` varchar(15) NOT NULL,
+  `id_admin` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `konten`
+--
+
+INSERT INTO `konten` (`id_konten`, `nm_konten`, `gambar`, `deskripsi`, `jns_konten`, `id_admin`) VALUES
+(4, 'Halaman Utama', '1705480935_5c57a8967bbd906f6a047e4c01adcc2a.jpg', '<p><strong>dassadas</strong></p><p>&nbsp;</p><ol><li><strong>ads</strong><i>dasdasdas</i></li><li><i>dassadas</i></li></ol><ul><li><i>dasdsadsa</i></li></ul>', '1', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `sektor_usaha`
 --
 
@@ -272,6 +294,13 @@ ALTER TABLE `klasifikasi_usaha`
   ADD PRIMARY KEY (`id_ku`);
 
 --
+-- Indeks untuk tabel `konten`
+--
+ALTER TABLE `konten`
+  ADD PRIMARY KEY (`id_konten`),
+  ADD KEY `id_admin` (`id_admin`);
+
+--
 -- Indeks untuk tabel `sektor_usaha`
 --
 ALTER TABLE `sektor_usaha`
@@ -327,6 +356,12 @@ ALTER TABLE `klasifikasi_usaha`
   MODIFY `id_ku` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT untuk tabel `konten`
+--
+ALTER TABLE `konten`
+  MODIFY `id_konten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT untuk tabel `sektor_usaha`
 --
 ALTER TABLE `sektor_usaha`
@@ -359,6 +394,12 @@ ALTER TABLE `faq`
 --
 ALTER TABLE `jenis_user`
   ADD CONSTRAINT `jenis_user_ibfk_1` FOREIGN KEY (`id_jenus`) REFERENCES `admin` (`id_jenus`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `konten`
+--
+ALTER TABLE `konten`
+  ADD CONSTRAINT `konten_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `usaha`

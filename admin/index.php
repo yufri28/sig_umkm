@@ -7,6 +7,7 @@ require_once './functions/kecamatan.php';
 require_once './functions/deskel.php';
 require_once './functions/sektor_usaha.php';
 require_once './functions/klasifikasi_usaha.php';
+require_once './functions/pengaturan.php';
 if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
     header("Location: ../index.php");
 }
@@ -39,6 +40,7 @@ $data_level = "Administrator";
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Alert -->
     <script src="../assets/plugins/alert.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -164,10 +166,10 @@ $data_level = "Administrator";
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="?page=data-profil" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-profil' ? 'active' : '') : '' ?>">
-                                    <i class="nav-icon fas fa-info-circle"></i>
+                                <a href="?page=data-pengaturan" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-pengaturan' ? 'active' : '') : '' ?>">
+                                    <i class="nav-icon fa fa-wrench"></i>
                                     <p>
-                                        Tentang Sistem
+                                        Pengaturan Web
                                     </p>
                                 </a>
                             </li>
@@ -324,21 +326,21 @@ $data_level = "Administrator";
                                 include "./klasifikasi_usaha/view_ku.php";
                                 break;
 
-                                //Pendidikan
-                            case 'data-pendidikan':
-                                include "admin/pendidikan/data_pendidikan.php";
+                                //konten
+                            case 'data-pengaturan':
+                                include "./pengaturan/data_pengaturan.php";
                                 break;
-                            case 'add-pendidikan':
-                                include "admin/pendidikan/add_pendidikan.php";
+                            case 'add-pengaturan':
+                                include "./pengaturan/add_pengaturan.php";
                                 break;
-                            case 'edit-pendidikan':
-                                include "admin/pendidikan/edit_pendidikan.php";
+                            case 'edit-pengaturan':
+                                include "./pengaturan/edit_pengaturan.php";
                                 break;
-                            case 'del-pendidikan':
-                                include "admin/pendidikan/del_pendidikan.php";
+                            case 'del-pengaturan':
+                                include "./pengaturan/del_pengaturan.php";
                                 break;
-                            case 'view-pendidikan':
-                                include "admin/pendidikan/view_pendidikan.php";
+                            case 'view-pengaturan':
+                                include "./pengaturan/view_pengaturan.php";
                                 break;
 
                                 //Golongan
@@ -485,6 +487,15 @@ $data_level = "Administrator";
             })
         })
     </script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
 
 </body>
 
