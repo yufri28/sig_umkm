@@ -34,34 +34,38 @@ $data_pengaturan = $Pengaturan->get();
                     while ($pengaturan = $data_pengaturan->fetch_assoc()) {
                     ?>
 
-                        <tr>
-                            <td>
-                                <?php echo $no++; ?>
-                            </td>
-                            <td>
-                                <?php echo $pengaturan['nm_konten']; ?>
-                            </td>
-                            <td>
-                                <img height="100" width="100" src="../assets/images/<?php echo $pengaturan['gambar']; ?>" alt="">
-                            </td>
-                            <td>
-                                <?php echo substr($pengaturan['deskripsi'], 0, 20); ?>
-                            </td>
-                            <td>
-                                <?php echo $pengaturan['jns_konten'] == 1 ? 'Halaman Utama' : ($pengaturan['jns_konten'] == 2 ? 'Visi Misi' : 'Produk'); ?>
-                            </td>
-                            <td>
-                                <a href="?page=view-pengaturan&kode=<?php echo $pengaturan['id_konten']; ?>" title="Detail" class="btn btn-info btn-sm">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                </a>
-                                <a href="?page=edit-pengaturan&kode=<?php echo $pengaturan['id_konten']; ?>" title="Ubah" class="btn btn-success btn-sm">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="?page=del-pengaturan&kode=<?php echo $pengaturan['id_konten']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <?= $no++; ?>
+                        </td>
+                        <td>
+                            <?= $pengaturan['nm_konten']; ?>
+                        </td>
+                        <td>
+                            <img height="100" width="100" src="../assets/images/<?= $pengaturan['gambar']; ?>" alt="">
+                        </td>
+                        <td>
+                            <?= substr($pengaturan['deskripsi'], 0, 20).'...'; ?>
+                        </td>
+                        <td>
+                            <?= $pengaturan['jns_konten'] == 1 ? 'Halaman Utama' : ($pengaturan['jns_konten'] == 2 ? 'Visi Misi' : 'Produk'); ?>
+                        </td>
+                        <td>
+                            <a href="?page=view-pengaturan&kode=<?= $pengaturan['id_konten']; ?>" title="Detail"
+                                class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            </a>
+                            <a href="?page=edit-pengaturan&kode=<?= $pengaturan['id_konten']; ?>" title="Ubah"
+                                class="btn btn-success btn-sm">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="?page=del-pengaturan&kode=<?= $pengaturan['id_konten']; ?>"
+                                onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus"
+                                class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                        </td>
+                    </tr>
 
                     <?php
                     }

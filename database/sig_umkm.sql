@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Jan 2024 pada 09.42
--- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.2.34
+-- Waktu pembuatan: 18 Jan 2024 pada 15.22
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -185,7 +185,7 @@ INSERT INTO `klasifikasi_usaha` (`id_ku`, `nm_ku`) VALUES
 CREATE TABLE `konten` (
   `id_konten` int(11) NOT NULL,
   `nm_konten` varchar(30) NOT NULL,
-  `gambar` text NOT NULL,
+  `gambar` text DEFAULT NULL,
   `deskripsi` longtext NOT NULL,
   `jns_konten` varchar(15) NOT NULL,
   `id_admin` int(5) NOT NULL
@@ -196,7 +196,11 @@ CREATE TABLE `konten` (
 --
 
 INSERT INTO `konten` (`id_konten`, `nm_konten`, `gambar`, `deskripsi`, `jns_konten`, `id_admin`) VALUES
-(4, 'Halaman Utama', '1705480935_5c57a8967bbd906f6a047e4c01adcc2a.jpg', '<p><strong>dassadas</strong></p><p>&nbsp;</p><ol><li><strong>ads</strong><i>dasdasdas</i></li><li><i>dassadas</i></li></ol><ul><li><i>dasdsadsa</i></li></ul>', '1', 1);
+(4, 'Halaman Utama', '1705585762_logo_kab.ttu-removebg-preview.png', '<p>Kiasan :<br>Pemberdayaan melalui pemodalan , sosialisasi, pendampingan, dan pengontrolan dapat membantu meningkatkan kinerja produktivitas tiap usaha.</p><p><strong>Bernardinus Totnay, S.Sos</strong></p><p><strong>Kepala Dinas Koperasi Usaha Kecil dan Menengah Kabupaten TTU</strong></p><p>Sekilas UMKM di TTU</p><p>Usaha Mikro, Kecil, dan Menengah (UMKM) di Kabupaten Timor Tengah Utara (TTU) umumnya melibatkan sektor pertanian, kerajinan tradisional, perdagangan lokal, dan jasa. Potensi ekonomi UMKM dapat berkontribusi pada pertumbuhan ekonomi daerah serta memperkuat keberlanjutan ekonomi masyarakat setempat.</p>', '1', 1),
+(5, 'Visi', '', '<p>Terwujudnya koperasi dan UMKM yang mandiri sebagai pelaku ekonomi yang tanggap, tangguh dan ulet demi mencapai masyarakat Timor Tengah Utara yang sejahtera secara adil.</p>', '2', 1),
+(6, 'Misi', '', '<ol><li>Meningkatkan kualitas kelembagaan koperasi, UKM dalam bidang organisasi administrasi dan sumber daya manusia.</li><li>Pengembangan kewirausahaan bagi koperasi dan UMKM melalui pembinaan, bimbingan dan fasilitas pengembangan dan peningkatan hasil produksi serta mengembangkan iklim usaha yang kondusif.</li></ol>', '3', 1),
+(7, 'Jagung Titi', '1705586914_Screenshot (21).png', '<p>Terbuat dari kedelai hitam berkualitas</p>', '4', 1),
+(8, 'Jagung Titi 2', '1705587449_Screenshot (1).png', '<p>Terbuat dari kacang pilihan mama</p>', '4', 1);
 
 -- --------------------------------------------------------
 
@@ -359,7 +363,7 @@ ALTER TABLE `klasifikasi_usaha`
 -- AUTO_INCREMENT untuk tabel `konten`
 --
 ALTER TABLE `konten`
-  MODIFY `id_konten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_konten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `sektor_usaha`

@@ -32,51 +32,58 @@ if (isset($_POST['Simpan'])) {
             return $_SESSION['error'] = "Gagal mengupload gambar!";
         }
     } else {
-        return $_SESSION['error'] = "Gambar tidak dipilih!";
+        $data = [
+            'judul_konten' => $judul_konten,
+            'gambar_konten' => NULL,
+            'deskripsi' => $deskripsi,
+            'jns_konten' => $jns_konten,
+            'id_user' => $id_user
+        ];
+        $Pengaturan->add($data);
     }
 }
 
 ?>
 <?php if (isset($_SESSION['success'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Sukses!',
-            text: '<?php echo $_SESSION['success']; ?>',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.value) {
-                window.location = 'index.php?page=data-pengaturan';
-            }
-        });
-    </script>
-    <?php unset($_SESSION['success']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Sukses!',
+    text: '<?php echo $_SESSION['success']; ?>',
+    icon: 'success',
+    confirmButtonText: 'OK'
+}).then((result) => {
+    if (result.value) {
+        window.location = 'index.php?page=data-pengaturan';
+    }
+});
+</script>
+<?php unset($_SESSION['success']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['warning'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Warning!',
-            text: '<?php echo $_SESSION['warning']; ?>',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-    </script>
-    <?php unset($_SESSION['warning']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Warning!',
+    text: '<?php echo $_SESSION['warning']; ?>',
+    icon: 'warning',
+    confirmButtonText: 'OK'
+});
+</script>
+<?php unset($_SESSION['warning']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['error'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Error!',
-            text: '<?php echo $_SESSION['error']; ?>',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    </script>
-    <?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Error!',
+    text: '<?php echo $_SESSION['error']; ?>',
+    icon: 'error',
+    confirmButtonText: 'OK'
+});
+</script>
+<?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 <div class="card card-primary">
@@ -90,13 +97,15 @@ if (isset($_POST['Simpan'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Judul Konten</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="judul_konten" name="judul_konten" placeholder="Judul Konten" required>
+                    <input type="text" class="form-control" id="judul_konten" name="judul_konten"
+                        placeholder="Judul Konten" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Gambar Konten <i><small>(Optional)</small></i></label>
                 <div class="col-sm-5">
-                    <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="gambar_konten" name="gambar_konten" placeholder="Gambar Konten" required>
+                    <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="gambar_konten"
+                        name="gambar_konten" placeholder="Gambar Konten">
                 </div>
             </div>
             <div class="form-group row">
@@ -111,8 +120,9 @@ if (isset($_POST['Simpan'])) {
                     <select name="jns_konten" id="jns_konten" class="form-control">
                         <option value="">- Pilih -</option>
                         <option value="1">Halaman Utama</option>
-                        <option value="2">Visi Misi</option>
-                        <option value="3">Produk</option>
+                        <option value="2">Visi</option>
+                        <option value="3">Misi</option>
+                        <option value="4">Produk</option>
                     </select>
                 </div>
             </div>

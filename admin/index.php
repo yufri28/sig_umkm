@@ -21,7 +21,7 @@ $data_level = "Administrator";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SIG UMKM TTU</title>
-    <link rel="icon" href="../assets/dist/img/logo.png">
+    <link rel="icon" href="../assets/dist/img/logo_dinas.png">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -102,108 +102,118 @@ $data_level = "Administrator";
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
 
                         <!-- Level  -->
                         <?php
                         if ($data_level == "Administrator") {
                         ?>
-                            <li class="nav-item">
-                                <a href="index.php" class="nav-link <?= !isset($_GET['page']) ? 'active' : '' ?>">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Dashboard
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="?page=data-usaha" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-usaha' ? 'active' : '') : '' ?>">
-                                    <i class="nav-icon far fa fa-table"></i>
-                                    <p>
-                                        Data Usaha
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="?page=data-kecamatan" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-kecamatan' || $_GET['page'] == 'add-kecamatan' || $_GET['page'] == 'edit-kecamatan' || $_GET['page'] == 'view-kecamatan' ? 'active' : '') : '' ?>">
-                                    <i class="nav-icon far fa fa-table"></i>
-                                    <p>
-                                        Kecamatan
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="?page=data-deskel" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-deskel' || $_GET['page'] == 'add-deskel' || $_GET['page'] == 'edit-deskel' || $_GET['page'] == 'view-deskel' ? 'active' : '') : '' ?>">
-                                    <i class="nav-icon far fa fa-table"></i>
-                                    <p>
-                                        Desa/Kelurahan
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="?page=data-su" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-su' || $_GET['page'] == 'add-su' || $_GET['page'] == 'edit-su' || $_GET['page'] == 'view-su' ? 'active' : '') : '' ?>">
-                                    <i class="nav-icon far fa fa-table"></i>
-                                    <p>
-                                        Sektor Usaha
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="?page=data-ku" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-ku' ? 'active' : '') : '' ?>">
-                                    <i class="nav-icon fa fa-object-group" aria-hidden="true"></i>
-                                    <p>
-                                        Klasifikasi Usaha
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-header">Setting</li>
-                            <li class="nav-item">
-                                <a href="?page=data-pengguna" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-pengguna' ? 'active' : '') : '' ?>">
-                                    <i class="nav-icon far fa-user"></i>
-                                    <p>
-                                        Administrator
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="?page=data-pengaturan" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-pengaturan' ? 'active' : '') : '' ?>">
-                                    <i class="nav-icon fa fa-wrench"></i>
-                                    <p>
-                                        Pengaturan Web
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a href="index.php" class="nav-link <?= !isset($_GET['page']) ? 'active' : '' ?>">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-usaha"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-usaha' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
+                                <p>
+                                    Data Usaha
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-kecamatan"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-kecamatan' || $_GET['page'] == 'add-kecamatan' || $_GET['page'] == 'edit-kecamatan' || $_GET['page'] == 'view-kecamatan' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
+                                <p>
+                                    Kecamatan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-deskel"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-deskel' || $_GET['page'] == 'add-deskel' || $_GET['page'] == 'edit-deskel' || $_GET['page'] == 'view-deskel' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
+                                <p>
+                                    Desa/Kelurahan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-su"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-su' || $_GET['page'] == 'add-su' || $_GET['page'] == 'edit-su' || $_GET['page'] == 'view-su' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
+                                <p>
+                                    Sektor Usaha
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-ku"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-ku' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon fa fa-object-group" aria-hidden="true"></i>
+                                <p>
+                                    Klasifikasi Usaha
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-header">Setting</li>
+                        <li class="nav-item">
+                            <a href="?page=data-pengguna"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-pengguna' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa-user"></i>
+                                <p>
+                                    Administrator
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-pengaturan"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-pengaturan' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon fa fa-wrench"></i>
+                                <p>
+                                    Pengaturan Web
+                                </p>
+                            </a>
+                        </li>
 
                         <?php
                         } elseif ($data_level == "Sekretaris") {
                         ?>
 
-                            <li class="nav-item">
-                                <a href="index.php" class="nav-link <?= !isset($_GET['page']) ? 'active' : '' ?>">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Dashboard
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a href="index.php" class="nav-link <?= !isset($_GET['page']) ? 'active' : '' ?>">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a href="?page=data-pegawai" class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-pegawai' ? 'active' : '') : '' ?>">
-                                    <i class="nav-icon far fa fa-users"></i>
-                                    <p>
-                                        Data Pegawai
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a href="?page=data-pegawai"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-pegawai' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-users"></i>
+                                <p>
+                                    Data Pegawai
+                                </p>
+                            </a>
+                        </li>
 
-                            <li class="nav-header">Setting</li>
+                        <li class="nav-header">Setting</li>
 
                         <?php
                         }
                         ?>
 
                         <li class="nav-item">
-                            <a onclick="return confirm('Apakah anda yakin akan keluar ?')" href="logout.php" class="nav-link">
+                            <a onclick="return confirm('Apakah anda yakin akan keluar ?')" href="logout.php"
+                                class="nav-link">
                                 <i class="nav-icon fas fa-sign-out-alt"></i>
                                 <p>
                                     Logout
@@ -415,11 +425,11 @@ $data_level = "Administrator";
             </div>
             <b> &copy; <span id="currentYear"></span> </b>
             <script>
-                // Mengambil tahun saat ini
-                var currentYear = new Date().getFullYear();
+            // Mengambil tahun saat ini
+            var currentYear = new Date().getFullYear();
 
-                // Menampilkan tahun dalam elemen dengan id "currentYear"
-                document.getElementById("currentYear").textContent = currentYear;
+            // Menampilkan tahun dalam elemen dengan id "currentYear"
+            document.getElementById("currentYear").textContent = currentYear;
             </script>
         </footer>
 
@@ -454,46 +464,46 @@ $data_level = "Administrator";
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
     <script>
-        $(function() {
-            $("#example1").DataTable({
-                "scrollX": true,
-                "scrollY": true,
-            });
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "scrollX": true,
-                "scrollY": true,
-            });
-            $("#example3").DataTable({
-                "scrollX": true,
-                "scrollY": true,
-            });
+    $(function() {
+        $("#example1").DataTable({
+            "scrollX": true,
+            "scrollY": true,
         });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "scrollX": true,
+            "scrollY": true,
+        });
+        $("#example3").DataTable({
+            "scrollX": true,
+            "scrollY": true,
+        });
+    });
     </script>
 
     <script>
-        $(function() {
-            //Initialize Select2 Elements
-            $('.select2').select2()
+    $(function() {
+        //Initialize Select2 Elements
+        $('.select2').select2()
 
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            })
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
         })
+    })
     </script>
 
     <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
     </script>
 
 

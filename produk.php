@@ -1,4 +1,10 @@
-<?php include './header.php';?>
+<?php 
+
+include './header.php';
+
+$data_produk = $koneksi->query("SELECT * FROM konten WHERE jns_konten = 4");
+
+?>
 <div class="container hero">
     <div class="row my-5 d-flex justify-content-center">
         <div class="col-lg-10">
@@ -38,52 +44,19 @@
                     </div>
                 </div>
             </div>
-            <div class="row d-flex justify-content-center">
+            <div class="row d-flex justify-content-center"
+                style="font-family: 'Open Sans', sans-serif; font-weight: 600">
+                <?php foreach ($data_produk as $key => $produk): ?>
                 <div class="card col-lg-3 m-1" style="width: 18rem">
-                    <img src="./Screenshot (2).png" class="card-img-top pt-3" alt="..." />
+                    <img src="./assets/images/<?=$produk['gambar'];?>" class="card-img-top pt-3" alt="..." />
                     <div class="card-body">
-                        <p class="card-text" style="font-family: 'Open Sans', sans-serif; font-weight: 600">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
+                        <h5 class="card-title fw-bold"><?=$produk['nm_konten'];?></h5>
+                        <p class="card-text">
+                            <?=$produk['deskripsi'];?>
                         </p>
                     </div>
                 </div>
-                <div class="card col-lg-3 m-1" style="width: 18rem">
-                    <img src="./Screenshot (2).png" class="card-img-top pt-3" alt="..." />
-                    <div class="card-body">
-                        <p class="card-text" style="font-family: 'Open Sans', sans-serif; font-weight: 600">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                        </p>
-                    </div>
-                </div>
-                <div class="card col-lg-3 m-1" style="width: 18rem">
-                    <img src="./Screenshot (2).png" class="card-img-top pt-3" alt="..." />
-                    <div class="card-body">
-                        <p class="card-text" style="font-family: 'Open Sans', sans-serif; font-weight: 600">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                        </p>
-                    </div>
-                </div>
-                <div class="card col-lg-3 m-1" style="width: 18rem">
-                    <img src="./Screenshot (2).png" class="card-img-top pt-3" alt="..." />
-                    <div class="card-body">
-                        <p class="card-text" style="font-family: 'Open Sans', sans-serif; font-weight: 600">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                        </p>
-                    </div>
-                </div>
-                <div class="card col-lg-3 m-1" style="width: 18rem">
-                    <img src="./Screenshot (2).png" class="card-img-top pt-3" alt="..." />
-                    <div class="card-body">
-                        <p class="card-text" style="font-family: 'Open Sans', sans-serif; font-weight: 600">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                        </p>
-                    </div>
-                </div>
+                <?php endforeach;?>
             </div>
         </div>
     </div>
