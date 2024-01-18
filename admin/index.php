@@ -212,7 +212,7 @@ $data_level = "Administrator";
                         ?>
 
                         <li class="nav-item">
-                            <a onclick="return confirm('Apakah anda yakin akan keluar ?')" href="logout.php"
+                            <a onclick="return confirm('Apakah anda yakin akan keluar ?')" href="../auth/logout.php"
                                 class="nav-link">
                                 <i class="nav-icon fas fa-sign-out-alt"></i>
                                 <p>
