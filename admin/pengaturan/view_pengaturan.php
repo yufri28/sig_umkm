@@ -30,7 +30,8 @@ if (isset($_GET['kode'])) {
                                 <b>Gambar</b>
                             </td>
                             <td>:
-                                <img height="200px" width="200px" class="img-fluid" src="../assets/images/<?php echo $data_cek['gambar']; ?>" alt="">
+                                <img height="200px" width="200px" class="img-fluid"
+                                    src="../assets/images/<?php echo $data_cek['gambar']; ?>" alt="">
                             </td>
                         </tr>
                         <tr>
@@ -47,6 +48,14 @@ if (isset($_GET['kode'])) {
                             </td>
                             <td>:
                                 <?php echo $data_cek['jns_konten'] == 1 ? 'Halaman Utama' : ($data_cek['jns_konten'] == 2 ? 'Visi Misi' : 'Produk'); ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                <b>Kategori Jenis Usaha</b>
+                            </td>
+                            <td>:
+                                <?php echo $data_cek['nama_jenus']; ?>
                             </td>
                         </tr>
                     </tbody>

@@ -5,6 +5,7 @@ if (isset($_POST['Simpan'])) {
     $deskripsi = $_POST['deskripsi'];
     $jns_konten = htmlspecialchars($_POST['jns_konten']);
     $id_user = htmlspecialchars($_SESSION['id_user']);
+    $f_id_jenus = htmlspecialchars($_POST['jenis_usaha']);
 
 
     // Upload gambar
@@ -25,7 +26,8 @@ if (isset($_POST['Simpan'])) {
                 'gambar_konten' => $gambar_konten,
                 'deskripsi' => $deskripsi,
                 'jns_konten' => $jns_konten,
-                'id_user' => $id_user
+                'id_user' => $id_user,
+                'f_id_jenus' => $f_id_jenus
             ];
             $Pengaturan->add($data);
         } else {
@@ -37,12 +39,13 @@ if (isset($_POST['Simpan'])) {
             'gambar_konten' => NULL,
             'deskripsi' => $deskripsi,
             'jns_konten' => $jns_konten,
-            'id_user' => $id_user
+            'id_user' => $id_user,
+            'f_id_jenus' => $f_id_jenus
         ];
         $Pengaturan->add($data);
     }
 }
-
+$data_jenus = $Jenus->get();
 ?>
 <?php if (isset($_SESSION['success'])) : ?>
 <script>
@@ -126,10 +129,21 @@ Swal.fire({
                     </select>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Kategori Jenis Usaha</label>
+                <div class="col-sm-5">
+                    <select id="jenis_usaha" name="jenis_usaha" required class="form-control">
+                        <option value="">- Pilih -</option>
+                        <?php foreach ($data_jenus as $key => $jenus) : ?>
+                        <option value="<?= $jenus['id_ju']; ?>"><?= $jenus['nama_jenus']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="card-footer">
             <input type="submit" name="Simpan" value="Simpan" class="btn btn-info">
-            <a href="?page=data-su" title="Kembali" class="btn btn-secondary">Batal</a>
+            <a href="?page=data-pengaturan" title="Kembali" class="btn btn-secondary">Batal</a>
         </div>
     </form>
 </div>

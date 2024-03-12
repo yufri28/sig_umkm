@@ -4,6 +4,7 @@ $data_kecamatan = $Kecamatan->get();
 $data_deskel = $Deskel->get();
 $data_sektor = $Sektor->get();
 $data_klasifikasi = $Klasifikasi->get();
+$data_jenus = $Jenus->get();
 
 
 if (isset($_POST['Simpan'])) {
@@ -50,45 +51,45 @@ if (isset($_POST['Simpan'])) {
 
 ?>
 <?php if (isset($_SESSION['success'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Sukses!',
-            text: '<?php echo $_SESSION['success']; ?>',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.value) {
-                window.location = 'index.php?page=data-usaha';
-            }
-        });
-    </script>
-    <?php unset($_SESSION['success']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Sukses!',
+    text: '<?php echo $_SESSION['success']; ?>',
+    icon: 'success',
+    confirmButtonText: 'OK'
+}).then((result) => {
+    if (result.value) {
+        window.location = 'index.php?page=data-usaha';
+    }
+});
+</script>
+<?php unset($_SESSION['success']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['warning'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Warning!',
-            text: '<?php echo $_SESSION['warning']; ?>',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-    </script>
-    <?php unset($_SESSION['warning']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Warning!',
+    text: '<?php echo $_SESSION['warning']; ?>',
+    icon: 'warning',
+    confirmButtonText: 'OK'
+});
+</script>
+<?php unset($_SESSION['warning']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['error'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Error!',
-            text: '<?php echo $_SESSION['error']; ?>',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    </script>
-    <?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Error!',
+    text: '<?php echo $_SESSION['error']; ?>',
+    icon: 'error',
+    confirmButtonText: 'OK'
+});
+</script>
+<?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 <div class="card card-primary">
@@ -103,7 +104,8 @@ if (isset($_POST['Simpan'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nama Usaha</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="nama_usaha" name="nama_usaha" placeholder="Nama Usaha" required>
+                    <input type="text" class="form-control" id="nama_usaha" name="nama_usaha" placeholder="Nama Usaha"
+                        required>
                 </div>
             </div>
 
@@ -113,7 +115,7 @@ if (isset($_POST['Simpan'])) {
                     <select name="id_deskel" id="id_deskel" class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_deskel as $key => $deskel) : ?>
-                            <option value="<?= $deskel['id_deskel']; ?>"><?= $deskel['nm_deskel']; ?></option>
+                        <option value="<?= $deskel['id_deskel']; ?>"><?= $deskel['nm_deskel']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -125,7 +127,7 @@ if (isset($_POST['Simpan'])) {
                     <select name="id_su" id="id_su" class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_sektor as $key => $sektor) : ?>
-                            <option value="<?= $sektor['id_su']; ?>"><?= $sektor['nm_su']; ?></option>
+                        <option value="<?= $sektor['id_su']; ?>"><?= $sektor['nm_su']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -136,7 +138,7 @@ if (isset($_POST['Simpan'])) {
                     <select name="id_ku" id="id_ku" class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_klasifikasi as $key => $klasifikasi) : ?>
-                            <option value="<?= $klasifikasi['id_ku']; ?>"><?= $klasifikasi['nm_ku']; ?></option>
+                        <option value="<?= $klasifikasi['id_ku']; ?>"><?= $klasifikasi['nm_ku']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -145,14 +147,22 @@ if (isset($_POST['Simpan'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tahun Pembentukan</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="tahun_pembentukan" name="tahun_pembentukan" placeholder="Contoh: 2019" required>
+                    <input type="number" class="form-control" id="tahun_pembentukan" name="tahun_pembentukan"
+                        placeholder="Contoh: 2019" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Jenis Usaha</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="jenis_usaha" name="jenis_usaha" placeholder="Jenis Usaha" required>
+                    <select id="jenis_usaha" name="jenis_usaha" required class="form-control">
+                        <option value="">- Pilih -</option>
+                        <?php foreach ($data_jenus as $key => $jenus) : ?>
+                        <?php if($jenus['nama_jenus'] != 'Default' || $jenus['id_ju'] != '1'):?>
+                        <option value="<?= $jenus['id_ju']; ?>"><?= $jenus['nama_jenus']; ?></option>
+                        <?php endif;?>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
 
@@ -161,7 +171,8 @@ if (isset($_POST['Simpan'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nomor Izin</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="no_izin" name="no_izin" placeholder="Nomor Izin" required>
+                    <input type="text" class="form-control" id="no_izin" name="no_izin" placeholder="Nomor Izin"
+                        required>
                 </div>
             </div>
 
@@ -169,7 +180,8 @@ if (isset($_POST['Simpan'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nama Pemilik</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="nama_pemilik" name="nama_pemilik" placeholder="Nama Pemilik" required>
+                    <input type="text" class="form-control" id="nama_pemilik" name="nama_pemilik"
+                        placeholder="Nama Pemilik" required>
                 </div>
             </div>
 
@@ -183,25 +195,29 @@ if (isset($_POST['Simpan'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Jumlah Pekerja Laki-laki</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="tk_laki" name="tk_laki" placeholder="Jumlah Pekerja Laki-laki" required>
+                    <input type="number" class="form-control" id="tk_laki" name="tk_laki"
+                        placeholder="Jumlah Pekerja Laki-laki" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Jumlah Pekerja Perempuan</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="tk_perempuan" name="tk_perempuan" placeholder="Jumlah Pekerja Perempuan" required>
+                    <input type="number" class="form-control" id="tk_perempuan" name="tk_perempuan"
+                        placeholder="Jumlah Pekerja Perempuan" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Modal Sendiri</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="modal_sendiri" name="modal_sendiri" placeholder="Modal Sendiri" required>
+                    <input type="number" class="form-control" id="modal_sendiri" name="modal_sendiri"
+                        placeholder="Modal Sendiri" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Modal Luar</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="modal_luar" name="modal_luar" placeholder="Modal Luar" required>
+                    <input type="number" class="form-control" id="modal_luar" name="modal_luar" placeholder="Modal Luar"
+                        required>
                 </div>
             </div>
             <div class="form-group row">
@@ -219,19 +235,21 @@ if (isset($_POST['Simpan'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Latitude</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Latitude" required>
+                    <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Latitude"
+                        required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Longitude</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="longitude" name="longitude" placeholder="Longitude" required>
+                    <input type="text" class="form-control" id="longitude" name="longitude" placeholder="Longitude"
+                        required>
                 </div>
             </div>
         </div>
         <div class="card-footer">
             <input type="submit" name="Simpan" value="Simpan" class="btn btn-info">
-            <a href="?page=data-pegawai" title="Kembali" class="btn btn-secondary">Batal</a>
+            <a href="?page=data-usaha" title="Kembali" class="btn btn-secondary">Batal</a>
         </div>
     </form>
 </div>

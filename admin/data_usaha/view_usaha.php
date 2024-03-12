@@ -70,7 +70,7 @@ if (isset($_GET['kode'])) {
                                 <b>Jenis Usaha</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['jns_ush']; ?>
+                                <?php echo $data_cek['nama_jenus']; ?>
                             </td>
                         </tr>
                         <tr>

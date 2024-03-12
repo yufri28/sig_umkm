@@ -15,7 +15,8 @@ class Usaha
             JOIN deskel d ON u.id_deskel=d.id_deskel 
             JOIN sektor_usaha su ON u.id_su=su.id_su 
             JOIN kecamatan k ON d.id_kec=k.id_kec 
-            JOIN klasifikasi_usaha ku ON u.id_ku=ku.id_ku"
+            JOIN klasifikasi_usaha ku ON u.id_ku=ku.id_ku
+            JOIN jenus ju ON u.jns_ush=ju.id_ju"
         );
     }
 
@@ -26,7 +27,8 @@ class Usaha
             JOIN deskel d ON u.id_deskel=d.id_deskel 
             JOIN sektor_usaha su ON u.id_su=su.id_su 
             JOIN kecamatan k ON d.id_kec=k.id_kec 
-            JOIN klasifikasi_usaha ku ON u.id_ku=ku.id_ku WHERE id_datum='$id'"
+            JOIN klasifikasi_usaha ku ON u.id_ku=ku.id_ku
+            JOIN jenus ju ON u.jns_ush=ju.id_ju WHERE id_datum='$id'"
         );
     }
 

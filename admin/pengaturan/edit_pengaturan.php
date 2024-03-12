@@ -11,6 +11,7 @@ if (isset($_POST['Ubah'])) {
     $jns_konten = htmlspecialchars($_POST['jns_konten']);
     $id_user = htmlspecialchars($_SESSION['id_user']);
     $id_konten = htmlspecialchars($_GET['kode']);
+    $f_id_jenus = htmlspecialchars($_POST['jenis_usaha']);
 
     // Upload gambar
     if (!empty($_FILES['gambar_konten']['name'])) {
@@ -39,7 +40,8 @@ if (isset($_POST['Ubah'])) {
                 'deskripsi' => $deskripsi,
                 'jns_konten' => $jns_konten,
                 'id_user' => $id_user,
-                'id_konten' => $id_konten
+                'id_konten' => $id_konten,
+                'f_id_jenus' => $f_id_jenus
             ];
 
             $Pengaturan->update($data);
@@ -54,53 +56,55 @@ if (isset($_POST['Ubah'])) {
             'deskripsi' => $deskripsi,
             'jns_konten' => $jns_konten,
             'id_user' => $id_user,
-            'id_konten' => $id_konten
+            'id_konten' => $id_konten,
+            'f_id_jenus' => $f_id_jenus
         ];
 
         $Pengaturan->update($data);
     }
 }
+$data_jenus = $Jenus->get();
 ?>
 <?php if (isset($_SESSION['success'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Sukses!',
-            text: '<?php echo $_SESSION['success']; ?>',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.value) {
-                window.location = 'index.php?page=data-pengaturan';
-            }
-        });
-    </script>
-    <?php unset($_SESSION['success']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Sukses!',
+    text: '<?php echo $_SESSION['success']; ?>',
+    icon: 'success',
+    confirmButtonText: 'OK'
+}).then((result) => {
+    if (result.value) {
+        window.location = 'index.php?page=data-pengaturan';
+    }
+});
+</script>
+<?php unset($_SESSION['success']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['warning'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Warning!',
-            text: '<?php echo $_SESSION['warning']; ?>',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-    </script>
-    <?php unset($_SESSION['warning']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Warning!',
+    text: '<?php echo $_SESSION['warning']; ?>',
+    icon: 'warning',
+    confirmButtonText: 'OK'
+});
+</script>
+<?php unset($_SESSION['warning']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['error'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Error!',
-            text: '<?php echo $_SESSION['error']; ?>',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    </script>
-    <?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Error!',
+    text: '<?php echo $_SESSION['error']; ?>',
+    icon: 'error',
+    confirmButtonText: 'OK'
+});
+</script>
+<?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
@@ -115,14 +119,17 @@ if (isset($_POST['Ubah'])) {
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Judul Konten</label>
                 <div class="col-sm-5">
-                    <input type="text" value="<?= $data_cek['nm_konten']; ?>" class="form-control" id="judul_konten" name="judul_konten" placeholder="Judul Konten" required>
+                    <input type="text" value="<?= $data_cek['nm_konten']; ?>" class="form-control" id="judul_konten"
+                        name="judul_konten" placeholder="Judul Konten" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Gambar Konten <i><small>(Optional)</small></i></label>
                 <div class="col-sm-5">
-                    <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="gambar_konten" name="gambar_konten" placeholder="Gambar Konten">
-                    <input type="hidden" accept="image/png, image/jpeg, image/jpg" value="<?= $data_cek['gambar']; ?>" class="form-control" id="gambar_lama" name="gambar_lama" required>
+                    <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="gambar_konten"
+                        name="gambar_konten" placeholder="Gambar Konten">
+                    <input type="hidden" accept="image/png, image/jpeg, image/jpg" value="<?= $data_cek['gambar']; ?>"
+                        class="form-control" id="gambar_lama" name="gambar_lama" required>
                     <small><i>* Diisi jika ingin mengubah gambar</i></small>
                 </div>
             </div>
@@ -137,16 +144,30 @@ if (isset($_POST['Ubah'])) {
                 <div class="col-sm-5">
                     <select name="jns_konten" id="jns_konten" class="form-control">
                         <option value="">- Pilih -</option>
-                        <option <?= $data_cek['jns_konten'] == '1' ? 'selected' : ''; ?> value="1">Halaman Utama</option>
-                        <option <?= $data_cek['jns_konten'] == '2' ? 'selected' : ''; ?> value="2">Visi Misi</option>
-                        <option <?= $data_cek['jns_konten'] == '3' ? 'selected' : ''; ?> value="3">Produk</option>
+                        <option <?= $data_cek['jns_konten'] == '1' ? 'selected' : ''; ?> value="1">Halaman Utama
+                        </option>
+                        <option <?= $data_cek['jns_konten'] == '2' ? 'selected' : ''; ?> value="2">Visi</option>
+                        <option <?= $data_cek['jns_konten'] == '3' ? 'selected' : ''; ?> value="3">Misi</option>
+                        <option <?= $data_cek['jns_konten'] == '4' ? 'selected' : ''; ?> value="4">Produk</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Kategori Jenis Usaha</label>
+                <div class="col-sm-5">
+                    <select id="jenis_usaha" name="jenis_usaha" required class="form-control">
+                        <option value="">- Pilih -</option>
+                        <?php foreach ($data_jenus as $key => $jenus) : ?>
+                        <option <?= $data_cek['f_id_jenus'] == $jenus['id_ju'] ? 'selected' : ''; ?>
+                            value="<?= $jenus['id_ju']; ?>"><?= $jenus['nama_jenus']; ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>
         </div>
         <div class="card-footer">
             <input type="submit" name="Ubah" value="Simpan" class="btn btn-success">
-            <a href="?page=data-su" title="Kembali" class="btn btn-secondary">Batal</a>
+            <a href="?page=data-pengaturan" title="Kembali" class="btn btn-secondary">Batal</a>
         </div>
     </form>
 </div>

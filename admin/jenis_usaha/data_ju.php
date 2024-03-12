@@ -1,18 +1,18 @@
 <?php
-$data_pengaturan = $Pengaturan->get();
+$data_jenus = $Jenus->get();
 ?>
 <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
 <div class="card card-info">
     <div class="card-header">
         <h3 class="card-title">
-            <i class="fas fa-users"></i> Data Pengaturan
+            <i class="fas fa-users"></i> Data Jenis Usaha
         </h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
         <div class="table-responsive">
             <div class="d-flex">
-                <a href="?page=add-pengaturan" class="btn btn-primary">
+                <a href="?page=add-ju" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Tambah Data</a>
 
             </div>
@@ -21,56 +21,45 @@ $data_pengaturan = $Pengaturan->get();
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Konten</th>
-                        <th>Gambar</th>
-                        <th>Deskripsi/Isi</th>
-                        <th>Jenis Konten</th>
-                        <th>Kategori Jenis Usaha</th>
+                        <th>Nama Jenis Usaha</th>
+                        <th>Icon</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $no = 1;
-                    while ($pengaturan = $data_pengaturan->fetch_assoc()) {
-                    ?>
+                    while ($jenus = $data_jenus->fetch_assoc()) {
 
+                    ?>
+                    <?php if($jenus['nama_jenus'] != 'Default' || $jenus['id_ju'] != '1'):?>
                     <tr>
                         <td>
-                            <?= $no++; ?>
+                            <?php echo $no++; ?>
                         </td>
                         <td>
-                            <?= $pengaturan['nm_konten']; ?>
+                            <?php echo $jenus['nama_jenus']; ?>
                         </td>
                         <td>
-                            <img height="100" width="100" src="../assets/images/<?= $pengaturan['gambar']; ?>" alt="">
+                            <?php echo $jenus['icon']; ?>
                         </td>
                         <td>
-                            <?= substr($pengaturan['deskripsi'], 0, 20).'...'; ?>
-                        </td>
-                        <td>
-                            <?= $pengaturan['jns_konten'] == 1 ? 'Halaman Utama' : ($pengaturan['jns_konten'] == 2 ? 'Visi Misi' : 'Produk'); ?>
-                        </td>
-                        <td>
-                            <?= $pengaturan['nama_jenus']; ?>
-                        </td>
-                        <td>
-                            <a href="?page=view-pengaturan&kode=<?= $pengaturan['id_konten']; ?>" title="Detail"
+                            <a href="?page=view-ju&kode=<?php echo $jenus['id_ju']; ?>" title="Detail"
                                 class="btn btn-info btn-sm">
                                 <i class="fa fa-eye"></i>
                             </a>
                             </a>
-                            <a href="?page=edit-pengaturan&kode=<?= $pengaturan['id_konten']; ?>" title="Ubah"
+                            <a href="?page=edit-ju&kode=<?php echo $jenus['id_ju']; ?>" title="Ubah"
                                 class="btn btn-success btn-sm">
                                 <i class="fa fa-edit"></i>
                             </a>
-                            <a href="?page=del-pengaturan&kode=<?= $pengaturan['id_konten']; ?>"
+                            <a href="?page=del-ju&kode=<?php echo $jenus['id_ju']; ?>"
                                 onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus"
                                 class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i>
                         </td>
                     </tr>
-
+                    <?php endif;?>
                     <?php
                     }
                     ?>

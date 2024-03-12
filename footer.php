@@ -26,13 +26,13 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap contributors",
 }).addTo(mymap);
 
-var searchControl = L.Control.geocoder({
-        defaultMarkGeocode: false,
-    })
-    .on("markgeocode", function(e) {
-        mymap.setView(e.geocode.center, 13);
-    })
-    .addTo(mymap);
+// var searchControl = L.Control.geocoder({
+//         defaultMarkGeocode: false,
+//     })
+//     .on("markgeocode", function(e) {
+//         mymap.setView(e.geocode.center, 13);
+//     })
+//     .addTo(mymap);
 </script>
 
 
@@ -65,23 +65,16 @@ mymap.addLayer(drawnItems);
             JOIN deskel d ON u.id_deskel=d.id_deskel 
             JOIN sektor_usaha su ON u.id_su=su.id_su 
             JOIN kecamatan k ON d.id_kec=k.id_kec 
-            JOIN klasifikasi_usaha ku ON u.id_ku=ku.id_ku"
+            JOIN klasifikasi_usaha ku ON u.id_ku=ku.id_ku
+            JOIN jenus ju ON u.jns_ush=ju.id_ju"
     );
 
     foreach ($data_usaha as $location) {
         if ($location['latitude'] != '-' && $location['longitude'] != '-') {
             echo "var marker = L.marker([" . $location['latitude'] . ", " . $location['longitude'] . "], {";
             echo "  icon: L.divIcon({";
-            if ($location['nm_ku'] == 'Campuran') {
-                echo "className: 'custom-icon-green',";
-                echo "html: '<i class=\"fa fa-home\"></i>',"; // Menggunakan kelas 'fa' dan kelas angka sesuai dengan $iconNumb        
-            } elseif ($location['nm_ku'] == 'Laki-Laki') {
-                echo "className: 'custom-icon-blue',";
-                echo "html: '<i class=\"fa fa-home\"></i>',"; // Menggunakan kelas 'fa' dan kelas angka sesuai dengan $iconNumber
-            } else {
-                echo "className: 'custom-icon-campuran',";
-                echo "html: '<i class=\"fa fa-home\"></i>',"; // Menggunakan kelas 'fa' dan kelas angka sesuai dengan $iconNumber
-            }
+            echo "className: 'custom-icon-campuran',";
+            echo "html: '".$location['icon']."',"; // Menggunakan kelas 'fa' dan kelas angka sesuai dengan $iconNumber
             echo "    iconSize: [40, 40],";
             echo "    iconAnchor: [20, 40]";
             echo "  })";

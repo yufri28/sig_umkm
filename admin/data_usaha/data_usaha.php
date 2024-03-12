@@ -66,70 +66,74 @@
                     while ($data = $sql->fetch_assoc()) {
                     ?>
 
-                        <tr>
-                            <td>
-                                <?php echo $no++; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['nm_usaha']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['nm_kec']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['nm_deskel']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['nm_su']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['nm_ku']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['thn_pmtkn']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['jns_ush']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['nmr_izin']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['nm_pemilik']; ?>
-                            </td>
-                            <td class="text-wrap">
-                                <?php echo $data['alamat']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['tng_kerja_lki']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['tng_kerja_prmpn']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['mdl_sendiri']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['mdl_luar']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['asset']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['omset']; ?>
-                            </td>
-                            <td>
-                                <a href="?page=view-usaha&kode=<?php echo $data['id_datum']; ?>" title="Detail" class="btn btn-info btn-sm">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                </a>
-                                <a href="?page=edit-usaha&kode=<?php echo $data['id_datum']; ?>" title="Ubah" class="btn btn-success btn-sm">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="?page=del-usaha&kode=<?php echo $data['id_datum']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <?php echo $no++; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nm_usaha']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nm_kec']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nm_deskel']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nm_su']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nm_ku']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['thn_pmtkn']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nama_jenus']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nmr_izin']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nm_pemilik']; ?>
+                        </td>
+                        <td class="text-wrap">
+                            <?php echo $data['alamat']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['tng_kerja_lki']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['tng_kerja_prmpn']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['mdl_sendiri']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['mdl_luar']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['asset']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['omset']; ?>
+                        </td>
+                        <td>
+                            <a href="?page=view-usaha&kode=<?php echo $data['id_datum']; ?>" title="Detail"
+                                class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            </a>
+                            <a href="?page=edit-usaha&kode=<?php echo $data['id_datum']; ?>" title="Ubah"
+                                class="btn btn-success btn-sm">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="?page=del-usaha&kode=<?php echo $data['id_datum']; ?>"
+                                onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus"
+                                class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                        </td>
+                    </tr>
 
                     <?php
                     }
