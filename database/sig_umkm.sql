@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Jan 2024 pada 15.22
+-- Waktu pembuatan: 13 Mar 2024 pada 13.59
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -91,6 +91,31 @@ CREATE TABLE `jenis_user` (
 
 INSERT INTO `jenis_user` (`id_jenus`, `nama_jenus`, `level`) VALUES
 (1, 'Admin', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jenus`
+--
+
+CREATE TABLE `jenus` (
+  `id_ju` int(11) NOT NULL,
+  `nama_jenus` varchar(255) NOT NULL,
+  `icon` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `jenus`
+--
+
+INSERT INTO `jenus` (`id_ju`, `nama_jenus`, `icon`) VALUES
+(1, 'Default', '<i class=\"fa fa-home\" aria-hidden=\"true\"></i>'),
+(2, 'Toko', '<i class=\"fa fa-building\" aria-hidden=\"true\"></i>'),
+(3, 'Tempat Makan', '<i class=\"fa fa-coffee\" aria-hidden=\"true\"></i>'),
+(5, 'Kelompok Tani', '<i class=\"fa fa-users\" aria-hidden=\"true\"></i>'),
+(6, 'Produksi Air Mineral', '<i class=\"fa fa-tint\" aria-hidden=\"true\"></i>'),
+(7, 'Bengkel', '<i class=\"fa fa-wrench\" aria-hidden=\"true\"></i>'),
+(9, 'Kios', '<i class=\"fa fa-home\" aria-hidden=\"true\"></i>');
 
 -- --------------------------------------------------------
 
@@ -188,19 +213,21 @@ CREATE TABLE `konten` (
   `gambar` text DEFAULT NULL,
   `deskripsi` longtext NOT NULL,
   `jns_konten` varchar(15) NOT NULL,
-  `id_admin` int(5) NOT NULL
+  `id_admin` int(5) NOT NULL,
+  `f_id_jenus` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `konten`
 --
 
-INSERT INTO `konten` (`id_konten`, `nm_konten`, `gambar`, `deskripsi`, `jns_konten`, `id_admin`) VALUES
-(4, 'Halaman Utama', '1705585762_logo_kab.ttu-removebg-preview.png', '<p>Kiasan :<br>Pemberdayaan melalui pemodalan , sosialisasi, pendampingan, dan pengontrolan dapat membantu meningkatkan kinerja produktivitas tiap usaha.</p><p><strong>Bernardinus Totnay, S.Sos</strong></p><p><strong>Kepala Dinas Koperasi Usaha Kecil dan Menengah Kabupaten TTU</strong></p><p>Sekilas UMKM di TTU</p><p>Usaha Mikro, Kecil, dan Menengah (UMKM) di Kabupaten Timor Tengah Utara (TTU) umumnya melibatkan sektor pertanian, kerajinan tradisional, perdagangan lokal, dan jasa. Potensi ekonomi UMKM dapat berkontribusi pada pertumbuhan ekonomi daerah serta memperkuat keberlanjutan ekonomi masyarakat setempat.</p>', '1', 1),
-(5, 'Visi', '', '<p>Terwujudnya koperasi dan UMKM yang mandiri sebagai pelaku ekonomi yang tanggap, tangguh dan ulet demi mencapai masyarakat Timor Tengah Utara yang sejahtera secara adil.</p>', '2', 1),
-(6, 'Misi', '', '<ol><li>Meningkatkan kualitas kelembagaan koperasi, UKM dalam bidang organisasi administrasi dan sumber daya manusia.</li><li>Pengembangan kewirausahaan bagi koperasi dan UMKM melalui pembinaan, bimbingan dan fasilitas pengembangan dan peningkatan hasil produksi serta mengembangkan iklim usaha yang kondusif.</li></ol>', '3', 1),
-(7, 'Jagung Titi', '1705586914_Screenshot (21).png', '<p>Terbuat dari kedelai hitam berkualitas</p>', '4', 1),
-(8, 'Jagung Titi 2', '1705587449_Screenshot (1).png', '<p>Terbuat dari kacang pilihan mama</p>', '4', 1);
+INSERT INTO `konten` (`id_konten`, `nm_konten`, `gambar`, `deskripsi`, `jns_konten`, `id_admin`, `f_id_jenus`) VALUES
+(4, 'Halaman Utama', '1705585762_logo_kab.ttu-removebg-preview.png', '<p>Kiasan :<br>Pemberdayaan melalui pemodalan , sosialisasi, pendampingan, dan pengontrolan dapat membantu meningkatkan kinerja produktivitas tiap usaha.</p><p><strong>Bernardinus Totnay, S.Sos</strong></p><p><strong>Kepala Dinas Koperasi Usaha Kecil dan Menengah Kabupaten TTU</strong></p><p>Sekilas UMKM di TTU</p><p>Usaha Mikro, Kecil, dan Menengah (UMKM) di Kabupaten Timor Tengah Utara (TTU) umumnya melibatkan sektor pertanian, kerajinan tradisional, perdagangan lokal, dan jasa. Potensi ekonomi UMKM dapat berkontribusi pada pertumbuhan ekonomi daerah serta memperkuat keberlanjutan ekonomi masyarakat setempat.</p>', '1', 1, 1),
+(5, 'Visi', '', '<p>Terwujudnya koperasi dan UMKM yang mandiri sebagai pelaku ekonomi yang tanggap, tangguh dan ulet demi mencapai masyarakat Timor Tengah Utara yang sejahtera secara adil.</p>', '2', 1, 1),
+(6, 'Misi', '', '<ol><li>Meningkatkan kualitas kelembagaan koperasi, UKM dalam bidang organisasi administrasi dan sumber daya manusia.</li><li>Pengembangan kewirausahaan bagi koperasi dan UMKM melalui pembinaan, bimbingan dan fasilitas pengembangan dan peningkatan hasil produksi serta mengembangkan iklim usaha yang kondusif.</li></ol>', '3', 1, 1),
+(7, 'Jagung Titi', '1705586914_Screenshot (21).png', '<p>Terbuat dari kedelai hitam berkualitas</p>', '4', 1, 1),
+(8, 'Jagung Titi 2', '1705587449_Screenshot (1).png', '<p>Terbuat dari kacang pilihan mama</p>', '4', 1, 1),
+(11, 'Legalitasssss', '1710246517_Penguins.jpg', '<p>ADsa</p>', '4', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -233,7 +260,7 @@ CREATE TABLE `usaha` (
   `id_ku` int(1) NOT NULL,
   `nm_usaha` varchar(25) NOT NULL,
   `thn_pmtkn` int(4) NOT NULL,
-  `jns_ush` varchar(20) NOT NULL,
+  `jns_ush` int(11) NOT NULL,
   `nmr_izin` varchar(13) NOT NULL,
   `nm_pemilik` varchar(50) NOT NULL,
   `alamat` text NOT NULL,
@@ -252,7 +279,7 @@ CREATE TABLE `usaha` (
 --
 
 INSERT INTO `usaha` (`id_datum`, `id_deskel`, `id_su`, `id_ku`, `nm_usaha`, `thn_pmtkn`, `jns_ush`, `nmr_izin`, `nm_pemilik`, `alamat`, `tng_kerja_lki`, `tng_kerja_prmpn`, `mdl_sendiri`, `mdl_luar`, `asset`, `omset`, `latitude`, `longitude`) VALUES
-(3, 4, 1, 2, 'Kios Kici', 2019, 'Kios', '2141FASFSADK', 'Aldo', 'Penfui', 2, 2, 2000000, 2100000, 2000000, 1999999, '-9.344585214738624', '124.63028553973807');
+(3, 4, 1, 2, 'Kios Kici', 2019, 9, '2141FASFSADK', 'Aldo', 'Penfui', 2, 2, 2000000, 2100000, 2000000, 1999999, '-9.344585214738624', '124.63028553973807');
 
 --
 -- Indexes for dumped tables
@@ -286,6 +313,12 @@ ALTER TABLE `jenis_user`
   ADD PRIMARY KEY (`id_jenus`);
 
 --
+-- Indeks untuk tabel `jenus`
+--
+ALTER TABLE `jenus`
+  ADD PRIMARY KEY (`id_ju`);
+
+--
 -- Indeks untuk tabel `kecamatan`
 --
 ALTER TABLE `kecamatan`
@@ -302,7 +335,8 @@ ALTER TABLE `klasifikasi_usaha`
 --
 ALTER TABLE `konten`
   ADD PRIMARY KEY (`id_konten`),
-  ADD KEY `id_admin` (`id_admin`);
+  ADD KEY `id_admin` (`id_admin`),
+  ADD KEY `f_id_jenus` (`f_id_jenus`);
 
 --
 -- Indeks untuk tabel `sektor_usaha`
@@ -317,7 +351,8 @@ ALTER TABLE `usaha`
   ADD PRIMARY KEY (`id_datum`),
   ADD KEY `id_su` (`id_su`),
   ADD KEY `id_ku` (`id_ku`),
-  ADD KEY `id_deskel` (`id_deskel`);
+  ADD KEY `id_deskel` (`id_deskel`),
+  ADD KEY `jns_ush` (`jns_ush`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -348,6 +383,12 @@ ALTER TABLE `jenis_user`
   MODIFY `id_jenus` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT untuk tabel `jenus`
+--
+ALTER TABLE `jenus`
+  MODIFY `id_ju` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT untuk tabel `kecamatan`
 --
 ALTER TABLE `kecamatan`
@@ -363,7 +404,7 @@ ALTER TABLE `klasifikasi_usaha`
 -- AUTO_INCREMENT untuk tabel `konten`
 --
 ALTER TABLE `konten`
-  MODIFY `id_konten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_konten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `sektor_usaha`
@@ -403,7 +444,8 @@ ALTER TABLE `jenis_user`
 -- Ketidakleluasaan untuk tabel `konten`
 --
 ALTER TABLE `konten`
-  ADD CONSTRAINT `konten_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `konten_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `konten_ibfk_2` FOREIGN KEY (`f_id_jenus`) REFERENCES `jenus` (`id_ju`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `usaha`
@@ -411,7 +453,8 @@ ALTER TABLE `konten`
 ALTER TABLE `usaha`
   ADD CONSTRAINT `usaha_ibfk_1` FOREIGN KEY (`id_su`) REFERENCES `sektor_usaha` (`id_su`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `usaha_ibfk_2` FOREIGN KEY (`id_deskel`) REFERENCES `deskel` (`id_deskel`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `usaha_ibfk_4` FOREIGN KEY (`id_ku`) REFERENCES `klasifikasi_usaha` (`id_ku`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `usaha_ibfk_4` FOREIGN KEY (`id_ku`) REFERENCES `klasifikasi_usaha` (`id_ku`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usaha_ibfk_5` FOREIGN KEY (`jns_ush`) REFERENCES `jenus` (`id_ju`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
