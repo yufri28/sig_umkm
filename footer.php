@@ -3,8 +3,7 @@
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: #f0f0f0">
         Copyright ©
-        <a href="#" style="text-decoration: none" target="_blank"
-            class="text-gray-800 text-dark text-hover-primary">DINAS KOPERASI & UMKM KAB. TTU
+        <a href="#" style="text-decoration: none" target="_blank" class="text-gray-800 text-dark text-hover-primary">DINAS KOPERASI & UMKM KAB. TTU
         </a>
     </div>
     <!-- Copyright -->
@@ -16,30 +15,27 @@
 
 
 
-
-
-
 <script>
-var mymap = L.map("mapid").setView([-9.3405531, 124.4736825], 10);
+    var mymap = L.map("mapid").setView([-9.3405531, 124.4736825], 10);
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "© OpenStreetMap contributors",
-}).addTo(mymap);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors",
+    }).addTo(mymap);
 
-// var searchControl = L.Control.geocoder({
-//         defaultMarkGeocode: false,
-//     })
-//     .on("markgeocode", function(e) {
-//         mymap.setView(e.geocode.center, 13);
-//     })
-//     .addTo(mymap);
+    // var searchControl = L.Control.geocoder({
+    //         defaultMarkGeocode: false,
+    //     })
+    //     .on("markgeocode", function(e) {
+    //         mymap.setView(e.geocode.center, 13);
+    //     })
+    //     .addTo(mymap);
 </script>
 
 
 <script>
-var drawnItems = new L.FeatureGroup();
-mymap.addLayer(drawnItems);
-<?php
+    var drawnItems = new L.FeatureGroup();
+    mymap.addLayer(drawnItems);
+    <?php
     $data = $koneksi->query("SELECT * FROM kecamatan");
 
     foreach ($data as $key => $value) {
@@ -58,7 +54,7 @@ mymap.addLayer(drawnItems);
     }
     ?>
 
-<?php
+    <?php
 
     $data_usaha = $koneksi->query(
         "SELECT * FROM usaha u 
@@ -74,7 +70,7 @@ mymap.addLayer(drawnItems);
             echo "var marker = L.marker([" . $location['latitude'] . ", " . $location['longitude'] . "], {";
             echo "  icon: L.divIcon({";
             echo "className: 'custom-icon-campuran',";
-            echo "html: '".$location['icon']."',"; // Menggunakan kelas 'fa' dan kelas angka sesuai dengan $iconNumber
+            echo "html: '" . $location['icon'] . "',"; // Menggunakan kelas 'fa' dan kelas angka sesuai dengan $iconNumber
             echo "    iconSize: [40, 40],";
             echo "    iconAnchor: [20, 40]";
             echo "  })";
@@ -89,38 +85,38 @@ mymap.addLayer(drawnItems);
 </html>
 
 <style>
-.legend {
-    background-color: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+    .legend {
+        background-color: white;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-.legend i {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    margin-right: 5px;
-}
+    .legend i {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        margin-right: 5px;
+    }
 
-.custom-icon-campuran {
-    text-align: center;
-    color: #EB455F;
-    font-size: 20pt;
-    font-weight: bold;
-}
+    .custom-icon-campuran {
+        text-align: center;
+        color: #EB455F;
+        font-size: 20pt;
+        font-weight: bold;
+    }
 
-.custom-icon-blue {
-    text-align: center;
-    color: blue;
-    font-size: 20pt;
-    font-weight: bold;
-}
+    .custom-icon-blue {
+        text-align: center;
+        color: blue;
+        font-size: 20pt;
+        font-weight: bold;
+    }
 
-.custom-icon-green {
-    text-align: center;
-    color: #17594A;
-    font-size: 20pt;
-    font-weight: bold;
-}
+    .custom-icon-green {
+        text-align: center;
+        color: #17594A;
+        font-size: 20pt;
+        font-weight: bold;
+    }
 </style>
