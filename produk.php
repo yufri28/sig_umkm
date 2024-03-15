@@ -91,7 +91,7 @@ $num_rows = $data_produk->num_rows;
                     <h4 class="text-center"><i>Data belum ada!</i></h4>
                 <?php else : ?>
                     <?php foreach ($data_produk as $key => $produk) : ?>
-                        <div class="card col-lg-3 m-1" style="width: 18rem">
+                        <div class="card col-lg-3 m-1" style="width: 18rem" data-aos="fade-up" data-aos-duration="3000">
                             <img src="./assets/images/<?= $produk['gambar']; ?>" class="card-img-top pt-3" alt="..." />
                             <div class="card-body">
                                 <h5 class="card-title fw-bold"><?= $produk['nm_konten']; ?></h5>

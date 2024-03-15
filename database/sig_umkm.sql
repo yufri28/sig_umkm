@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Mar 2024 pada 13.59
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 8.1.6
+-- Waktu pembuatan: 15 Mar 2024 pada 07.48
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -225,9 +225,10 @@ INSERT INTO `konten` (`id_konten`, `nm_konten`, `gambar`, `deskripsi`, `jns_kont
 (4, 'Halaman Utama', '1705585762_logo_kab.ttu-removebg-preview.png', '<p>Kiasan :<br>Pemberdayaan melalui pemodalan , sosialisasi, pendampingan, dan pengontrolan dapat membantu meningkatkan kinerja produktivitas tiap usaha.</p><p><strong>Bernardinus Totnay, S.Sos</strong></p><p><strong>Kepala Dinas Koperasi Usaha Kecil dan Menengah Kabupaten TTU</strong></p><p>Sekilas UMKM di TTU</p><p>Usaha Mikro, Kecil, dan Menengah (UMKM) di Kabupaten Timor Tengah Utara (TTU) umumnya melibatkan sektor pertanian, kerajinan tradisional, perdagangan lokal, dan jasa. Potensi ekonomi UMKM dapat berkontribusi pada pertumbuhan ekonomi daerah serta memperkuat keberlanjutan ekonomi masyarakat setempat.</p>', '1', 1, 1),
 (5, 'Visi', '', '<p>Terwujudnya koperasi dan UMKM yang mandiri sebagai pelaku ekonomi yang tanggap, tangguh dan ulet demi mencapai masyarakat Timor Tengah Utara yang sejahtera secara adil.</p>', '2', 1, 1),
 (6, 'Misi', '', '<ol><li>Meningkatkan kualitas kelembagaan koperasi, UKM dalam bidang organisasi administrasi dan sumber daya manusia.</li><li>Pengembangan kewirausahaan bagi koperasi dan UMKM melalui pembinaan, bimbingan dan fasilitas pengembangan dan peningkatan hasil produksi serta mengembangkan iklim usaha yang kondusif.</li></ol>', '3', 1, 1),
-(7, 'Jagung Titi', '1705586914_Screenshot (21).png', '<p>Terbuat dari kedelai hitam berkualitas</p>', '4', 1, 1),
-(8, 'Jagung Titi 2', '1705587449_Screenshot (1).png', '<p>Terbuat dari kacang pilihan mama</p>', '4', 1, 1),
-(11, 'Legalitasssss', '1710246517_Penguins.jpg', '<p>ADsa</p>', '4', 1, 3);
+(7, 'Jagung Titi', '1705586914_Screenshot (21).png', '<p>Terbuat dari kedelai hitam berkualitas</p>', '4', 1, 6),
+(8, 'Jagung Titi 2', '1705587449_Screenshot (1).png', '<p>Terbuat dari kacang pilihan mama</p>', '4', 1, 6),
+(11, 'Legalitasssss', '1710246517_Penguins.jpg', '<p>ADsa</p>', '4', 1, 3),
+(12, 'Test 1', '1710484666_pngtree-boy-s-face-outline-coloring-page-vector-png-image_6787401.png', '<p>dasdasdsadas</p>', '4', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -279,7 +280,9 @@ CREATE TABLE `usaha` (
 --
 
 INSERT INTO `usaha` (`id_datum`, `id_deskel`, `id_su`, `id_ku`, `nm_usaha`, `thn_pmtkn`, `jns_ush`, `nmr_izin`, `nm_pemilik`, `alamat`, `tng_kerja_lki`, `tng_kerja_prmpn`, `mdl_sendiri`, `mdl_luar`, `asset`, `omset`, `latitude`, `longitude`) VALUES
-(3, 4, 1, 2, 'Kios Kici', 2019, 9, '2141FASFSADK', 'Aldo', 'Penfui', 2, 2, 2000000, 2100000, 2000000, 1999999, '-9.344585214738624', '124.63028553973807');
+(3, 4, 1, 2, 'Kios Kici', 2019, 9, '2141FASFSADK', 'Aldo', 'Penfui', 2, 2, 2000000, 2100000, 2000000, 1999999, '-9.344585214738624', '124.63028553973807'),
+(4, 4, 1, 2, 'Toko Delima', 2007, 2, '2141FASFFFGF', 'Aldo', '-', 4, 3, 2000000, 2000000, 2000000, 2000000, '-9.4102887', '124.5154514'),
+(5, 4, 1, 2, 'Kios&amp;Warung TASI', 2001, 3, '2141FASFSAAD', 'Aldo', '-', 12, 12, 3000000, 3000000, 3000000, 3000000, '-9.541164272427501', '124.50341921331578');
 
 --
 -- Indexes for dumped tables
@@ -404,7 +407,7 @@ ALTER TABLE `klasifikasi_usaha`
 -- AUTO_INCREMENT untuk tabel `konten`
 --
 ALTER TABLE `konten`
-  MODIFY `id_konten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_konten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `sektor_usaha`
@@ -416,7 +419,7 @@ ALTER TABLE `sektor_usaha`
 -- AUTO_INCREMENT untuk tabel `usaha`
 --
 ALTER TABLE `usaha`
-  MODIFY `id_datum` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_datum` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
