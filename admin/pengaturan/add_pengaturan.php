@@ -6,7 +6,8 @@ if (isset($_POST['Simpan'])) {
     $jns_konten = htmlspecialchars($_POST['jns_konten']);
     $id_user = htmlspecialchars($_SESSION['id_user']);
     $f_id_jenus = htmlspecialchars($_POST['jenis_usaha']);
-
+    $latitude = htmlspecialchars($_POST['latitude']);
+    $longitude = htmlspecialchars($_POST['longitude']);
 
     // Upload gambar
     if (!empty($_FILES['gambar_konten']['name'])) {
@@ -27,7 +28,9 @@ if (isset($_POST['Simpan'])) {
                 'deskripsi' => $deskripsi,
                 'jns_konten' => $jns_konten,
                 'id_user' => $id_user,
-                'f_id_jenus' => $f_id_jenus
+                'f_id_jenus' => $f_id_jenus,
+                'latitude' => $latitude,
+                'longitude' => $longitude
             ];
             $Pengaturan->add($data);
         } else {
@@ -40,7 +43,9 @@ if (isset($_POST['Simpan'])) {
             'deskripsi' => $deskripsi,
             'jns_konten' => $jns_konten,
             'id_user' => $id_user,
-            'f_id_jenus' => $f_id_jenus
+            'f_id_jenus' => $f_id_jenus,
+            'latitude' => $latitude,
+            'longitude' => $longitude
         ];
         $Pengaturan->add($data);
     }
@@ -48,45 +53,45 @@ if (isset($_POST['Simpan'])) {
 $data_jenus = $Jenus->get();
 ?>
 <?php if (isset($_SESSION['success'])) : ?>
-<script>
-Swal.fire({
-    title: 'Sukses!',
-    text: '<?php echo $_SESSION['success']; ?>',
-    icon: 'success',
-    confirmButtonText: 'OK'
-}).then((result) => {
-    if (result.value) {
-        window.location = 'index.php?page=data-pengaturan';
-    }
-});
-</script>
-<?php unset($_SESSION['success']); // Menghapus session setelah ditampilkan 
+    <script>
+        Swal.fire({
+            title: 'Sukses!',
+            text: '<?php echo $_SESSION['success']; ?>',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.value) {
+                window.location = 'index.php?page=data-pengaturan';
+            }
+        });
+    </script>
+    <?php unset($_SESSION['success']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['warning'])) : ?>
-<script>
-Swal.fire({
-    title: 'Warning!',
-    text: '<?php echo $_SESSION['warning']; ?>',
-    icon: 'warning',
-    confirmButtonText: 'OK'
-});
-</script>
-<?php unset($_SESSION['warning']); // Menghapus session setelah ditampilkan 
+    <script>
+        Swal.fire({
+            title: 'Warning!',
+            text: '<?php echo $_SESSION['warning']; ?>',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    <?php unset($_SESSION['warning']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['error'])) : ?>
-<script>
-Swal.fire({
-    title: 'Error!',
-    text: '<?php echo $_SESSION['error']; ?>',
-    icon: 'error',
-    confirmButtonText: 'OK'
-});
-</script>
-<?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: '<?php echo $_SESSION['error']; ?>',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    <?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 <div class="card card-primary">
@@ -100,15 +105,13 @@ Swal.fire({
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Judul Konten</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="judul_konten" name="judul_konten"
-                        placeholder="Judul Konten" required>
+                    <input type="text" class="form-control" id="judul_konten" name="judul_konten" placeholder="Judul Konten" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Gambar Konten <i><small>(Optional)</small></i></label>
                 <div class="col-sm-5">
-                    <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="gambar_konten"
-                        name="gambar_konten" placeholder="Gambar Konten">
+                    <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="gambar_konten" name="gambar_konten" placeholder="Gambar Konten">
                 </div>
             </div>
             <div class="form-group row">
@@ -135,9 +138,23 @@ Swal.fire({
                     <select id="jenis_usaha" name="jenis_usaha" required class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_jenus as $key => $jenus) : ?>
-                        <option value="<?= $jenus['id_ju']; ?>"><?= $jenus['nama_jenus']; ?></option>
+                            <option value="<?= $jenus['id_ju']; ?>"><?= $jenus['nama_jenus']; ?></option>
                         <?php endforeach; ?>
                     </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Latitude</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" value="" id="latitude" name="latitude" placeholder="Latitude">
+                    <i><small>Diisi jika kategori jenis usaha adalah Produk</small></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Longitude</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" value="" id="longitude" name="longitude" placeholder="Longitude">
+                    <i><small>Diisi jika kategori jenis usaha adalah Produk</small></i>
                 </div>
             </div>
         </div>
@@ -147,3 +164,28 @@ Swal.fire({
         </div>
     </form>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var jnsKontenSelect = document.getElementById("jns_konten");
+        var latitudeInput = document.getElementById("latitude").closest('.form-group');
+        var longitudeInput = document.getElementById("longitude").closest('.form-group');
+
+        jnsKontenSelect.addEventListener("change", function() {
+            if (jnsKontenSelect.value != "4") { // Jika dipilih "Produk"
+                latitudeInput.style.display = "none";
+                longitudeInput.style.display = "none";
+            } else {
+                latitudeInput.style.display = "flex";
+                longitudeInput.style.display = "flex";
+            }
+        });
+        // Inisialisasi awal
+        if (jnsKontenSelect.value != "4") {
+            latitudeInput.style.display = "none";
+            longitudeInput.style.display = "none";
+        } else {
+            latitudeInput.style.display = "flex";
+            longitudeInput.style.display = "flex";
+        }
+    });
+</script>

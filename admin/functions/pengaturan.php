@@ -31,11 +31,14 @@ class Pengaturan
             $jns_konten = $data['jns_konten'];
             $id_user = $data['id_user'];
             $f_id_jenus = $data['f_id_jenus'];
+            $latitude = $data['latitude'];
+            $longitude = $data['longitude'];
+
 
             // Insert data ke database
             $insert = $this->db->query(
-                "INSERT INTO konten (id_konten,nm_konten,gambar,deskripsi,jns_konten,id_admin,f_id_jenus) 
-                VALUES(0,'$judul_konten','$gambar_konten','$deskripsi','$jns_konten','$id_user','$f_id_jenus')"
+                "INSERT INTO konten (id_konten,nm_konten,gambar,deskripsi,jns_konten,id_admin,f_id_jenus,latitude,longitude) 
+                VALUES(0,'$judul_konten','$gambar_konten','$deskripsi','$jns_konten','$id_user','$f_id_jenus','$latitude','$longitude')"
             );
 
             if ($insert) {
@@ -59,10 +62,12 @@ class Pengaturan
             $id_user = $data['id_user'];
             $id_konten = $data['id_konten'];
             $f_id_jenus = $data['f_id_jenus'];
+            $latitude = $data['latitude'];
+            $longitude = $data['longitude'];
 
 
             $update = $this->db->query(
-                "UPDATE konten SET nm_konten = '$judul_konten', gambar='$gambar_konten', deskripsi='$deskripsi', jns_konten='$jns_konten', id_admin='$id_user', f_id_jenus='$f_id_jenus' WHERE id_konten='$id_konten'"
+                "UPDATE konten SET nm_konten = '$judul_konten', gambar='$gambar_konten', deskripsi='$deskripsi', jns_konten='$jns_konten', id_admin='$id_user', f_id_jenus='$f_id_jenus',latitude='$latitude',longitude='$longitude' WHERE id_konten='$id_konten'"
             );
 
             if ($update) {

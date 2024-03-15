@@ -26,27 +26,21 @@ $num_rows = $data_produk->num_rows;
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active text-white" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="./assets/images/banner1.jpg" style="height:50vh;" class="d-block w-100" alt="...">
+            <img src="./assets/images/1.png" style="height:50vh;" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Judul Gambar 1</h5>
+                <h5></h5>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="./assets/images/banner2.jpg" style="height:50vh;" class="d-block w-100" alt="...">
+            <img src="./assets/images/2.png" style="height:50vh;" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Judul Gambar 2</h5>
+                <h5></h5>
             </div>
         </div>
-        <div class="carousel-item">
-            <img src="./assets/images/1710246389_Penguins.jpg" style="height:50vh;" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Judul Gambar 3</h5>
-            </div>
-        </div>
+
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -99,8 +93,11 @@ $num_rows = $data_produk->num_rows;
                                     <?= $produk['deskripsi']; ?>
                                 </p>
                                 <div class="d-flex justify-content-center">
-                                    <a href="#" class="btn btn-primary me-1">Detail</a>
-                                    <a href="#" class="btn btn-secondary">Lokasi</a>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#details<?= $produk['id_konten']; ?>">
+                                        Detail
+                                    </button>
+                                    <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=<?= $produk['latitude']; ?>,<?= $produk['longitude']; ?>" title="Lokasi di MAPS" class="btn btn-sm btn-success">Lokasi</a>
                                 </div>
                             </div>
                         </div>
@@ -111,3 +108,29 @@ $num_rows = $data_produk->num_rows;
     </div>
 </div>
 <?php include './footer.php'; ?>
+<!-- Modal -->
+<?php foreach ($data_produk as $key => $produk) : ?>
+    <div class="modal fade" id="details<?= $produk['id_konten']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card mb-3">
+                        <img src="./assets/images/<?= $produk['gambar']; ?>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $produk['nm_konten']; ?></h5>
+                            <p class="card-text"><?= $produk['deskripsi']; ?></p>
+                            <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=<?= $produk['latitude']; ?>,<?= $produk['longitude']; ?>" title="Lokasi di MAPS" class="btn btn-sm btn-success">Lokasi di Maps</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
