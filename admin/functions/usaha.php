@@ -53,10 +53,12 @@ class Usaha
             $omset = $data['omset'];
             $latitude = $data['latitude'];
             $longitude = $data['longitude'];
+            $no_telpon = $data['no_telpon'];
+            $gambar = $data['gambar'];
 
 
             $insert = $this->db->query(
-                "INSERT INTO usaha (id_datum,id_deskel,id_su,id_ku,nm_usaha,thn_pmtkn,jns_ush,nmr_izin,nm_pemilik,alamat,tng_kerja_lki,tng_kerja_prmpn,mdl_sendiri,mdl_luar,asset,omset,latitude,longitude) VALUES(0,'$id_deskel', '$id_su', '$id_ku','$nama_usaha','$tahun_pembentukan','$jenis_usaha','$no_izin', '$nama_pemilik','$alamat','$tk_laki','$tk_perempuan','$modal_sendiri','$modal_luar','$asset','$omset','$latitude','$longitude')"
+                "INSERT INTO usaha (id_datum,id_deskel,id_su,id_ku,nm_usaha,thn_pmtkn,jns_ush,nmr_izin,nm_pemilik,alamat,tng_kerja_lki,tng_kerja_prmpn,mdl_sendiri,mdl_luar,asset,omset,latitude,longitude,no_telpon,gambar) VALUES(0,'$id_deskel', '$id_su', '$id_ku','$nama_usaha','$tahun_pembentukan','$jenis_usaha','$no_izin', '$nama_pemilik','$alamat','$tk_laki','$tk_perempuan','$modal_sendiri','$modal_luar','$asset','$omset','$latitude','$longitude','$no_telpon','$gambar')"
             );
 
             if ($insert) {
@@ -91,13 +93,15 @@ class Usaha
             $omset = $data['omset'];
             $latitude = $data['latitude'];
             $longitude = $data['longitude'];
+            $no_telpon = $data['no_telpon'];
+            $gambar = $data['gambar'];
 
             $update = $this->db->query(
                 "UPDATE usaha SET id_deskel = '$id_deskel', id_su='$id_su', id_ku='$id_ku',
                 nm_usaha='$nama_usaha', thn_pmtkn='$tahun_pembentukan', jns_ush='$jenis_usaha',
                 nmr_izin='$no_izin', nm_pemilik='$nama_pemilik', alamat='$alamat', tng_kerja_lki='$tk_laki',
                 tng_kerja_prmpn='$tk_perempuan', mdl_sendiri='$modal_sendiri', mdl_luar='$modal_luar',
-                asset='$asset', omset='$omset', latitude='$latitude', longitude='$longitude' WHERE id_datum='$id_datum'"
+                asset='$asset', omset='$omset', latitude='$latitude', longitude='$longitude',no_telpon='$no_telpon',gambar='$gambar' WHERE id_datum='$id_datum'"
             );
 
             if ($update) {

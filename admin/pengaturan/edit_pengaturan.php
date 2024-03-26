@@ -3,6 +3,8 @@
 if (isset($_GET['kode'])) {
     $sql_cek = $Pengaturan->getById($_GET['kode']);
     $data_cek = mysqli_fetch_array($sql_cek, MYSQLI_BOTH);
+    $sql_cek_konten = $koneksi->query("SELECT id_konten_usaha, f_id_usaha FROM konten_usaha WHERE f_id_konten='".$_GET['kode']."'");
+    $data_cek_konten = mysqli_fetch_array($sql_cek_konten, MYSQLI_BOTH);
 }
 if (isset($_POST['Ubah'])) {
     $judul_konten = htmlspecialchars($_POST['judul_konten']);
@@ -12,8 +14,10 @@ if (isset($_POST['Ubah'])) {
     $id_user = htmlspecialchars($_SESSION['id_user']);
     $id_konten = htmlspecialchars($_GET['kode']);
     $f_id_jenus = htmlspecialchars($_POST['jenis_usaha']);
-    $latitude = htmlspecialchars($_POST['latitude']);
-    $longitude = htmlspecialchars($_POST['longitude']);
+    $id_konten_usaha = htmlspecialchars($_POST['id_konten_usaha']);
+    $id_datum = htmlspecialchars($_POST['id_datum']);
+    // $latitude = htmlspecialchars($_POST['latitude']);
+    // $longitude = htmlspecialchars($_POST['longitude']);
 
 
     // Upload gambar
@@ -45,8 +49,8 @@ if (isset($_POST['Ubah'])) {
                 'id_user' => $id_user,
                 'id_konten' => $id_konten,
                 'f_id_jenus' => $f_id_jenus,
-                'latitude' => $latitude,
-                'longitude' => $longitude
+                'id_datum' => $id_datum,
+                'id_konten_usaha' => $id_konten_usaha
             ];
 
             $Pengaturan->update($data);
@@ -63,55 +67,56 @@ if (isset($_POST['Ubah'])) {
             'id_user' => $id_user,
             'id_konten' => $id_konten,
             'f_id_jenus' => $f_id_jenus,
-            'latitude' => $latitude,
-            'longitude' => $longitude
+            'id_datum' => $id_datum,
+            'id_konten_usaha' => $id_konten_usaha
         ];
 
         $Pengaturan->update($data);
     }
 }
 $data_jenus = $Jenus->get();
+$datum = $Usaha->get();
 ?>
 <?php if (isset($_SESSION['success'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Sukses!',
-            text: '<?php echo $_SESSION['success']; ?>',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.value) {
-                window.location = 'index.php?page=data-pengaturan';
-            }
-        });
-    </script>
-    <?php unset($_SESSION['success']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Sukses!',
+    text: '<?php echo $_SESSION['success']; ?>',
+    icon: 'success',
+    confirmButtonText: 'OK'
+}).then((result) => {
+    if (result.value) {
+        window.location = 'index.php?page=data-pengaturan';
+    }
+});
+</script>
+<?php unset($_SESSION['success']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['warning'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Warning!',
-            text: '<?php echo $_SESSION['warning']; ?>',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-    </script>
-    <?php unset($_SESSION['warning']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Warning!',
+    text: '<?php echo $_SESSION['warning']; ?>',
+    icon: 'warning',
+    confirmButtonText: 'OK'
+});
+</script>
+<?php unset($_SESSION['warning']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['error'])) : ?>
-    <script>
-        Swal.fire({
-            title: 'Error!',
-            text: '<?php echo $_SESSION['error']; ?>',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    </script>
-    <?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
+<script>
+Swal.fire({
+    title: 'Error!',
+    text: '<?php echo $_SESSION['error']; ?>',
+    icon: 'error',
+    confirmButtonText: 'OK'
+});
+</script>
+<?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
 
@@ -126,14 +131,17 @@ $data_jenus = $Jenus->get();
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Judul Konten</label>
                 <div class="col-sm-5">
-                    <input type="text" value="<?= $data_cek['nm_konten']; ?>" class="form-control" id="judul_konten" name="judul_konten" placeholder="Judul Konten" required>
+                    <input type="text" value="<?= $data_cek['nm_konten']; ?>" class="form-control" id="judul_konten"
+                        name="judul_konten" placeholder="Judul Konten" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Gambar Konten <i><small>(Optional)</small></i></label>
                 <div class="col-sm-5">
-                    <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="gambar_konten" name="gambar_konten" placeholder="Gambar Konten">
-                    <input type="hidden" accept="image/png, image/jpeg, image/jpg" value="<?= $data_cek['gambar']; ?>" class="form-control" id="gambar_lama" name="gambar_lama" required>
+                    <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="gambar_konten"
+                        name="gambar_konten" placeholder="Gambar Konten">
+                    <input type="hidden" accept="image/png, image/jpeg, image/jpg" value="<?= $data_cek['gambar']; ?>"
+                        class="form-control" id="gambar_lama" name="gambar_lama" required>
                     <small><i>* Diisi jika ingin mengubah gambar</i></small>
                 </div>
             </div>
@@ -162,23 +170,25 @@ $data_jenus = $Jenus->get();
                     <select id="jenis_usaha" name="jenis_usaha" required class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_jenus as $key => $jenus) : ?>
-                            <option <?= $data_cek['f_id_jenus'] == $jenus['id_ju'] ? 'selected' : ''; ?> value="<?= $jenus['id_ju']; ?>"><?= $jenus['nama_jenus']; ?></option>
+                        <option <?= $data_cek['f_id_jenus'] == $jenus['id_ju'] ? 'selected' : ''; ?>
+                            value="<?= $jenus['id_ju']; ?>"><?= $jenus['nama_jenus']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Latitude</label>
+                <label class="col-sm-2 col-form-label">Data Usaha</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" value="<?= $data_cek['latitude']; ?>" id="latitude" name="latitude" placeholder="Latitude">
-                    <i><small>Diisi jika kategori jenis usaha adalah Produk</small></i>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Longitude</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" value="<?= $data_cek['longitude']; ?>" id="longitude" name="longitude" placeholder="Longitude">
-                    <i><small>Diisi jika kategori jenis usaha adalah Produk</small></i>
+                    <select id="id_datum" name="id_datum" required class="form-control">
+                        <option value="">- Pilih -</option>
+                        <?php foreach ($datum as $key => $data_umkm) : ?>
+                        <option <?= $data_cek_konten['f_id_usaha'] == $data_umkm['id_datum'] ? 'selected' : ''; ?>
+                            value="<?= $data_umkm['id_datum']; ?>">
+                            <?= $data_umkm['nm_usaha']; ?></option>
+                        <?php endforeach; ?>
+                        <input type="hidden" name="id_konten_usaha" id="id_konten_usaha"
+                            value="<?=$data_cek_konten['id_konten_usaha']?>">
+                    </select>
                 </div>
             </div>
         </div>
@@ -189,27 +199,37 @@ $data_jenus = $Jenus->get();
     </form>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var jnsKontenSelect = document.getElementById("jns_konten");
-        var latitudeInput = document.getElementById("latitude").closest('.form-group');
-        var longitudeInput = document.getElementById("longitude").closest('.form-group');
+document.addEventListener("DOMContentLoaded", function() {
+    var jnsKontenSelect = document.getElementById("jns_konten");
+    var dataUsahaSelect = document.getElementById("id_datum").closest('.form-group');
+    var dataIdKontenUsaha = document.getElementById("id_konten_usaha").closest('.form-group');
+    // var latitudeInput = document.getElementById("latitude").closest('.form-group');
+    // var longitudeInput = document.getElementById("longitude").closest('.form-group');
 
-        jnsKontenSelect.addEventListener("change", function() {
-            if (jnsKontenSelect.value != "4") { // Jika dipilih "Produk"
-                latitudeInput.style.display = "none";
-                longitudeInput.style.display = "none";
-            } else {
-                latitudeInput.style.display = "flex";
-                longitudeInput.style.display = "flex";
-            }
-        });
-        // Inisialisasi awal
-        if (jnsKontenSelect.value != "4") {
-            latitudeInput.style.display = "none";
-            longitudeInput.style.display = "none";
+    jnsKontenSelect.addEventListener("change", function() {
+        if (jnsKontenSelect.value != "4") { // Jika dipilih "Produk"
+            // latitudeInput.style.display = "none";
+            // longitudeInput.style.display = "none";
+            dataUsahaSelect.style.display = "none";
+            dataIdKontenUsaha.style.display = "none";
         } else {
-            latitudeInput.style.display = "flex";
-            longitudeInput.style.display = "flex";
+            // latitudeInput.style.display = "flex";
+            // longitudeInput.style.display = "flex";
+            dataUsahaSelect.style.display = "flex";
+            dataIdKontenUsaha.style.display = "flex";
         }
     });
+    // Inisialisasi awal
+    if (jnsKontenSelect.value != "4") {
+        // latitudeInput.style.display = "none";
+        // longitudeInput.style.display = "none";
+        dataUsahaSelect.style.display = "none";
+        dataIdKontenUsaha.style.display = "none";
+    } else {
+        // latitudeInput.style.display = "flex";
+        // longitudeInput.style.display = "flex";
+        dataUsahaSelect.style.display = "flex";
+        dataIdKontenUsaha.style.display = "flex";
+    }
+});
 </script>

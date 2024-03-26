@@ -49,7 +49,7 @@ $data_pengaturan = $Pengaturan->get();
                             <?= substr($pengaturan['deskripsi'], 0, 20).'...'; ?>
                         </td>
                         <td>
-                            <?= $pengaturan['jns_konten'] == 1 ? 'Halaman Utama' : ($pengaturan['jns_konten'] == 2 ? 'Visi Misi' : 'Produk'); ?>
+                            <?= $pengaturan['jns_konten'] == 1 ? 'Halaman Utama' : (($pengaturan['jns_konten'] == 2 ? 'Visi' : (($pengaturan['jns_konten'] == 3)?'Misi':'Produk'))); ?>
                         </td>
                         <td>
                             <?= $pengaturan['nama_jenus']; ?>

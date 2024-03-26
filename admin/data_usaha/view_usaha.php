@@ -75,7 +75,7 @@ if (isset($_GET['kode'])) {
                         </tr>
                         <tr>
                             <td style="width: 150px">
-                                <b>Nomor Izin</b>
+                                <b>Izin Usaha Yang Dimiliki</b>
                             </td>
                             <td>:
                                 <?php echo $data_cek['nmr_izin']; ?>
@@ -143,6 +143,14 @@ if (isset($_GET['kode'])) {
                             </td>
                             <td>:
                                 <?php echo $data_cek['omset']; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                <b>No Telepon</b>
+                            </td>
+                            <td>:
+                                <?= $data_cek['no_telpon']??'-'; ?>
                             </td>
                         </tr>
                     </tbody>

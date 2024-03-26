@@ -40,6 +40,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Gambar</th>
                         <th>Nama Usaha</th>
                         <th>Kecamatan</th>
                         <th>Desa/Kelurahan</th>
@@ -47,7 +48,7 @@
                         <th>Klasifikasi Usaha</th>
                         <th>Tahun Pembentukan</th>
                         <th>Jenis Usaha</th>
-                        <th>No Izin</th>
+                        <th>Izin Usaha Yang Dimiliki</th>
                         <th>Nama Pemilik</th>
                         <th>Alamat</th>
                         <th>TK Laki-Laki</th>
@@ -56,6 +57,7 @@
                         <th>Modal Luar</th>
                         <th>Asset</th>
                         <th>Omset</th>
+                        <th>Nomor Telepon</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -69,6 +71,11 @@
                     <tr>
                         <td>
                             <?php echo $no++; ?>
+                        </td>
+                        <td>
+                            <img height="100" width="100"
+                                src="../assets/<?= $data['gambar'] == NULL?'img/no-image.svg':'images/'.$data['gambar']; ?>"
+                                alt="">
                         </td>
                         <td>
                             <?php echo $data['nm_usaha']; ?>
@@ -117,6 +124,9 @@
                         </td>
                         <td>
                             <?php echo $data['omset']; ?>
+                        </td>
+                        <td>
+                            <?= $data['no_telpon'] == NULL?'-':$data['no_telpon']; ?>
                         </td>
                         <td>
                             <a href="?page=view-usaha&kode=<?php echo $data['id_datum']; ?>" title="Detail"

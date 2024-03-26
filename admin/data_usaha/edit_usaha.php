@@ -24,28 +24,81 @@ if (isset($_POST['Ubah'])) {
     $omset = htmlspecialchars($_POST['omset']);
     $latitude = htmlspecialchars($_POST['latitude']);
     $longitude = htmlspecialchars($_POST['longitude']);
+    $no_telepon = htmlspecialchars($_POST['no_telepon']);
+    $gambar_lama = htmlspecialchars($_POST['gambar_lama']);
 
-    $data = [
-        'id_datum' => $id_datum,
-        'nama_usaha' => $nama_usaha,
-        'id_deskel' => $id_deskel,
-        'id_su' => $id_su,
-        'id_ku' => $id_ku,
-        'tahun_pembentukan' => $tahun_pembentukan,
-        'jenis_usaha' => $jenis_usaha,
-        'no_izin' => $no_izin,
-        'nama_pemilik' => $nama_pemilik,
-        'alamat' => $alamat,
-        'tk_laki' => $tk_laki,
-        'tk_perempuan' => $tk_perempuan,
-        'modal_sendiri' => $modal_sendiri,
-        'modal_luar' => $modal_luar,
-        'asset' => $asset,
-        'omset' => $omset,
-        'latitude' => $latitude,
-        'longitude' => $longitude
-    ];
+    // Upload gambar
+    if (!empty($_FILES['gambar_konten']['name'])) {
+        $gambar_konten = $_FILES['gambar_konten']['name'];
+        $gambar_tmp = $_FILES['gambar_konten']['tmp_name'];
 
+        // Tentukan direktori tempat menyimpan gambar
+        $upload_dir = "../assets/images/";
+
+        // Generate nama unik untuk gambar (misalnya, menggunakan timestamp)
+        $gambar_konten = time() . '_' . $gambar_konten;
+
+        // Pindahkan file gambar ke direktori upload
+        if (move_uploaded_file($gambar_tmp, $upload_dir . $gambar_konten)) {
+            // Hapus gambar lama jika ada
+            if (!empty($gambar_lama)) {
+                $old_image_path = $upload_dir . $gambar_lama;
+                if (file_exists($old_image_path)) {
+                    unlink($old_image_path);
+                }
+            }
+
+            $data = [
+                'id_datum' => $id_datum,
+                'nama_usaha' => $nama_usaha,
+                'id_deskel' => $id_deskel,
+                'id_su' => $id_su,
+                'id_ku' => $id_ku,
+                'tahun_pembentukan' => $tahun_pembentukan,
+                'jenis_usaha' => $jenis_usaha,
+                'no_izin' => $no_izin,
+                'nama_pemilik' => $nama_pemilik,
+                'alamat' => $alamat,
+                'tk_laki' => $tk_laki,
+                'tk_perempuan' => $tk_perempuan,
+                'modal_sendiri' => $modal_sendiri,
+                'modal_luar' => $modal_luar,
+                'asset' => $asset,
+                'omset' => $omset,
+                'latitude' => $latitude,
+                'longitude' => $longitude,
+                'no_telpon' => $no_telepon,
+                'gambar' => $gambar_konten
+            ];
+
+        } else {
+            return $_SESSION['error'] = "Gagal mengupload gambar!";
+        }
+    } else {
+        $data = [
+            'id_datum' => $id_datum,
+            'nama_usaha' => $nama_usaha,
+            'id_deskel' => $id_deskel,
+            'id_su' => $id_su,
+            'id_ku' => $id_ku,
+            'tahun_pembentukan' => $tahun_pembentukan,
+            'jenis_usaha' => $jenis_usaha,
+            'no_izin' => $no_izin,
+            'nama_pemilik' => $nama_pemilik,
+            'alamat' => $alamat,
+            'tk_laki' => $tk_laki,
+            'tk_perempuan' => $tk_perempuan,
+            'modal_sendiri' => $modal_sendiri,
+            'modal_luar' => $modal_luar,
+            'asset' => $asset,
+            'omset' => $omset,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'no_telpon' => $no_telepon,
+            'gambar' => $gambar_lama
+        ];
+    
+    }
 
     $Usaha->update($data);
 }
@@ -105,7 +158,7 @@ Swal.fire({
             <i class="fa fa-edit"></i> Ubah Data
         </h3>
     </div>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <div class="card-body">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nama Usaha</label>
@@ -173,7 +226,7 @@ Swal.fire({
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Nomor Izin</label>
+                <label class="col-sm-2 col-form-label">Izin Usaha Yang Dimiliki</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" value="<?= $data_cek['nmr_izin']; ?>" id="no_izin"
                         name="no_izin" placeholder="Nomor Izin" required>
@@ -252,6 +305,23 @@ Swal.fire({
                 <div class="col-sm-5">
                     <input type="text" class="form-control" id="longitude" name="longitude"
                         value="<?= $data_cek['longitude']; ?>" placeholder="Longitude" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="no_telepon" class="col-sm-2 col-form-label">No Telepon</label>
+                <div class="col-sm-5">
+                    <input type="number" class="form-control" value="<?= $data_cek['no_telpon']; ?>" id="no_telepon"
+                        name="no_telepon" placeholder="No Telepon" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Gambar Konten <i><small>(Optional)</small></i></label>
+                <div class="col-sm-5">
+                    <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="gambar_konten"
+                        name="gambar_konten" placeholder="Gambar Konten">
+                    <input type="hidden" accept="image/png, image/jpeg, image/jpg" value="<?= $data_cek['gambar']; ?>"
+                        class="form-control" id="gambar_lama" name="gambar_lama" required>
+                    <small><i>* Diisi jika ingin mengubah gambar</i></small>
                 </div>
             </div>
         </div>
