@@ -109,9 +109,9 @@ echo "legend.addTo(mymap);";
             echo "var marker = L.marker([" . $location['latitude'] . ", " . $location['longitude'] . "], {";
             echo "  icon: L.divIcon({";
             echo "    className: 'custom-icon-campuran',";
-            echo "    html: '<div class=\"rounded-circle\">" . $location['icon'] . "</div>',"; 
+            echo "    html: '<div class=\"test text-center rounded-circle\">" . $location['icon'] . "</div>',"; 
             echo "    iconSize: [5, 5],";
-            echo "    iconAnchor: [10, 20]";
+            echo "    iconAnchor: [20, 20]";
             echo "  })";
             echo "}).addTo(mymap);";
             
@@ -132,8 +132,8 @@ echo "legend.addTo(mymap);";
             }
     
             // Membuat poligon
-            echo "var polygonCoords = [" . implode(",", $polygonCoords) . "];";
-            echo "var polygon = L.polygon(polygonCoords).addTo(mymap);";
+            // echo "var polygonCoords = [" . implode(",", $polygonCoords) . "];";
+            // echo "var polygon = L.polygon(polygonCoords).addTo(mymap);";
     
             // Mengikat pop-up pada marker
             if ($location['gambar'] == NULL) {
@@ -153,6 +153,18 @@ echo "legend.addTo(mymap);";
 </html>
 
 <style>
+.test {
+    border: 1px solid blue;
+    font-size: 12pt;
+    width: 25px;
+    height: 25px;
+    /* padding: 0 25px 0 3px; */
+    /* padding-top: -10px;
+    padding-bottom: -10px;
+    padding-right: 25px;
+    padding-left: 3px; */
+}
+
 .legend {
     background-color: white;
     padding: 10px;

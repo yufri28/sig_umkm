@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Apr 2024 pada 15.49
+-- Waktu pembuatan: 26 Mar 2024 pada 18.57
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -109,13 +109,19 @@ CREATE TABLE `jenus` (
 --
 
 INSERT INTO `jenus` (`id_ju`, `nama_jenus`, `icon`) VALUES
-(1, 'Default', '<i class=\"fa fa-home\" aria-hidden=\"true\"></i>'),
+(1, 'Default', '<i class="fa fa-map-marker" aria-hidden="true"></i>'),
 (2, 'Toko', '<i class=\"fa fa-building\" aria-hidden=\"true\"></i>'),
-(3, 'Tempat Makan', '<i class=\"fa fa-coffee\" aria-hidden=\"true\"></i>'),
-(5, 'Kelompok Tani', '<i class=\"fa fa-users\" aria-hidden=\"true\"></i>'),
-(6, 'Produksi Air Mineral', '<i class=\"fa fa-tint\" aria-hidden=\"true\"></i>'),
-(7, 'Bengkel', '<i class=\"fa fa-wrench\" aria-hidden=\"true\"></i>'),
-(9, 'Kios', '<i class=\"fa fa-home\" aria-hidden=\"true\"></i>');
+(3, 'Kulineran', '<i class=\"fa fa-coffee\" aria-hidden=\"true\"></i>'),
+(4, 'Kerajinan', '<i class="fa fa-diamond" aria-hidden="true"></i>'),
+(5, 'Serba Usaha', '<i class=\"fa fa-users\" aria-hidden=\"true\"></i>'),
+(6, 'Air Mineral', '<i class=\"fa fa-tint\" aria-hidden=\"true\"></i>'),
+(7, 'Servis', '<i class=\"fa fa-wrench\" aria-hidden=\"true\"></i>'),
+(8, 'Percetakan', '<i class="fa fa-cubes" aria-hidden="true"></i>'),
+(9, 'Kios', '<i class=\"fa fa-home\" aria-hidden=\"true\"></i>'),
+(10, 'Studio', '<<i class="fa fa-camera-retro" aria-hidden="true"></i>'),
+(11, 'Meubel', '<i class="fa fa-gavel" aria-hidden="true"></i>'),
+(12, 'Perawatan', '<i class="fa fa-scissors" aria-hidden="true"></i>'),
+(13, 'Pelayanan Kesehatan', '<i class="fa fa-plus-square-o" aria-hidden="true"></i>');
 
 -- --------------------------------------------------------
 
@@ -222,7 +228,7 @@ CREATE TABLE `konten` (
 --
 
 INSERT INTO `konten` (`id_konten`, `nm_konten`, `gambar`, `deskripsi`, `jns_konten`, `id_admin`, `f_id_jenus`) VALUES
-(4, 'Halaman Utama', '1705585762_logo_kab.ttu-removebg-preview.png', '<p>Kiasan :<br>Pemberdayaan melalui pemodalan , sosialisasi, pendampingan, dan pengontrolan dapat membantu meningkatkan kinerja produktivitas tiap usaha.</p><p><strong>Bernardinus Totnay, S.Sos</strong></p><p><strong>Kepala Dinas Koperasi Usaha Kecil dan Menengah Kabupaten TTU</strong></p><p>Sekilas UMKM di TTU</p><p>Usaha Mikro, Kecil, dan Menengah (UMKM) di Kabupaten Timor Tengah Utara (TTU) umumnya melibatkan sektor pertanian, kerajinan tradisional, perdagangan lokal, dan jasa. Potensi ekonomi UMKM dapat berkontribusi pada pertumbuhan ekonomi daerah serta memperkuat keberlanjutan ekonomi masyarakat setempat.</p>', '1', 1, 1),
+(4, 'Halaman Utama', '1705585762_logo_kab.ttu-removebg-preview.png', '<p>Pemberdayaan melalui pemodalan , sosialisasi, pendampingan, dan pengontrolan dapat membantu meningkatkan kinerja produktivitas tiap usaha.Potensi ekonomi UMKM dapat berkontribusi pada pertumbuhan ekonomi daerah serta memperkuat keberlanjutan ekonomi masyarakat setempat.</p><p>Usaha Mikro, Kecil, dan Menengah (UMKM) di Kabupaten Timor Tengah Utara (TTU) umumnya melibatkan sektor pertanian, kerajinan tradisional, perdagangan lokal, dan jasa.</p><p><strong>Drs. Juandi David<br>Bupati Timor Tengah Utara</strong></p>', '1', 1, 1),
 (5, 'Visi', '', '<p>Terwujudnya koperasi dan UMKM yang mandiri sebagai pelaku ekonomi yang tanggap, tangguh dan ulet demi mencapai masyarakat Timor Tengah Utara yang sejahtera secara adil.</p>', '2', 1, 1),
 (6, 'Misi', '', '<ol><li>Meningkatkan kualitas kelembagaan koperasi, UKM dalam bidang organisasi administrasi dan sumber daya manusia.</li><li>Pengembangan kewirausahaan bagi koperasi dan UMKM melalui pembinaan, bimbingan dan fasilitas pengembangan dan peningkatan hasil produksi serta mengembangkan iklim usaha yang kondusif.</li></ol>', '3', 1, 1),
 (7, 'Jagung Titi', '1705586914_Screenshot (21).png', '<p>Terbuat dari kedelai hitam berkualitas</p>', '4', 1, 6),
