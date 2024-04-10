@@ -168,7 +168,7 @@ if(isset($_GET['k'])) {
     foreach ($jenus as $key => $jenis_usaha) {
         $legendContent .= "<p>" . $jenis_usaha['icon'] . " " . $jenis_usaha['nama_jenus'] . "</p>";
     }
-    $legendContent .= "<p><i class=\"fa fa-circle-thin text-primary\" aria-hidden=\"true\"></i> Polygon Jenis Usaha</p>";
+
 
     echo "var legend = L.control({position: 'topright'});";
     echo "legend.onAdd = function (map) {";
