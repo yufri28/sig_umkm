@@ -25,6 +25,7 @@ if (isset($_POST['Ubah'])) {
     $latitude = htmlspecialchars($_POST['latitude']);
     $longitude = htmlspecialchars($_POST['longitude']);
     $no_telepon = htmlspecialchars($_POST['no_telepon']);
+    $polygon = htmlspecialchars($_POST['polygon']);
     $gambar_lama = htmlspecialchars($_POST['gambar_lama']);
 
     // Upload gambar
@@ -68,6 +69,7 @@ if (isset($_POST['Ubah'])) {
                 'latitude' => $latitude,
                 'longitude' => $longitude,
                 'no_telpon' => $no_telepon,
+                'polygon' => $polygon,
                 'gambar' => $gambar_konten
             ];
 
@@ -95,6 +97,7 @@ if (isset($_POST['Ubah'])) {
             'latitude' => $latitude,
             'longitude' => $longitude,
             'no_telpon' => $no_telepon,
+            'polygon' => $polygon,
             'gambar' => $gambar_lama
         ];
     
@@ -322,6 +325,13 @@ Swal.fire({
                     <input type="hidden" accept="image/png, image/jpeg, image/jpg" value="<?= $data_cek['gambar']; ?>"
                         class="form-control" id="gambar_lama" name="gambar_lama" required>
                     <small><i>* Diisi jika ingin mengubah gambar</i></small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="polygon" class="col-sm-2 col-form-label">Polygon</label>
+                <div class="col-sm-5">
+                    <textarea class="form-control" name="polygon" id="polygon" rows="3" required><?= $data_cek['polygon_usaha']; ?>
+                    </textarea>
                 </div>
             </div>
         </div>

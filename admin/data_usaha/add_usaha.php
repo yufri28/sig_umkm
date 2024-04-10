@@ -6,7 +6,6 @@ $data_sektor = $Sektor->get();
 $data_klasifikasi = $Klasifikasi->get();
 $data_jenus = $Jenus->get();
 
-
 if (isset($_POST['Simpan'])) {
     $data = array();
     $nama_usaha = htmlspecialchars($_POST['nama_usaha']);
@@ -27,6 +26,7 @@ if (isset($_POST['Simpan'])) {
     $latitude = htmlspecialchars($_POST['latitude']);
     $longitude = htmlspecialchars($_POST['longitude']);
     $no_telepon = htmlspecialchars($_POST['no_telepon']);
+    $polygon = htmlspecialchars($_POST['polygon']);
     
 
     // Upload gambar
@@ -61,6 +61,7 @@ if (isset($_POST['Simpan'])) {
                 'latitude' => $latitude,
                 'longitude' => $longitude,
                 'no_telpon' => $no_telepon,
+                'polygon' => $polygon,
                 'gambar' => $gambar_konten
             ];
         } else {
@@ -86,6 +87,7 @@ if (isset($_POST['Simpan'])) {
             'latitude' => $latitude,
             'longitude' => $longitude,
             'no_telpon' => $no_telepon,
+            'polygon' => $polygon,
             'gambar' => NULL,
         ];
     }
@@ -302,6 +304,13 @@ Swal.fire({
                 <div class="col-sm-5">
                     <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="gambar_konten"
                         name="gambar_konten" placeholder="Gambar Konten">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="polygon" class="col-sm-2 col-form-label">Polygon</label>
+                <div class="col-sm-5">
+                    <textarea class="form-control" name="polygon" id="polygon" rows="3" required></textarea>
                 </div>
             </div>
         </div>
