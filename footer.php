@@ -82,7 +82,7 @@ if(isset($_GET['k'])) {
                 JOIN kecamatan k ON d.id_kec=k.id_kec 
                 JOIN klasifikasi_usaha ku ON u.id_ku=ku.id_ku
                 JOIN jenus ju ON u.jns_ush=ju.id_ju
-                WHERE u.id_datum='$id' AND k.id_kec='$kec'");
+                WHERE u.jns_ush='$id' AND k.id_kec='$kec'");
     }
     elseif (isset($_GET['q'])) {
         $id = htmlspecialchars($_GET['q']);
@@ -93,7 +93,7 @@ if(isset($_GET['k'])) {
                 JOIN kecamatan k ON d.id_kec=k.id_kec 
                 JOIN klasifikasi_usaha ku ON u.id_ku=ku.id_ku
                 JOIN jenus ju ON u.jns_ush=ju.id_ju
-                WHERE u.id_datum='$id'"
+                WHERE u.jns_ush='$id'"
         );
     } elseif(isset($_GET['k'])) {
         $kec = htmlspecialchars($_GET['k']);
