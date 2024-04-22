@@ -28,21 +28,21 @@ if ($resCekKadis->num_rows < 1) {
     $resultKadis = $koneksi->query($sqlKadis);
 }
 
-// Cek untuk jenis pengguna level 'User Biasa'
+// Cek untuk jenis pengguna level 'Admin Biasa'
 $sqlCekUserBiasa = "SELECT * FROM jenis_user WHERE level='Admin'";
 $resCekUserBiasa = $koneksi->query($sqlCekUserBiasa);
 
 if ($resCekUserBiasa->num_rows < 1) {
-    // Jika jenis pengguna User Biasa belum ada, tambahkan ke database
+    // Jika jenis pengguna Admin Biasa belum ada, tambahkan ke database
     $sqlUserBiasa = "INSERT INTO jenis_user (nama_jenus, level) VALUES ('Admin', 'Admin')";
     $resultUserBiasa = $koneksi->query($sqlUserBiasa);
 }
 
 sleep(0.7);
-$sql = "SELECT * FROM admin a JOIN jenis_user ju WHERE ju.level='admin'";
+$sql = "SELECT * FROM admin a JOIN jenis_user ju ON a.id_jenus=ju.id_jenus WHERE ju.level='Administrator'";
 $res = $koneksi->query($sql);
 if($res->num_rows < 1){
-    $sqlJenus = "SELECT * FROM jenis_user WHERE level='admin'";
+    $sqlJenus = "SELECT * FROM jenis_user WHERE level='Administrator'";
     $resJenus = $koneksi->query($sqlJenus)->fetch_assoc();
     $id_jenus = $resJenus['id_jenus'];
     $password_hash = password_hash("admin",PASSWORD_BCRYPT);

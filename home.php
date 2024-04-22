@@ -12,15 +12,15 @@ $data_misi = $koneksi->query("SELECT * FROM konten WHERE jns_konten = 3")->fetch
         <div class="col-lg-6 d-flex align-items-center">
             <div class="container">
                 <div class="wrapper py-4">
-                    <img src="./assets/images/<?= $data_halaman_utama['gambar']; ?>" alt="Logo" width="330" height="324"
-                        class="d-inline-block align-text-top" />
+                    <img src="./assets/images/<?= isset($data_halaman_utama['gambar']) ? $data_halaman_utama['gambar']:''; ?>"
+                        alt="Logo" width="330" height="324" class="d-inline-block align-text-top" />
                 </div>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="container">
                 <div class="wrapper py-4" style="font-family: roboto;">
-                    <?= $data_halaman_utama['deskripsi']; ?>
+                    <?= isset($data_halaman_utama['deskripsi']) ?$data_halaman_utama['deskripsi']:'No Content'; ?>
                 </div>
 
                 <!-- <a href="" class="btn btn-warning fw-bolder">CARA MENDAFTAR USAHA ANDA</a> -->
@@ -34,13 +34,13 @@ $data_misi = $koneksi->query("SELECT * FROM konten WHERE jns_konten = 3")->fetch
             <div class="col-lg-6">
                 <div class="wrapper">
                     <h1 class="text-center my-5">Visi</h1>
-                    <?= $data_visi['deskripsi']; ?>
+                    <?= isset($data_visi['deskripsi'])?$data_visi['deskripsi']:'No Content'; ?>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="wrapper">
                     <h1 class="text-center my-5">Misi</h1>
-                    <?= $data_misi['deskripsi']; ?>
+                    <?= isset($data_misi['deskripsi']) ?$data_misi['deskripsi']:'No Content'; ?>
                 </div>
             </div>
         </div>
