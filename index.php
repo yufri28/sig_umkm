@@ -1,12 +1,43 @@
 <?php
 require_once 'config.php';
-$sqlCekJenus = "SELECT * FROM jenis_user WHERE level='admin'";
-$resCekJenus = $koneksi->query($sqlCekJenus);
+// $sqlCekJenus = "SELECT * FROM jenis_user WHERE level='Administrator'";
+// $resCekJenus = $koneksi->query($sqlCekJenus);
 
-if($resCekJenus->num_rows < 1){
-    $sql1 = "INSERT INTO jenis_user (nama_jenus,level)VALUES('Admin','admin')";
-    $result1 = $koneksi->query($sql1);
+// if($resCekJenus->num_rows < 1){
+//     $sql1 = "INSERT INTO jenis_user (nama_jenus,level)VALUES('Admin','admin')";
+//     $result1 = $koneksi->query($sql1);
+// }
+
+// Cek untuk jenis pengguna level 'Administrator'
+$sqlCekAdmin = "SELECT * FROM jenis_user WHERE level='Administrator'";
+$resCekAdmin = $koneksi->query($sqlCekAdmin);
+
+if ($resCekAdmin->num_rows < 1) {
+    // Jika jenis pengguna Admin belum ada, tambahkan ke database
+    $sqlAdmin = "INSERT INTO jenis_user (id_jenus,nama_jenus, level) VALUES (1,'Administrator', 'Administrator')";
+    $resultAdmin = $koneksi->query($sqlAdmin);
 }
+
+// Cek untuk jenis pengguna level 'Kadis'
+$sqlCekKadis = "SELECT * FROM jenis_user WHERE level='Kadis'";
+$resCekKadis = $koneksi->query($sqlCekKadis);
+
+if ($resCekKadis->num_rows < 1) {
+    // Jika jenis pengguna Kadis belum ada, tambahkan ke database
+    $sqlKadis = "INSERT INTO jenis_user (nama_jenus, level) VALUES ('Kadis', 'Kadis')";
+    $resultKadis = $koneksi->query($sqlKadis);
+}
+
+// Cek untuk jenis pengguna level 'User Biasa'
+$sqlCekUserBiasa = "SELECT * FROM jenis_user WHERE level='Admin'";
+$resCekUserBiasa = $koneksi->query($sqlCekUserBiasa);
+
+if ($resCekUserBiasa->num_rows < 1) {
+    // Jika jenis pengguna User Biasa belum ada, tambahkan ke database
+    $sqlUserBiasa = "INSERT INTO jenis_user (nama_jenus, level) VALUES ('Admin', 'Admin')";
+    $resultUserBiasa = $koneksi->query($sqlUserBiasa);
+}
+
 sleep(0.7);
 $sql = "SELECT * FROM admin a JOIN jenis_user ju WHERE ju.level='admin'";
 $res = $koneksi->query($sql);
@@ -16,7 +47,7 @@ if($res->num_rows < 1){
     $id_jenus = $resJenus['id_jenus'];
     $password_hash = password_hash("admin",PASSWORD_BCRYPT);
     if($resJenus != null){
-        $sql2 = "INSERT INTO admin (id_admin,uname,password,id_jenus) VALUES (0,'Admin','$password_hash','$id_jenus')";
+        $sql2 = "INSERT INTO admin (id_admin,uname,password,id_jenus) VALUES (0,'admin','$password_hash',1)";
         $result2 = $koneksi->query($sql2);
     }
 }
