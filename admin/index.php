@@ -14,7 +14,7 @@ if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
     header("Location: ../index.php");
 }
 
-$data_level = "Administrator";
+$data_level = $_SESSION['level'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -106,7 +106,6 @@ $data_level = "Administrator";
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-
                         <!-- Level  -->
                         <?php
                         if ($data_level == "Administrator") {
@@ -203,7 +202,7 @@ $data_level = "Administrator";
                         </li>
 
                         <?php
-                        } elseif ($data_level == "Sekretaris") {
+                        } elseif ($data_level == "Kadis") {
                         ?>
 
                         <li class="nav-item">
@@ -214,16 +213,150 @@ $data_level = "Administrator";
                                 </p>
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a href="?page=data-pegawai"
-                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == '-' ? 'active' : '') : '' ?>">
-                                <i class="nav-icon far fa fa-users"></i>
+                            <a href="?page=data-usaha"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-usaha' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
                                 <p>
-                                    -
+                                    Data Usaha
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="?page=data-kecamatan"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-kecamatan' || $_GET['page'] == 'add-kecamatan' || $_GET['page'] == 'edit-kecamatan' || $_GET['page'] == 'view-kecamatan' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
+                                <p>
+                                    Kecamatan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-deskel"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-deskel' || $_GET['page'] == 'add-deskel' || $_GET['page'] == 'edit-deskel' || $_GET['page'] == 'view-deskel' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
+                                <p>
+                                    Desa/Kelurahan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-su"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-su' || $_GET['page'] == 'add-su' || $_GET['page'] == 'edit-su' || $_GET['page'] == 'view-su' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
+                                <p>
+                                    Sektor Usaha
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-ku"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-ku' || $_GET['page'] == 'add-ku' || $_GET['page'] == 'edit-ku' || $_GET['page'] == 'view-ku' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon fa fa-object-group" aria-hidden="true"></i>
+                                <p>
+                                    Klasifikasi Usaha
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-ju"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-ju' || $_GET['page'] == 'add-ju' || $_GET['page'] == 'edit-ju' || $_GET['page'] == 'view-ju' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon fa fa-table" aria-hidden="true"></i>
+                                <p>
+                                    Jenis Usaha
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-faq"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-faq' || $_GET['page'] == 'add-faq' || $_GET['page'] == 'edit-faq' || $_GET['page'] == 'view-faq' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon fa fa-table" aria-hidden="true"></i>
+                                <p>
+                                    FAQ
+                                </p>
+                            </a>
+                        </li>
+
+
+
+                        <li class="nav-header">Setting</li>
+                        <?php
+                         } elseif ($data_level == "Admin") {
+                        ?>
+
+                        <li class="nav-item">
+                            <a href="index.php" class="nav-link <?= !isset($_GET['page']) ? 'active' : '' ?>">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-usaha"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-usaha' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
+                                <p>
+                                    Data Usaha
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-kecamatan"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-kecamatan' || $_GET['page'] == 'add-kecamatan' || $_GET['page'] == 'edit-kecamatan' || $_GET['page'] == 'view-kecamatan' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
+                                <p>
+                                    Kecamatan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-deskel"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-deskel' || $_GET['page'] == 'add-deskel' || $_GET['page'] == 'edit-deskel' || $_GET['page'] == 'view-deskel' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
+                                <p>
+                                    Desa/Kelurahan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-su"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-su' || $_GET['page'] == 'add-su' || $_GET['page'] == 'edit-su' || $_GET['page'] == 'view-su' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon far fa fa-table"></i>
+                                <p>
+                                    Sektor Usaha
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-ku"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-ku' || $_GET['page'] == 'add-ku' || $_GET['page'] == 'edit-ku' || $_GET['page'] == 'view-ku' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon fa fa-object-group" aria-hidden="true"></i>
+                                <p>
+                                    Klasifikasi Usaha
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-ju"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-ju' || $_GET['page'] == 'add-ju' || $_GET['page'] == 'edit-ju' || $_GET['page'] == 'view-ju' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon fa fa-table" aria-hidden="true"></i>
+                                <p>
+                                    Jenis Usaha
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=data-faq"
+                                class="nav-link <?= isset($_GET['page']) ? ($_GET['page'] == 'data-faq' || $_GET['page'] == 'add-faq' || $_GET['page'] == 'edit-faq' || $_GET['page'] == 'view-faq' ? 'active' : '') : '' ?>">
+                                <i class="nav-icon fa fa-table" aria-hidden="true"></i>
+                                <p>
+                                    FAQ
+                                </p>
+                            </a>
+                        </li>
+
+
 
                         <li class="nav-header">Setting</li>
 
@@ -407,6 +540,20 @@ $data_level = "Administrator";
                                 include "./faq/view_faq.php";
                                 break;
 
+                            //Pengguna
+                            case 'data-pengguna':
+                                include "./pengguna/data_pengguna.php";
+                                break;
+                            case 'add-pengguna':
+                                include "./pengguna/add_pengguna.php";
+                                break;
+                            case 'edit-pengguna':
+                                include "./pengguna/edit_pengguna.php";
+                                break;
+                            case 'del-pengguna':
+                                include "./pengguna/del_pengguna.php";
+                                break;
+
                                 //default
                             default:
                                 echo "<center><h1> ERROR !</h1></center>";
@@ -416,8 +563,11 @@ $data_level = "Administrator";
                         // Auto Halaman Home Pengguna
                         if ($data_level == "Administrator") {
                             include "./dashboard.php";
-                        } elseif ($data_level == "Sekretaris") {
-                            include "home/sekretaris.php";
+                        } elseif ($data_level == "Admin") {
+                            include "./dashboard.php";
+                        }
+                         elseif ($data_level == "Kadis") {
+                            include "./dashboard.php";
                         }
                     }
                     ?>

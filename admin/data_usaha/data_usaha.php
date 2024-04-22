@@ -12,8 +12,10 @@
     <div class="card-body">
         <div class="table-responsive">
             <div class="d-flex">
+                <?php if($_SESSION['level'] != 'Kadis'):?>
                 <a href="?page=add-usaha" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Tambah Data Usaha</a>
+                <?php endif;?>
                 <!-- <a href="./report/cetak-pegawai.php" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i> Laporan</a> -->
                 <!-- <div class="dropdown ml-1">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
@@ -133,7 +135,7 @@
                                 class="btn btn-info btn-sm">
                                 <i class="fa fa-eye"></i>
                             </a>
-                            </a>
+                            <?php if($_SESSION['level'] != 'Kadis'):?>
                             <a href="?page=edit-usaha&kode=<?php echo $data['id_datum']; ?>" title="Ubah"
                                 class="btn btn-success btn-sm">
                                 <i class="fa fa-edit"></i>
@@ -142,6 +144,8 @@
                                 onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus"
                                 class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i>
+                            </a>
+                            <?php endif;?>
                         </td>
                     </tr>
 

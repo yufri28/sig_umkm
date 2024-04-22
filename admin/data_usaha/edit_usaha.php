@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-usaha';
+        }
+    })</script>";
+}
 if (isset($_GET['kode'])) {
     $sql_cek = $Usaha->getById($_GET['kode']);
     $data_cek = mysqli_fetch_array($sql_cek, MYSQLI_BOTH);

@@ -12,8 +12,10 @@ $data_kecamatan = $Kecamatan->get();
     <div class="card-body">
         <div class="table-responsive">
             <div class="d-flex">
+                <?php if($_SESSION['level'] != 'Kadis'):?>
                 <a href="?page=add-kecamatan" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Tambah Data Kecamatan</a>
+                <?php endif;?>
 
             </div>
             <br>
@@ -47,7 +49,7 @@ $data_kecamatan = $Kecamatan->get();
                                 class="btn btn-info btn-sm">
                                 <i class="fa fa-eye"></i>
                             </a>
-                            </a>
+                            <?php if($_SESSION['level'] != 'Kadis'):?>
                             <a href="?page=edit-kecamatan&kode=<?php echo $kecamatan['id_kec']; ?>" title="Ubah"
                                 class="btn btn-success btn-sm">
                                 <i class="fa fa-edit"></i>
@@ -56,6 +58,8 @@ $data_kecamatan = $Kecamatan->get();
                                 onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus"
                                 class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i>
+                            </a>
+                            <?php endif;?>
                         </td>
                     </tr>
 

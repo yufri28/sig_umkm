@@ -12,9 +12,10 @@ $data_jenus = $Jenus->get();
     <div class="card-body">
         <div class="table-responsive">
             <div class="d-flex">
+                <?php if($_SESSION['level'] != 'Kadis'):?>
                 <a href="?page=add-ju" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Tambah Data</a>
-
+                <?php endif;?>
             </div>
             <br>
             <table id="example1" class="table nowrap table-bordered table-striped" style="width:100%;">
@@ -48,7 +49,7 @@ $data_jenus = $Jenus->get();
                                 class="btn btn-info btn-sm">
                                 <i class="fa fa-eye"></i>
                             </a>
-                            </a>
+                            <?php if($_SESSION['level'] != 'Kadis'):?>
                             <a href="?page=edit-ju&kode=<?php echo $jenus['id_ju']; ?>" title="Ubah"
                                 class="btn btn-success btn-sm">
                                 <i class="fa fa-edit"></i>
@@ -57,6 +58,8 @@ $data_jenus = $Jenus->get();
                                 onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus"
                                 class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i>
+                            </a>
+                            <?php endif;?>
                         </td>
                     </tr>
                     <?php endif;?>

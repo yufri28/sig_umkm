@@ -1,7 +1,16 @@
 <?php
 
 if(isset($_GET['kode'])){
-    $Deskel->delete($_GET['kode']);
+    if($_SESSION['level'] == "Kadis"){
+        echo "<script>
+        Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+        }).then((result) => {if (result.value){
+            window.location = 'index.php?page=data-deskel';
+            }
+        })</script>";
+    }else{
+        $Deskel->delete($_GET['kode']);
+    }
 }
 ?>
 

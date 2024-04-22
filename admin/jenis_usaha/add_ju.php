@@ -1,4 +1,12 @@
 <?php
+if($_SESSION['level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-ju';
+        }
+    })</script>";
+}
 if (isset($_POST['Simpan'])) {
     $nama_jenus= htmlspecialchars($_POST['nama_jenus']);
     $icon= $_POST['icon'];

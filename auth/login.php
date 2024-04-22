@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['error'] = 'Login Gagal';
         }
     }
-    if (!mysqli_num_rows($cekPelamar) > 0 && !mysqli_num_rows($cekAdmin) > 0) {
+    if (!mysqli_num_rows($cekAdmin) > 0) {
         $_SESSION['error'] = 'Login Gagal';
     }
 }

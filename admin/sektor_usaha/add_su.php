@@ -1,4 +1,12 @@
 <?php
+if($_SESSION['level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-su';
+        }
+    })</script>";
+}
 if (isset($_POST['Simpan'])) {
     $nama_sektor = htmlspecialchars($_POST['nama_sektor']);
     $Sektor->add($nama_sektor);

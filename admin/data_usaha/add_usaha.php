@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-usaha';
+        }
+    })</script>";
+}
 $data_kecamatan = $Kecamatan->get();
 $data_deskel = $Deskel->get();
 $data_sektor = $Sektor->get();

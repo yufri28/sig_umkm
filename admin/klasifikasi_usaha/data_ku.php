@@ -12,9 +12,10 @@ $data_klasifikasi = $Klasifikasi->get();
     <div class="card-body">
         <div class="table-responsive">
             <div class="d-flex">
+                <?php if($_SESSION['level'] != 'Kadis'):?>
                 <a href="?page=add-ku" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Tambah Data</a>
-
+                <?php endif;?>
             </div>
             <br>
             <table id="example1" class="table nowrap table-bordered table-striped" style="width:100%;">
@@ -31,25 +32,31 @@ $data_klasifikasi = $Klasifikasi->get();
                     while ($klasifikasi = $data_klasifikasi->fetch_assoc()) {
                     ?>
 
-                        <tr>
-                            <td>
-                                <?php echo $no++; ?>
-                            </td>
-                            <td>
-                                <?php echo $klasifikasi['nm_ku']; ?>
-                            </td>
-                            <td>
-                                <a href="?page=view-ku&kode=<?php echo $klasifikasi['id_ku']; ?>" title="Detail" class="btn btn-info btn-sm">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                </a>
-                                <a href="?page=edit-ku&kode=<?php echo $klasifikasi['id_ku']; ?>" title="Ubah" class="btn btn-success btn-sm">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="?page=del-ku&kode=<?php echo $klasifikasi['id_ku']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <?php echo $no++; ?>
+                        </td>
+                        <td>
+                            <?php echo $klasifikasi['nm_ku']; ?>
+                        </td>
+                        <td>
+                            <a href="?page=view-ku&kode=<?php echo $klasifikasi['id_ku']; ?>" title="Detail"
+                                class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            <?php if($_SESSION['level'] != 'Kadis'):?>
+                            <a href="?page=edit-ku&kode=<?php echo $klasifikasi['id_ku']; ?>" title="Ubah"
+                                class="btn btn-success btn-sm">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="?page=del-ku&kode=<?php echo $klasifikasi['id_ku']; ?>"
+                                onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus"
+                                class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <?php endif;?>
+                        </td>
+                    </tr>
 
                     <?php
                     }

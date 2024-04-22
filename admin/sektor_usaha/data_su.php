@@ -12,9 +12,10 @@ $data_sektor = $Sektor->get();
     <div class="card-body">
         <div class="table-responsive">
             <div class="d-flex">
+                <?php if($_SESSION['level'] != 'Kadis'):?>
                 <a href="?page=add-su" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Tambah Data</a>
-
+                <?php endif;?>
             </div>
             <br>
             <table id="example1" class="table nowrap table-bordered table-striped" style="width:100%;">
@@ -43,7 +44,7 @@ $data_sektor = $Sektor->get();
                                 class="btn btn-info btn-sm">
                                 <i class="fa fa-eye"></i>
                             </a>
-                            </a>
+                            <?php if($_SESSION['level'] != 'Kadis'):?>
                             <a href="?page=edit-su&kode=<?php echo $sektor['id_su']; ?>" title="Ubah"
                                 class="btn btn-success btn-sm">
                                 <i class="fa fa-edit"></i>
@@ -52,6 +53,8 @@ $data_sektor = $Sektor->get();
                                 onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus"
                                 class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i>
+                            </a>
+                            <?php endif;?>
                         </td>
                     </tr>
 
