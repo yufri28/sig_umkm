@@ -105,6 +105,16 @@ if(isset($_GET['k'])) {
                 JOIN klasifikasi_usaha ku ON u.id_ku=ku.id_ku
                 JOIN jenus ju ON u.jns_ush=ju.id_ju
                 WHERE k.id_kec='$kec'");
+    }elseif(isset($_GET['u'])){
+        $id_datum = htmlspecialchars($_GET['u']);
+        $data_usaha = $koneksi->query(
+            "SELECT *, u.polygon AS polygon_usaha FROM usaha u 
+                JOIN deskel d ON u.id_deskel=d.id_deskel 
+                JOIN sektor_usaha su ON u.id_su=su.id_su 
+                JOIN kecamatan k ON d.id_kec=k.id_kec 
+                JOIN klasifikasi_usaha ku ON u.id_ku=ku.id_ku
+                JOIN jenus ju ON u.jns_ush=ju.id_ju
+                WHERE u.id_datum='$id_datum'");
     }
     else {
         $data_usaha = $koneksi->query(
@@ -245,7 +255,7 @@ if (count($coordinates) > 0) {
 
             // Mengikat pop-up pada marker
             if ($location['gambar'] == NULL) {
-                echo "marker.bindPopup('<div class=\"custom-popup\"><img src=\"./assets/img/" . "no-image.svg" . "\" width=\"210\" height=\"150\"><br><br><b>" . $location['nm_usaha'] . "</b><br>Kecamatan : " . $location['nm_kec'] . "<br>Desa/Keluarah : " . $location['nm_deskel'] . "<br>Sektor Usaha : " . $location['nm_su'] . "<br>Klasifikasi Usaha : " . $location['nm_ku'] . "<br>Tahun Pembentukan : " . $location['thn_pmtkn'] . "').openPopup();";
+                echo "marker.bindPopup('<div class=\"custom-popup\"><img src=\"./assets/img/" . "no-image.svg" . "\" width=\"210\" height=\"150\"><br><br><b>" . $location['nm_usaha'] . "</b><br>Kecamatan : " . $location['nm_kec'] . "<br>Desa/Keluarah : " . $location['nm_deskel'] . "<br>Sektor Usaha : " . $location['nm_su'] . "<br>Klasifikasi Usaha : " . $location['nm_ku'] . "<br>Tahun Pembentukan : " . $location['thn_pmtkn'] . "<br><br><a target=\"_blank\" href=\"https://www.google.com/maps/dir/?api=1&destination=" . $location['latitude'] . ',' . $location['longitude'] . "\" title=\"Lokasi di Google Maps\" class=\"btn text-white btn-sm btn-success\">Rute G.Maps</a><a href=\"./produk.php\" title=\"Lokasi di Google Maps\" class=\"btn text-white btn-sm btn-danger\">UMKM</a>').openPopup();";
             } else {
                 echo "marker.bindPopup('<div class=\"custom-popup\"><img src=\"./assets/images/" . $location['gambar']  . "\" width=\"210\" height=\"150\"><br><br><b>" . $location['nm_usaha'] . "</b><br>Kecamatan : " . $location['nm_kec'] . "<br>Desa/Keluarah : " . $location['nm_deskel'] . "<br>Sektor Usaha : " . $location['nm_su'] . "<br>Klasifikasi Usaha : " . $location['nm_ku'] . "<br>Tahun Pembentukan : " . $location['thn_pmtkn'] . "<br><br><a target=\"_blank\" href=\"https://www.google.com/maps/dir/?api=1&destination=" . $location['latitude'] . ',' . $location['longitude'] . "\" title=\"Lokasi di Google Maps\" class=\"btn text-white btn-sm btn-success\">Rute G.Maps</a><a href=\"./produk.php\" title=\"Lokasi di Google Maps\" class=\"btn text-white btn-sm btn-danger\">UMKM</a>').openPopup();";
             }

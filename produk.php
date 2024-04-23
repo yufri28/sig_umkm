@@ -104,7 +104,7 @@ $num_rows = $data_produk->num_rows;
                                 data-bs-target="#details<?= $produk['id_konten']; ?>">
                                 Detail
                             </button>
-                            <a target="_blank" href="./maps.php?q=<?=$produk['f_id_usaha'];?>" title="Lokasi di MAPS"
+                            <a target="_blank" href="./maps.php?u=<?=$produk['f_id_usaha'];?>" title="Lokasi di MAPS"
                                 class="btn btn-sm btn-success">Lokasi</a>
                         </div>
                     </div>
@@ -132,7 +132,7 @@ $num_rows = $data_produk->num_rows;
                     <div class="card-body">
                         <h5 class="card-title"><?= $produk['nm_konten']; ?></h5>
                         <p class="card-text"><?= $produk['deskripsi']; ?></p>
-                        <a target="_blank" href="./maps.php?q=<?=$produk['f_id_usaha'];?>" title="Lokasi di MAPS"
+                        <a target="_blank" href="./maps.php?u=<?=$produk['f_id_usaha'];?>" title="Lokasi di MAPS"
                             class="btn btn-sm btn-success">Lokasi</a>
                     </div>
                 </div>
