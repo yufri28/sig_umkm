@@ -34,30 +34,46 @@ class Pengaturan
             $id_datum = $data['id_datum'];
             // $latitude = $data['latitude'];
             // $longitude = $data['longitude'];
-
-            // Insert data ke database
-            $insert = $this->db->query(
-                "INSERT INTO konten (id_konten,nm_konten,gambar,deskripsi,jns_konten,id_admin,f_id_jenus) 
-                VALUES(0,'$judul_konten','$gambar_konten','$deskripsi','$jns_konten','$id_user','$f_id_jenus')"
+            
+            
+            
+            // Memeriksa apakah data sudah ada
+            $cekData = $this->db->query(
+                "SELECT * FROM konten WHERE LOWER(nm_konten) = '".strtolower($judul_konten)."' AND jns_konten = '$jns_konten' AND f_id_jenus = '$f_id_jenus'"
             );
 
-            if ($insert) {
-                $maxIdKonten = $this->db->query(
-                    "SELECT id_konten FROM konten ORDER BY id_konten DESC LIMIT 1;"
-                )->fetch_assoc();
-
+            if ($cekData->num_rows > 0) {
+                $_SESSION['warning'] = 'Data sudah tersimpan sebelumnya!';
+            }else{
                 // Insert data ke database
-                $insertKontenUsaha = $this->db->query(
-                    "INSERT INTO konten_usaha (id_konten_usaha,f_id_usaha,f_id_konten) 
-                    VALUES(0,'$id_datum','".$maxIdKonten['id_konten']."')"
+                $insert = $this->db->query(
+                    "INSERT INTO konten (id_konten,nm_konten,gambar,deskripsi,jns_konten,id_admin,f_id_jenus) 
+                    VALUES(0,'$judul_konten','$gambar_konten','$deskripsi','$jns_konten','$id_user','$f_id_jenus')"
                 );
-
-                return $_SESSION['success'] = "Data berhasil disimpan!";
-            } else {
-                return $_SESSION['error'] = "Data gagal disimpan!";
+    
+                if ($insert) {
+                    if(empty($id_datum)){
+                        $_SESSION['success'] = "Data berhasil disimpan!";
+                    }else{
+                        $maxIdKonten = $this->db->query(
+                            "SELECT id_konten FROM konten ORDER BY id_konten DESC LIMIT 1;"
+                        )->fetch_assoc();
+        
+                        // Insert data ke database
+                        $insertKontenUsaha = $this->db->query(
+                            "INSERT INTO konten_usaha (id_konten_usaha,f_id_usaha,f_id_konten) 
+                            VALUES(0,'$id_datum','".$maxIdKonten['id_konten']."')"
+                        );
+        
+                         $_SESSION['success'] = "Data berhasil disimpan!";
+                    }
+                    
+                } else {
+                     $_SESSION['error'] = "Data gagal disimpan!";
+                }
             }
         } else {
-            return $_SESSION['error'] = "Tidak ada data yang dikirim!";
+             $_SESSION['error'] = "Tidak ada data yang dikirim!";
         }
     }
 

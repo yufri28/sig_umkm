@@ -13,9 +13,11 @@
         <div class="table-responsive">
             <div class="d-flex">
                 <?php if($_SESSION['level'] != 'Kadis'):?>
-                <a href="?page=add-usaha" class="btn btn-primary">
+                <a href="?page=add-usaha" class="btn btn-primary mr-2">
                     <i class="fa fa-plus"></i> Tambah Data Usaha</a>
                 <?php endif;?>
+                <a href="./../report/cetak_usaha.php" target="_blank" class="btn btn-success">
+                    <i class="fa fa-print"></i> Cetak Data Usaha</a>
                 <!-- <a href="./report/cetak-pegawai.php" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i> Laporan</a> -->
                 <!-- <div class="dropdown ml-1">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
@@ -60,6 +62,8 @@
                         <th>Asset</th>
                         <th>Omset</th>
                         <th>Nomor Telepon</th>
+                        <th>KTP Pemilik</th>
+                        <th>Surat Izin Usaha</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -129,6 +133,19 @@
                         </td>
                         <td>
                             <?= $data['no_telpon'] == NULL?'-':$data['no_telpon']; ?>
+                        </td>
+                        <td>
+                            <img height="100" width="100"
+                                src="../assets/<?= $data['ktp'] == NULL?'img/no-image.svg':'file/'.$data['ktp']; ?>"
+                                alt="">
+                        </td>
+                        <td>
+                            <?php if (!empty($data['surat_izin_usaha'])): ?>
+                            <a href="../assets/file/<?= $data['surat_izin_usaha']; ?>"
+                                download><?= $data['surat_izin_usaha']; ?></a>
+                            <?php else: ?>
+                            -
+                            <?php endif; ?>
                         </td>
                         <td>
                             <a href="?page=view-usaha&kode=<?php echo $data['id_datum']; ?>" title="Detail"

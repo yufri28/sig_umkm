@@ -37,67 +37,121 @@ if (isset($_POST['Simpan'])) {
     
 
     // Upload gambar
-    if (!empty($_FILES['gambar_konten']['name'])) {
-        $gambar_konten = $_FILES['gambar_konten']['name'];
-        $gambar_tmp = $_FILES['gambar_konten']['tmp_name'];
+    // if (!empty($_FILES['gambar_konten']['name'])) {
+    //     $gambar_konten = $_FILES['gambar_konten']['name'];
+    //     $gambar_tmp = $_FILES['gambar_konten']['tmp_name'];
 
-        // Tentukan direktori tempat menyimpan gambar
-        $upload_dir = "../assets/images/";
+    //     // Tentukan direktori tempat menyimpan gambar
+    //     $upload_dir = "../assets/images/";
 
-        // Generate nama unik untuk gambar (misalnya, menggunakan timestamp)
-        $gambar_konten = time() . '_' . $gambar_konten;
+    //     // Generate nama unik untuk gambar (misalnya, menggunakan timestamp)
+    //     $gambar_konten = time() . '_' . $gambar_konten;
 
-        // Pindahkan file gambar ke direktori upload
-        if (move_uploaded_file($gambar_tmp, $upload_dir . $gambar_konten)) {
-            $data = [
-                'nama_usaha' => $nama_usaha,
-                'id_deskel' => $id_deskel,
-                'id_su' => $id_su,
-                'id_ku' => $id_ku,
-                'tahun_pembentukan' => $tahun_pembentukan,
-                'jenis_usaha' => $jenis_usaha,
-                'no_izin' => $no_izin,
-                'nama_pemilik' => $nama_pemilik,
-                'alamat' => $alamat,
-                'tk_laki' => $tk_laki,
-                'tk_perempuan' => $tk_perempuan,
-                'modal_sendiri' => $modal_sendiri,
-                'modal_luar' => $modal_luar,
-                'asset' => $asset,
-                'omset' => $omset,
-                'latitude' => $latitude,
-                'longitude' => $longitude,
-                'no_telpon' => $no_telepon,
-                'polygon' => $polygon,
-                'gambar' => $gambar_konten
-            ];
-        } else {
-            return $_SESSION['error'] = "Gagal mengupload gambar!";
+    //     // Pindahkan file gambar ke direktori upload
+    //     if (move_uploaded_file($gambar_tmp, $upload_dir . $gambar_konten)) {
+    //         $data = [
+    //             'nama_usaha' => $nama_usaha,
+    //             'id_deskel' => $id_deskel,
+    //             'id_su' => $id_su,
+    //             'id_ku' => $id_ku,
+    //             'tahun_pembentukan' => $tahun_pembentukan,
+    //             'jenis_usaha' => $jenis_usaha,
+    //             'no_izin' => $no_izin,
+    //             'nama_pemilik' => $nama_pemilik,
+    //             'alamat' => $alamat,
+    //             'tk_laki' => $tk_laki,
+    //             'tk_perempuan' => $tk_perempuan,
+    //             'modal_sendiri' => $modal_sendiri,
+    //             'modal_luar' => $modal_luar,
+    //             'asset' => $asset,
+    //             'omset' => $omset,
+    //             'latitude' => $latitude,
+    //             'longitude' => $longitude,
+    //             'no_telpon' => $no_telepon,
+    //             'polygon' => $polygon,
+    //             'gambar' => $gambar_konten
+    //         ];
+    //     } else {
+    //         return $_SESSION['error'] = "Gagal mengupload gambar!";
+    //     }
+    // } else {
+    //     $data = [
+    //         'nama_usaha' => $nama_usaha,
+    //         'id_deskel' => $id_deskel,
+    //         'id_su' => $id_su,
+    //         'id_ku' => $id_ku,
+    //         'tahun_pembentukan' => $tahun_pembentukan,
+    //         'jenis_usaha' => $jenis_usaha,
+    //         'no_izin' => $no_izin,
+    //         'nama_pemilik' => $nama_pemilik,
+    //         'alamat' => $alamat,
+    //         'tk_laki' => $tk_laki,
+    //         'tk_perempuan' => $tk_perempuan,
+    //         'modal_sendiri' => $modal_sendiri,
+    //         'modal_luar' => $modal_luar,
+    //         'asset' => $asset,
+    //         'omset' => $omset,
+    //         'latitude' => $latitude,
+    //         'longitude' => $longitude,
+    //         'no_telpon' => $no_telepon,
+    //         'polygon' => $polygon,
+    //         'gambar' => NULL,
+    //     ];
+    // }
+
+    $upload_dir_gk = "../assets/images/";
+    $upload_dir_sk = "../assets/file/";
+    $uploads = [
+        'gambar_konten' => null,
+        'surat_izin_usaha' => null,
+        'ktp' => null
+    ];
+    
+    // Function to handle file upload
+    function handleUpload($file_key, &$uploads, $upload_dir) {
+        if (!empty($_FILES[$file_key]['name'])) {
+            $file_name = $_FILES[$file_key]['name'];
+            $file_tmp = $_FILES[$file_key]['tmp_name'];
+            $unique_file_name = time() . '_' . $file_name;
+            
+            if (move_uploaded_file($file_tmp, $upload_dir . $unique_file_name)) {
+                $uploads[$file_key] = $unique_file_name;
+            } else {
+                return $_SESSION['error'] = "Gagal mengupload $file_key!";
+            }
         }
-    } else {
-        $data = [
-            'nama_usaha' => $nama_usaha,
-            'id_deskel' => $id_deskel,
-            'id_su' => $id_su,
-            'id_ku' => $id_ku,
-            'tahun_pembentukan' => $tahun_pembentukan,
-            'jenis_usaha' => $jenis_usaha,
-            'no_izin' => $no_izin,
-            'nama_pemilik' => $nama_pemilik,
-            'alamat' => $alamat,
-            'tk_laki' => $tk_laki,
-            'tk_perempuan' => $tk_perempuan,
-            'modal_sendiri' => $modal_sendiri,
-            'modal_luar' => $modal_luar,
-            'asset' => $asset,
-            'omset' => $omset,
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-            'no_telpon' => $no_telepon,
-            'polygon' => $polygon,
-            'gambar' => NULL,
-        ];
     }
+    
+    // Handle each file upload
+    handleUpload('gambar_konten', $uploads, $upload_dir_gk);
+    handleUpload('surat_izin_usaha', $uploads, $upload_dir_sk);
+    handleUpload('ktp', $uploads, $upload_dir_sk);
+    
+    // Data array with optional file uploads
+    $data = [
+        'nama_usaha' => $nama_usaha,
+        'id_deskel' => $id_deskel,
+        'id_su' => $id_su,
+        'id_ku' => $id_ku,
+        'tahun_pembentukan' => $tahun_pembentukan,
+        'jenis_usaha' => $jenis_usaha,
+        'no_izin' => $no_izin,
+        'nama_pemilik' => $nama_pemilik,
+        'alamat' => $alamat,
+        'tk_laki' => $tk_laki,
+        'tk_perempuan' => $tk_perempuan,
+        'modal_sendiri' => $modal_sendiri,
+        'modal_luar' => $modal_luar,
+        'asset' => $asset,
+        'omset' => $omset,
+        'latitude' => $latitude,
+        'longitude' => $longitude,
+        'no_telpon' => $no_telepon,
+        'gambar' => $uploads['gambar_konten'],
+        'polygon' => $polygon,
+        'ktp' => $uploads['ktp'],
+        'surat_izin_usaha' => $uploads['surat_izin_usaha']
+    ];
     
     $Usaha->add($data);
 }
@@ -318,6 +372,20 @@ Swal.fire({
                 <label for="polygon" class="col-sm-2 col-form-label">Polygon</label>
                 <div class="col-sm-5">
                     <textarea class="form-control" name="polygon" id="polygon" rows="3" required></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">KTP <i><small>(Optional)</small></i></label>
+                <div class="col-sm-5">
+                    <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="ktp"
+                        name="ktp" placeholder="KTP">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">SURAT IZIN USAHA <i><small>(Optional)</small></i></label>
+                <div class="col-sm-5">
+                    <input type="file" accept=".pdf, .doc, .docx" class="form-control" id="surat_izin_usaha"
+                        name="surat_izin_usaha" placeholder="SURAT IZIN USAHA">
                 </div>
             </div>
         </div>

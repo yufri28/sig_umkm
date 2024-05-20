@@ -153,6 +153,39 @@ if (isset($_GET['kode'])) {
                                 <?= $data_cek['no_telpon']??'-'; ?>
                             </td>
                         </tr>
+                        <tr>
+                            <td style="width: 150px"><b>Gambar</b></td>
+                            <td>:
+                                <?php if (!empty($data_cek['gambar'])): ?>
+                                <img src="../assets/images/<?= $data_cek['gambar']; ?>"
+                                    style="max-width: 100px; max-height: 100px;" alt="Gambar">
+                                <?php else: ?>
+                                -
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px"><b>KTP</b></td>
+                            <td>:
+                                <?php if (!empty($data_cek['ktp'])): ?>
+                                <img src="../assets/file/<?= $data_cek['ktp']; ?>"
+                                    style="max-width: 100px; max-height: 100px;" alt="KTP">
+                                <?php else: ?>
+                                -
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px"><b>Surat Izin Usaha</b></td>
+                            <td>:
+                                <?php if (!empty($data_cek['surat_izin_usaha'])): ?>
+                                <a href="../assets/file/<?= $data_cek['surat_izin_usaha']; ?>"
+                                    download><?= $data_cek['surat_izin_usaha']; ?></a>
+                                <?php else: ?>
+                                -
+                                <?php endif; ?>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="card-footer">

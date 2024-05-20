@@ -14,6 +14,7 @@ if (isset($_POST['Simpan'])) {
     $id_user = htmlspecialchars($_SESSION['id_user']);
     $f_id_jenus = htmlspecialchars($_POST['jenis_usaha']);
     $id_datum = htmlspecialchars($_POST['id_datum']);
+ 
     // $latitude = htmlspecialchars($_POST['latitude']);
     // $longitude = htmlspecialchars($_POST['longitude']);
 
@@ -202,10 +203,12 @@ document.addEventListener("DOMContentLoaded", function() {
             // latitudeInput.style.display = "none";
             // longitudeInput.style.display = "none";
             dataUsahaSelect.style.display = "none";
+            document.getElementById("id_datum").removeAttribute('required');
         } else {
             // latitudeInput.style.display = "flex";
             // longitudeInput.style.display = "flex";
             dataUsahaSelect.style.display = "flex";
+            document.getElementById("id_datum").setAttribute('required', 'required');
         }
     });
     // Inisialisasi awal
@@ -213,10 +216,12 @@ document.addEventListener("DOMContentLoaded", function() {
         // latitudeInput.style.display = "none";
         // longitudeInput.style.display = "none";
         dataUsahaSelect.style.display = "none";
+        document.getElementById("id_datum").removeAttribute('required');
     } else {
         // latitudeInput.style.display = "flex";
         // longitudeInput.style.display = "flex";
         dataUsahaSelect.style.display = "flex";
+        document.getElementById("id_datum").setAttribute('required', 'required');
     }
 });
 </script>

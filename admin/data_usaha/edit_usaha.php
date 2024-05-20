@@ -11,6 +11,108 @@ if (isset($_GET['kode'])) {
     $sql_cek = $Usaha->getById($_GET['kode']);
     $data_cek = mysqli_fetch_array($sql_cek, MYSQLI_BOTH);
 }
+// if (isset($_POST['Ubah'])) {
+//     $data = array();
+//     $id_datum = htmlspecialchars($_GET['kode']);
+//     $nama_usaha = htmlspecialchars($_POST['nama_usaha']);
+//     $id_deskel = htmlspecialchars($_POST['id_deskel']);
+//     $id_su = htmlspecialchars($_POST['id_su']);
+//     $id_ku = htmlspecialchars($_POST['id_ku']);
+//     $tahun_pembentukan = htmlspecialchars($_POST['tahun_pembentukan']);
+//     $jenis_usaha = htmlspecialchars($_POST['jenis_usaha']);
+//     $no_izin = htmlspecialchars($_POST['no_izin']);
+//     $nama_pemilik = htmlspecialchars($_POST['nama_pemilik']);
+//     $alamat = htmlspecialchars($_POST['alamat']);
+//     $tk_laki = htmlspecialchars($_POST['tk_laki']);
+//     $tk_perempuan = htmlspecialchars($_POST['tk_perempuan']);
+//     $modal_sendiri = htmlspecialchars($_POST['modal_sendiri']);
+//     $modal_luar = htmlspecialchars($_POST['modal_luar']);
+//     $asset = htmlspecialchars($_POST['asset']);
+//     $omset = htmlspecialchars($_POST['omset']);
+//     $latitude = htmlspecialchars($_POST['latitude']);
+//     $longitude = htmlspecialchars($_POST['longitude']);
+//     $no_telepon = htmlspecialchars($_POST['no_telepon']);
+//     $polygon = htmlspecialchars($_POST['polygon']);
+//     $gambar_lama = htmlspecialchars($_POST['gambar_lama']);
+
+//     // Upload gambar
+//     if (!empty($_FILES['gambar_konten']['name'])) {
+//         $gambar_konten = $_FILES['gambar_konten']['name'];
+//         $gambar_tmp = $_FILES['gambar_konten']['tmp_name'];
+
+//         // Tentukan direktori tempat menyimpan gambar
+//         $upload_dir = "../assets/images/";
+
+//         // Generate nama unik untuk gambar (misalnya, menggunakan timestamp)
+//         $gambar_konten = time() . '_' . $gambar_konten;
+
+//         // Pindahkan file gambar ke direktori upload
+//         if (move_uploaded_file($gambar_tmp, $upload_dir . $gambar_konten)) {
+//             // Hapus gambar lama jika ada
+//             if (!empty($gambar_lama)) {
+//                 $old_image_path = $upload_dir . $gambar_lama;
+//                 if (file_exists($old_image_path)) {
+//                     unlink($old_image_path);
+//                 }
+//             }
+
+//             $data = [
+//                 'id_datum' => $id_datum,
+//                 'nama_usaha' => $nama_usaha,
+//                 'id_deskel' => $id_deskel,
+//                 'id_su' => $id_su,
+//                 'id_ku' => $id_ku,
+//                 'tahun_pembentukan' => $tahun_pembentukan,
+//                 'jenis_usaha' => $jenis_usaha,
+//                 'no_izin' => $no_izin,
+//                 'nama_pemilik' => $nama_pemilik,
+//                 'alamat' => $alamat,
+//                 'tk_laki' => $tk_laki,
+//                 'tk_perempuan' => $tk_perempuan,
+//                 'modal_sendiri' => $modal_sendiri,
+//                 'modal_luar' => $modal_luar,
+//                 'asset' => $asset,
+//                 'omset' => $omset,
+//                 'latitude' => $latitude,
+//                 'longitude' => $longitude,
+//                 'no_telpon' => $no_telepon,
+//                 'polygon' => $polygon,
+//                 'gambar' => $gambar_konten
+//             ];
+
+//         } else {
+//             return $_SESSION['error'] = "Gagal mengupload gambar!";
+//         }
+//     } else {
+//         $data = [
+//             'id_datum' => $id_datum,
+//             'nama_usaha' => $nama_usaha,
+//             'id_deskel' => $id_deskel,
+//             'id_su' => $id_su,
+//             'id_ku' => $id_ku,
+//             'tahun_pembentukan' => $tahun_pembentukan,
+//             'jenis_usaha' => $jenis_usaha,
+//             'no_izin' => $no_izin,
+//             'nama_pemilik' => $nama_pemilik,
+//             'alamat' => $alamat,
+//             'tk_laki' => $tk_laki,
+//             'tk_perempuan' => $tk_perempuan,
+//             'modal_sendiri' => $modal_sendiri,
+//             'modal_luar' => $modal_luar,
+//             'asset' => $asset,
+//             'omset' => $omset,
+//             'latitude' => $latitude,
+//             'longitude' => $longitude,
+//             'no_telpon' => $no_telepon,
+//             'polygon' => $polygon,
+//             'gambar' => $gambar_lama
+//         ];
+    
+//     }
+
+//     $Usaha->update($data);
+// }
+
 if (isset($_POST['Ubah'])) {
     $data = array();
     $id_datum = htmlspecialchars($_GET['kode']);
@@ -34,82 +136,72 @@ if (isset($_POST['Ubah'])) {
     $no_telepon = htmlspecialchars($_POST['no_telepon']);
     $polygon = htmlspecialchars($_POST['polygon']);
     $gambar_lama = htmlspecialchars($_POST['gambar_lama']);
+    $ktp_lama = htmlspecialchars($_POST['ktp_lama']);
+    $surat_izin_usaha_lama = htmlspecialchars($_POST['surat_izin_usaha_lama']);
 
-    // Upload gambar
-    if (!empty($_FILES['gambar_konten']['name'])) {
-        $gambar_konten = $_FILES['gambar_konten']['name'];
-        $gambar_tmp = $_FILES['gambar_konten']['tmp_name'];
+    // Define upload directory
+    $upload_dir_gk = "../assets/images/"; 
+    $upload_dir_sk = "../assets/file/"; 
 
-        // Tentukan direktori tempat menyimpan gambar
-        $upload_dir = "../assets/images/";
-
-        // Generate nama unik untuk gambar (misalnya, menggunakan timestamp)
-        $gambar_konten = time() . '_' . $gambar_konten;
-
-        // Pindahkan file gambar ke direktori upload
-        if (move_uploaded_file($gambar_tmp, $upload_dir . $gambar_konten)) {
-            // Hapus gambar lama jika ada
-            if (!empty($gambar_lama)) {
-                $old_image_path = $upload_dir . $gambar_lama;
-                if (file_exists($old_image_path)) {
-                    unlink($old_image_path);
+    // Function to handle file upload
+    function handleUpload($file_key, $upload_dir, $old_file) {
+        if (!empty($_FILES[$file_key]['name'])) {
+            $file_name = $_FILES[$file_key]['name'];
+            $file_tmp = $_FILES[$file_key]['tmp_name'];
+            $unique_file_name = time() . '_' . $file_name;
+            
+            if (move_uploaded_file($file_tmp, $upload_dir . $unique_file_name)) {
+                // Delete old file if exists
+                if (!empty($old_file) && file_exists($upload_dir . $old_file)) {
+                    unlink($upload_dir . $old_file);
                 }
+                return $unique_file_name;
+            } else {
+                $_SESSION['error'] = "Gagal mengupload $file_key!";
+                return false;
             }
-
-            $data = [
-                'id_datum' => $id_datum,
-                'nama_usaha' => $nama_usaha,
-                'id_deskel' => $id_deskel,
-                'id_su' => $id_su,
-                'id_ku' => $id_ku,
-                'tahun_pembentukan' => $tahun_pembentukan,
-                'jenis_usaha' => $jenis_usaha,
-                'no_izin' => $no_izin,
-                'nama_pemilik' => $nama_pemilik,
-                'alamat' => $alamat,
-                'tk_laki' => $tk_laki,
-                'tk_perempuan' => $tk_perempuan,
-                'modal_sendiri' => $modal_sendiri,
-                'modal_luar' => $modal_luar,
-                'asset' => $asset,
-                'omset' => $omset,
-                'latitude' => $latitude,
-                'longitude' => $longitude,
-                'no_telpon' => $no_telepon,
-                'polygon' => $polygon,
-                'gambar' => $gambar_konten
-            ];
-
-        } else {
-            return $_SESSION['error'] = "Gagal mengupload gambar!";
         }
-    } else {
-        $data = [
-            'id_datum' => $id_datum,
-            'nama_usaha' => $nama_usaha,
-            'id_deskel' => $id_deskel,
-            'id_su' => $id_su,
-            'id_ku' => $id_ku,
-            'tahun_pembentukan' => $tahun_pembentukan,
-            'jenis_usaha' => $jenis_usaha,
-            'no_izin' => $no_izin,
-            'nama_pemilik' => $nama_pemilik,
-            'alamat' => $alamat,
-            'tk_laki' => $tk_laki,
-            'tk_perempuan' => $tk_perempuan,
-            'modal_sendiri' => $modal_sendiri,
-            'modal_luar' => $modal_luar,
-            'asset' => $asset,
-            'omset' => $omset,
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-            'no_telpon' => $no_telepon,
-            'polygon' => $polygon,
-            'gambar' => $gambar_lama
-        ];
-    
+        return $old_file;
     }
 
+    // Handle each file upload
+    $gambar_konten = handleUpload('gambar_konten', $upload_dir_gk, $gambar_lama);
+    $ktp = handleUpload('ktp', $upload_dir_sk, $ktp_lama);
+    $surat_izin_usaha = handleUpload('surat_izin_usaha', $upload_dir_sk, $surat_izin_usaha_lama);
+
+    // If any file upload failed, redirect back with error
+    if ($gambar_konten === false || $ktp === false || $surat_izin_usaha === false) {
+        return $_SESSION['error'] = "Gagal mengupload gambar!";
+    }
+
+    // Data array with optional file uploads
+    $data = [
+        'id_datum' => $id_datum,
+        'nama_usaha' => $nama_usaha,
+        'id_deskel' => $id_deskel,
+        'id_su' => $id_su,
+        'id_ku' => $id_ku,
+        'tahun_pembentukan' => $tahun_pembentukan,
+        'jenis_usaha' => $jenis_usaha,
+        'no_izin' => $no_izin,
+        'nama_pemilik' => $nama_pemilik,
+        'alamat' => $alamat,
+        'tk_laki' => $tk_laki,
+        'tk_perempuan' => $tk_perempuan,
+        'modal_sendiri' => $modal_sendiri,
+        'modal_luar' => $modal_luar,
+        'asset' => $asset,
+        'omset' => $omset,
+        'latitude' => $latitude,
+        'longitude' => $longitude,
+        'no_telpon' => $no_telepon,
+        'polygon' => $polygon,
+        'gambar' => $gambar_konten,
+        'ktp' => $ktp,
+        'surat_izin_usaha' => $surat_izin_usaha
+    ];
+
+    // Update data in the database
     $Usaha->update($data);
 }
 
@@ -339,6 +431,24 @@ Swal.fire({
                 <div class="col-sm-5">
                     <textarea class="form-control" name="polygon" id="polygon" rows="3" required><?= $data_cek['polygon_usaha']; ?>
                     </textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">KTP <i><small>(Optional)</small></i></label>
+                <div class="col-sm-5">
+                    <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="ktp"
+                        name="ktp" placeholder="KTP">
+                    <input type="hidden" accept="image/png, image/jpeg, image/jpg" value="<?= $data_cek['ktp']; ?>"
+                        class="form-control" id="ktp_lama" name="ktp_lama" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">SURAT IZIN USAHA <i><small>(Optional)</small></i></label>
+                <div class="col-sm-5">
+                    <input type="file" accept=".pdf, .doc, .docx" class="form-control" id="surat_izin_usaha"
+                        name="surat_izin_usaha" placeholder="SURAT IZIN USAHA">
+                    <input type="hidden" accept=".pdf, .doc, .docx" value="<?= $data_cek['surat_izin_usaha']; ?>"
+                        class="form-control" id="surat_izin_usaha_lama" name="surat_izin_usaha_lama" required>
                 </div>
             </div>
         </div>

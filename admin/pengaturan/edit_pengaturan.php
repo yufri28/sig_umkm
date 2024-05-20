@@ -219,11 +219,13 @@ document.addEventListener("DOMContentLoaded", function() {
             // longitudeInput.style.display = "none";
             dataUsahaSelect.style.display = "none";
             dataIdKontenUsaha.style.display = "none";
+            document.getElementById("id_datum").removeAttribute('required');
         } else {
             // latitudeInput.style.display = "flex";
             // longitudeInput.style.display = "flex";
             dataUsahaSelect.style.display = "flex";
             dataIdKontenUsaha.style.display = "flex";
+            document.getElementById("id_datum").setAttribute('required', 'required');
         }
     });
     // Inisialisasi awal
@@ -232,11 +234,13 @@ document.addEventListener("DOMContentLoaded", function() {
         // longitudeInput.style.display = "none";
         dataUsahaSelect.style.display = "none";
         dataIdKontenUsaha.style.display = "none";
+        document.getElementById("id_datum").removeAttribute('required');
     } else {
         // latitudeInput.style.display = "flex";
         // longitudeInput.style.display = "flex";
         dataUsahaSelect.style.display = "flex";
         dataIdKontenUsaha.style.display = "flex";
+        document.getElementById("id_datum").setAttribute('required', 'required');
     }
 });
 </script>

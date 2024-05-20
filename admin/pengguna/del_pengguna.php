@@ -8,7 +8,7 @@ if(isset($_GET['kode'])){
             }
         })</script>";
     }else{
-        $sql_hapus = "DELETE FROM tb_pengguna WHERE id_pengguna='".$_GET['kode']."'";
+        $sql_hapus = "DELETE FROM admin WHERE id_admin='".$_GET['kode']."'";
         $query_hapus = mysqli_query($koneksi, $sql_hapus);
 
         if ($query_hapus) {

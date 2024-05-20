@@ -40,7 +40,7 @@ if($_SESSION['level'] == "Kadis" || $_SESSION['level'] == "Admin"){
 
                     <?php
                     $no = 1;
-                    $sql = $koneksi->query("SELECT * FROM admin a JOIN  jenis_user ju WHERE a.id_jenus=ju.id_jenus");
+                    $sql = $koneksi->query("SELECT * FROM admin a JOIN  jenis_user ju WHERE a.id_jenus=ju.id_jenus AND a.id_jenus!=1");
                     while ($data = $sql->fetch_assoc()) {
                     ?>
 
