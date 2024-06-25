@@ -1,5 +1,11 @@
 <?php
 // require_once '../functions/usaha.php';
+function formatRupiah($angka) {
+    // Ensure that the input is a valid number
+    $angka = (int)$angka;
+    return 'Rp. ' . number_format($angka, 0, ',', '.');
+}
+
 ?>
 <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
 <div class="card card-info">
@@ -120,16 +126,16 @@
                             <?php echo $data['tng_kerja_prmpn']; ?>
                         </td>
                         <td>
-                            <?php echo $data['mdl_sendiri']; ?>
+                            <?php echo formatRupiah($data['mdl_sendiri']); ?>
                         </td>
                         <td>
-                            <?php echo $data['mdl_luar']; ?>
+                            <?php echo formatRupiah($data['mdl_luar']); ?>
                         </td>
                         <td>
-                            <?php echo $data['asset']; ?>
+                            <?php echo formatRupiah($data['asset']); ?>
                         </td>
                         <td>
-                            <?php echo $data['omset']; ?>
+                            <?php echo formatRupiah($data['omset']); ?>
                         </td>
                         <td>
                             <?= $data['no_telpon'] == NULL?'-':$data['no_telpon']; ?>

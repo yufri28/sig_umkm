@@ -113,6 +113,12 @@ if (isset($_GET['kode'])) {
 //     $Usaha->update($data);
 // }
 
+function cleanRupiah($rupiah) {
+    // Remove "Rp.", spaces, and dots
+    $cleaned = str_replace(['Rp', '.', ' '], '', $rupiah);
+    return intval($cleaned);
+}
+
 if (isset($_POST['Ubah'])) {
     $data = array();
     $id_datum = htmlspecialchars($_GET['kode']);
@@ -127,10 +133,10 @@ if (isset($_POST['Ubah'])) {
     $alamat = htmlspecialchars($_POST['alamat']);
     $tk_laki = htmlspecialchars($_POST['tk_laki']);
     $tk_perempuan = htmlspecialchars($_POST['tk_perempuan']);
-    $modal_sendiri = htmlspecialchars($_POST['modal_sendiri']);
-    $modal_luar = htmlspecialchars($_POST['modal_luar']);
-    $asset = htmlspecialchars($_POST['asset']);
-    $omset = htmlspecialchars($_POST['omset']);
+    $modal_sendiri = cleanRupiah(htmlspecialchars($_POST['modal_sendiri']));
+    $modal_luar = cleanRupiah(htmlspecialchars($_POST['modal_luar']));
+    $asset = cleanRupiah(htmlspecialchars($_POST['asset']));
+    $omset = cleanRupiah(htmlspecialchars($_POST['omset']));
     $latitude = htmlspecialchars($_POST['latitude']);
     $longitude = htmlspecialchars($_POST['longitude']);
     $no_telepon = htmlspecialchars($_POST['no_telepon']);
@@ -369,29 +375,28 @@ Swal.fire({
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Modal Sendiri</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="modal_sendiri"
-                        value="<?= $data_cek['mdl_sendiri']; ?>" name="modal_sendiri" placeholder="Modal Sendiri"
-                        required>
+                    <input type="text" class="form-control" id="modal_sendiri" value="<?= $data_cek['mdl_sendiri']; ?>"
+                        name="modal_sendiri" placeholder="Modal Sendiri" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Modal Luar</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="modal_luar" name="modal_luar"
+                    <input type="text" class="form-control" id="modal_luar" name="modal_luar"
                         value="<?= $data_cek['mdl_luar']; ?>" placeholder="Modal Luar" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Asset</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="asset" value="<?= $data_cek['asset']; ?>" name="asset"
+                    <input type="text" class="form-control" id="asset" value="<?= $data_cek['asset']; ?>" name="asset"
                         placeholder="Asset" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Omset</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="omset" name="omset" value="<?= $data_cek['omset']; ?>"
+                    <input type="text" class="form-control" id="omset" name="omset" value="<?= $data_cek['omset']; ?>"
                         placeholder="Omset" required>
                 </div>
             </div>
@@ -458,3 +463,63 @@ Swal.fire({
         </div>
     </form>
 </div>
+
+
+<script>
+window.onload = function() {
+    var modalSendiri = document.getElementById('modal_sendiri');
+    var modalLuar = document.getElementById('modal_luar');
+    var asset = document.getElementById('asset');
+    var omset = document.getElementById('omset');
+
+    modalSendiri.value = formatRupiah(modalSendiri.value, 'Rp. ');
+    modalLuar.value = formatRupiah(modalLuar.value, 'Rp. ');
+    asset.value = formatRupiah(asset.value, 'Rp. ');
+    omset.value = formatRupiah(omset.value, 'Rp. ');
+};
+
+var modal_luar = document.getElementById('modal_luar');
+modal_luar.addEventListener('keyup', function(e) {
+    modal_luar.value = formatRupiah(this.value, 'Rp. ');
+});
+var modal_sendiri = document.getElementById('modal_sendiri');
+modal_sendiri.addEventListener('keyup', function(e) {
+    modal_sendiri.value = formatRupiah(this.value, 'Rp. ');
+});
+var asset = document.getElementById('asset');
+asset.addEventListener('keyup', function(e) {
+    asset.value = formatRupiah(this.value, 'Rp. ');
+});
+var omset = document.getElementById('omset');
+omset.addEventListener('keyup', function(e) {
+    omset.value = formatRupiah(this.value, 'Rp. ');
+});
+
+window.onload = function() {
+    var modalSendiri = document.getElementById('modal_sendiri');
+    var modalLuar = document.getElementById('modal_luar');
+    var asset = document.getElementById('asset');
+    var omset = document.getElementById('omset');
+
+    modalSendiri.value = formatRupiah(modalSendiri.value, 'Rp. ');
+    modalLuar.value = formatRupiah(modalLuar.value, 'Rp. ');
+    asset.value = formatRupiah(asset.value, 'Rp. ');
+    omset.value = formatRupiah(omset.value, 'Rp. ');
+}
+
+function formatRupiah(angka, prefix) {
+    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
+</script>

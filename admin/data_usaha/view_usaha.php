@@ -4,6 +4,12 @@ if (isset($_GET['kode'])) {
     $sql_cek = $Usaha->getById($_GET['kode']);
     $data_cek = mysqli_fetch_array($sql_cek, MYSQLI_BOTH);
 }
+
+function formatRupiah($angka) {
+    // Ensure that the input is a valid number
+    $angka = (int)$angka;
+    return 'Rp. ' . number_format($angka, 0, ',', '.');
+}
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -118,7 +124,7 @@ if (isset($_GET['kode'])) {
                                 <b>Modal Sendiri</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['mdl_sendiri']; ?>
+                                <?php echo formatRupiah($data_cek['mdl_sendiri']); ?>
                             </td>
                         </tr>
                         <tr>
@@ -126,7 +132,7 @@ if (isset($_GET['kode'])) {
                                 <b>Modal Luar</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['mdl_luar']; ?>
+                                <?php echo formatRupiah($data_cek['mdl_luar']); ?>
                             </td>
                         </tr>
                         <tr>
@@ -134,7 +140,7 @@ if (isset($_GET['kode'])) {
                                 <b>Asset</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['asset']; ?>
+                                <?php echo formatRupiah($data_cek['asset']); ?>
                             </td>
                         </tr>
                         <tr>
@@ -142,7 +148,7 @@ if (isset($_GET['kode'])) {
                                 <b>Omset</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['omset']; ?>
+                                <?php echo formatRupiah($data_cek['omset']); ?>
                             </td>
                         </tr>
                         <tr>
