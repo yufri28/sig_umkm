@@ -29,7 +29,7 @@ require_once './config.php';
     <style>
     .hero {
         margin-top: 160px;
-        margin-bottom: 160px;
+        margin-bottom: 60px;
     }
 
     @media (max-width: 768px) {
@@ -45,42 +45,41 @@ require_once './config.php';
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary" style="font-family: 'Roboto', sans-serif">
-        <div class="container-fluid m-2">
-            <a class="navbar-brand" href="#">
-                <img src="./assets/dist/img/logo_dinas.png" alt="Logo" width="24" height="24"
-                    class="d-inline-block align-text-top" />
-                <small class="logo-title"><strong>DINAS KOPERASI & UMKM KAB. TTU</strong></small>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link <?= $last_segment == 'home.php' || $last_segment == '' ? 'active' : ''; ?>"
-                            aria-current="page" href="./home.php">Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= $last_segment == 'produk.php' ? 'active' : ''; ?>"
-                            href="./produk.php">UMKM</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= $last_segment == 'faq.php' ? 'active' : ''; ?>" href="faq.php">FAQ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= $last_segment == 'maps.php' ? 'active' : ''; ?>"
-                            href="./maps.php">Maps</a>
-                    </li>
-                </ul>
-                <?php if(!isset($_SESSION['login'])):?>
-                <a href="./auth/login.php" class="btn btn-outline-primary mx-2">Login</a>
-                <?php else:?>
-                <a href="./auth/logout.php" class="btn btn-outline-primary mx-2">Logout</a>
-                <?php endif;?>
-            </div>
+    <nav class="navbar fixed-top navbar-expand-lg"
+        style="font-family: 'Roboto', sans-serif; background-color:#FFFAE6;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <a class="navbar-brand ms-2" href="#">
+            <img src="./assets/dist/img/logo_dinas.png" alt="Logo" width="24" height="24"
+                class="d-inline-block align-text-top" />
+            <small class="logo-title"><strong>DINAS KOPERASI & UMKM KAB. TTU</strong></small>
+        </a>
+        <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse px-2" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link <?= $last_segment == 'home.php' || $last_segment == '' ? 'active' : ''; ?>"
+                        aria-current="page" href="./home.php">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= $last_segment == 'produk.php' ? 'active' : ''; ?>"
+                        href="./produk.php">UMKM</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= $last_segment == 'faq.php' ? 'active' : ''; ?>" href="faq.php">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= $last_segment == 'maps.php' ? 'active' : ''; ?>" href="./maps.php">Maps</a>
+                </li>
+            </ul>
+            <?php if(!isset($_SESSION['login'])):?>
+            <a href="./auth/login.php" class="btn mx-lg-2" style="background-color:#FFDB5C">Login</a>
+            <?php else:?>
+            <a href="./auth/logout.php" class="btn mx-lg-2" style="background-color:#FFDB5C">Logout</a>
+            <?php endif;?>
+        </div>
         </div>
     </nav>
     <hr />

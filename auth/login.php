@@ -9,7 +9,7 @@ require_once '../config.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $cekAdmin = $koneksi->query("SELECT * FROM admin a JOIN jenis_user ju ON a.id_jenus=ju.id_jenus WHERE a.uname='$username'");
+    $cekAdmin = $koneksi->query("SELECT * FROM admin WHERE uname='$username'");
 
     if (mysqli_num_rows($cekAdmin) > 0) {
         $fetch = mysqli_fetch_assoc($cekAdmin);

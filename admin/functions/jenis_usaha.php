@@ -33,7 +33,7 @@ class Jenus
             }
 
             $insert = $this->db->query(
-                "INSERT INTO jenus (id_ju,nama_jenus,icon) VALUES(0,'$nama_jenus','$icon')"
+                "INSERT INTO jenus (nama_jenus,icon) VALUES('$nama_jenus','$icon')"
             );
 
             if ($insert) {

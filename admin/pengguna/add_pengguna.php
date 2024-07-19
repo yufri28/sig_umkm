@@ -7,8 +7,6 @@ if($_SESSION['level'] == "Kadis" || $_SESSION['level'] == "Admin"){
         }
     })</script>";
 }
-$get_data_unit = "SELECT * FROM jenis_user WHERE level!='Administrator'";
-$data_ju = mysqli_query($koneksi, $get_data_unit);
 ?>
 
 <div class="card card-primary">
@@ -36,11 +34,10 @@ $data_ju = mysqli_query($koneksi, $get_data_unit);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Level</label>
                 <div class="col-sm-6">
-                    <select name="id_jenus" id="id_jenus" class="form-control">
+                    <select name="level" id="level" class="form-control">
                         <option>- Pilih -</option>
-                        <?php foreach ($data_ju as $key => $jenis_user) : ?>
-                        <option value="<?= $jenis_user['id_jenus']; ?>"><?= $jenis_user['level']; ?></option>
-                        <?php endforeach; ?>
+                        <option value="Administrator">Administrator</option>
+                        <option value="Kadis">Kadis</option>
                     </select>
                 </div>
             </div>
@@ -58,7 +55,7 @@ if (isset($_POST['Simpan'])) {
     // Mulai proses simpan data
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $id_jenus = $_POST['id_jenus'];
+    $level = $_POST['level'];
 
     // Pengecekan apakah username sudah ada di database
     $sql_cek_username = "SELECT * FROM admin WHERE uname = '$username'";
@@ -79,10 +76,10 @@ if (isset($_POST['Simpan'])) {
               </script>";
     } else {
         // Jika username belum ada, lanjutkan proses penyimpanan
-        $sql_simpan = "INSERT INTO admin (uname, password, id_jenus) VALUES (
+        $sql_simpan = "INSERT INTO admin (uname, password, level) VALUES (
             '$username',
             '" . password_hash($password, PASSWORD_BCRYPT) . "',
-            '$id_jenus')";
+            '$level')";
         $query_simpan = mysqli_query($koneksi, $sql_simpan);
         mysqli_close($koneksi);
 

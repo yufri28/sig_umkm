@@ -1,12 +1,3 @@
-<?php
-// require_once '../functions/usaha.php';
-function formatRupiah($angka) {
-    // Ensure that the input is a valid number
-    $angka = (int)$angka;
-    return 'Rp. ' . number_format($angka, 0, ',', '.');
-}
-
-?>
 <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
 <div class="card card-info">
     <div class="card-header">
@@ -17,13 +8,13 @@ function formatRupiah($angka) {
     <!-- /.card-header -->
     <div class="card-body">
         <div class="table-responsive">
-            <div class="d-flex">
+            <div class="d-lg-flex">
                 <?php if($_SESSION['level'] != 'Kadis'):?>
                 <a href="?page=add-usaha" class="btn btn-primary mr-2">
                     <i class="fa fa-plus"></i> Tambah Data Usaha</a>
                 <?php endif;?>
-                <a href="./../report/cetak_usaha.php" target="_blank" class="btn btn-success">
-                    <i class="fa fa-print"></i> Cetak Data Usaha</a>
+                <!-- <a href="./../report/cetak_usaha.php" target="_blank" class="btn btn-success">
+                    <i class="fa fa-print"></i> Cetak Data Usaha</a> -->
                 <!-- <a href="./report/cetak-pegawai.php" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i> Laporan</a> -->
                 <!-- <div class="dropdown ml-1">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
@@ -44,6 +35,38 @@ function formatRupiah($angka) {
 
                     </ul>
                 </div> -->
+                <form class="ml-auto overflow-scroll d-lg-flex" method="post" action="./../report/cetak_data_usaha.php">
+                    <div class="ml-auto overflow-scroll d-lg-flex">
+                        <div class="ml-lg-2 mt-lg-0 mt-2">
+                            <?php 
+                             $data_kecamatan = $Kecamatan->get();
+                            ?>
+                            <select class="form-control" name="kecamatan" id="kecamatan">
+                                <option value="">-- Pilih Kecamatan --</option>
+                                <?php foreach ($data_kecamatan as $key => $kec):?>
+                                <option value="<?=$kec['id_kec'];?>"><?=$kec['nm_kec'];?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
+                        <div class="ml-lg-2 mt-lg-0 mt-2">
+                            <label for="tanggal_awal">Tanggal Awal :</label>
+                        </div>
+                        <div class="ml-lg-2 mt-lg-0 mt-2">
+                            <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control">
+                        </div>
+                        <div class="ml-lg-2 mt-lg-0 mt-2">
+                            <label for="tanggal_akhir">Tanggal Akhir :</label>
+                        </div>
+                        <div class="ml-lg-2 mt-lg-0 mt-2">
+                            <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control">
+                        </div>
+                        <div class="ml-lg-2 mt-lg-0 mt-2">
+                            <button class="btn btn-success" name="cetak_usaha" type="submit">
+                                <i class="fa fa-print"></i> Cetak
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <br>
             <table id="example1" class="table nowrap table-bordered table-striped" style="width:100%;">
@@ -70,6 +93,7 @@ function formatRupiah($angka) {
                         <th>Nomor Telepon</th>
                         <th>KTP Pemilik</th>
                         <th>Surat Izin Usaha</th>
+                        <th>NIK</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -152,6 +176,9 @@ function formatRupiah($angka) {
                             <?php else: ?>
                             -
                             <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nik']??'-'; ?>
                         </td>
                         <td>
                             <a href="?page=view-usaha&kode=<?php echo $data['id_datum']; ?>" title="Detail"

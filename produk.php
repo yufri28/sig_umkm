@@ -21,6 +21,25 @@ $num_rows = $data_produk->num_rows;
 .daftar-list {
     overflow-x: auto;
 }
+
+.d-flex-scroll {
+        display: flex;
+        overflow-x: auto; /* Mengaktifkan scrolling horizontal */
+        white-space: nowrap; /* Mencegah teks wrap */
+        -webkit-overflow-scrolling: touch; /* Untuk smooth scrolling di browser mobile */
+    }
+
+    .card {
+        font-size: 9pt;
+        cursor: pointer;
+        max-width: max-content;
+        transition: transform 0.3s ease; /* Animasi transisi */
+    }
+
+    .card:hover {
+        transform: translateX(10px); /* Menggeser 10px ke kanan saat hover */
+    }
+
 </style>
 <div id="carouselExampleIndicators" class="carousel slide" style="margin-bottom: -120px;">
     <div class="carousel-indicators">
@@ -73,7 +92,18 @@ $num_rows = $data_produk->num_rows;
             <div class="d-flex justify-content-center">
                 <div class="d-flex daftar-list justify-content-lg-center col-10 mt-5">
                     <!-- Isi Konten UMKM -->
-                    <div class="d-flex" style="white-space: nowrap;">
+
+                    <div class="d-flex-scroll">
+                    <?php foreach ($data_jenus as $key => $jenus) : ?>
+                    <a href="?ju=<?= base64_encode($jenus['id_ju']); ?>" style="text-decoration: none;">
+                        <div class="card text-center p-2 mx-1">
+                            <i class="fa" aria-hidden="true"> <?= $jenus['nama_jenus']; ?></i>
+                        </div>
+                    </a>
+                    <?php endforeach; ?>
+                </div>
+
+                    <!-- <div class="d-flex" style="white-space: nowrap;">
                         <?php foreach ($data_jenus as $key => $jenus) : ?>
                         <a href="?ju=<?= base64_encode($jenus['id_ju']); ?>" style="text-decoration: none;">
                             <div class="card text-center nowrap p-2 mx-1"
@@ -82,7 +112,7 @@ $num_rows = $data_produk->num_rows;
                             </div>
                         </a>
                         <?php endforeach; ?>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="row mt-3 d-flex justify-content-center"
@@ -95,9 +125,9 @@ $num_rows = $data_produk->num_rows;
                     <img src="./assets/images/<?= $produk['gambar_konten']; ?>" class="card-img-top pt-3" alt="..." />
                     <div class="card-body">
                         <h5 class="card-title fw-bold"><?= $produk['nm_konten']; ?></h5>
-                        <p class="card-text">
+                        <!-- <p class="card-text">
                             <?= $produk['deskripsi']; ?>
-                        </p>
+                        </p> -->
                         <div class="d-flex justify-content-center">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-sm btn-primary me-1" data-bs-toggle="modal"

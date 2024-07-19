@@ -12,9 +12,6 @@ if($_SESSION['level'] == "Kadis" || $_SESSION['level'] == "Admin"){
         $query_cek = mysqli_query($koneksi, $sql_cek);
         $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
     }
-
-    $data_jenis_user = "SELECT * FROM jenis_user WHERE level!='Administrator'";
-    $data_jenus = mysqli_query($koneksi, $data_jenis_user);
 ?>
 
 <div class="card card-success">
@@ -44,12 +41,11 @@ if($_SESSION['level'] == "Kadis" || $_SESSION['level'] == "Admin"){
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Level</label>
                 <div class="col-sm-6">
-                    <select name="id_jenus" id="id_jenus" class="form-control">
+                    <select name="level" id="level" class="form-control">
                         <option>- Pilih -</option>
-                        <?php foreach ($data_jenus as $key => $jenis_user) : ?>
-                        <option <?= $data_cek['id_jenus'] == $jenis_user['id_jenus'] ? 'selected':''; ?>
-                            value="<?= $jenis_user['id_jenus']; ?>"><?= $jenis_user['level']; ?></option>
-                        <?php endforeach; ?>
+                        <option <?php echo $data_cek['level'] == 'Administrator' ?'selected':''; ?>
+                            value="Administrator">Administrator</option>
+                        <option <?php echo $data_cek['level'] == 'Kadis' ?'selected':''; ?> value="Kadis">Kadis</option>
                     </select>
                 </div>
             </div>
@@ -68,7 +64,7 @@ if($_SESSION['level'] == "Kadis" || $_SESSION['level'] == "Admin"){
 if (isset($_POST['Ubah'])) {
     $id_admin = $_POST['id_admin'];
     $username = $_POST['username'];
-    $id_jenus = $_POST['id_jenus'];
+    $level = $_POST['level'];
     $password = $_POST['password'];
 
     // Jika password tidak kosong, maka password akan diubah
@@ -77,13 +73,13 @@ if (isset($_POST['Ubah'])) {
         $sql_ubah = "UPDATE admin SET
                      uname='$username',
                      password='$password',
-                     id_jenus='$id_jenus'
+                     level='$level'
                      WHERE id_admin='$id_admin'";
     } else {
         // Jika password kosong, maka password tidak akan diubah
         $sql_ubah = "UPDATE admin SET
                      uname='$username',
-                     id_jenus='$id_jenus'
+                     level='$level'
                      WHERE id_admin='$id_admin'";
     }
 

@@ -43,6 +43,19 @@ $data_level = $_SESSION['level'];
     <!-- Alert -->
     <script src="../assets/plugins/alert.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+    <style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">

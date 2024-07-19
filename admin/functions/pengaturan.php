@@ -47,8 +47,8 @@ class Pengaturan
             }else{
                 // Insert data ke database
                 $insert = $this->db->query(
-                    "INSERT INTO konten (id_konten,nm_konten,gambar,deskripsi,jns_konten,id_admin,f_id_jenus) 
-                    VALUES(0,'$judul_konten','$gambar_konten','$deskripsi','$jns_konten','$id_user','$f_id_jenus')"
+                    "INSERT INTO konten (nm_konten,gambar,deskripsi,jns_konten,id_admin,f_id_jenus) 
+                    VALUES('$judul_konten','$gambar_konten','$deskripsi','$jns_konten','$id_user','$f_id_jenus')"
                 );
     
                 if ($insert) {
@@ -61,8 +61,8 @@ class Pengaturan
         
                         // Insert data ke database
                         $insertKontenUsaha = $this->db->query(
-                            "INSERT INTO konten_usaha (id_konten_usaha,f_id_usaha,f_id_konten) 
-                            VALUES(0,'$id_datum','".$maxIdKonten['id_konten']."')"
+                            "INSERT INTO konten_usaha (f_id_usaha,f_id_konten) 
+                            VALUES('$id_datum','".$maxIdKonten['id_konten']."')"
                         );
         
                          $_SESSION['success'] = "Data berhasil disimpan!";

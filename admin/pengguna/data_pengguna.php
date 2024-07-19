@@ -29,7 +29,6 @@ if($_SESSION['level'] == "Kadis" || $_SESSION['level'] == "Admin"){
                     <tr>
                         <th>No</th>
                         <th style="width: 440px;">Username</th>
-                        <th style="width: 350px;">Nama Jenis User</th>
                         <th style="width: 340px;">Level</th>
                         <?php if($_SESSION['level'] != 'Kadis'):?>
                         <th style="width: 230px;">Aksi</th>
@@ -40,7 +39,7 @@ if($_SESSION['level'] == "Kadis" || $_SESSION['level'] == "Admin"){
 
                     <?php
                     $no = 1;
-                    $sql = $koneksi->query("SELECT * FROM admin a JOIN  jenis_user ju WHERE a.id_jenus=ju.id_jenus AND a.id_jenus!=1");
+                    $sql = $koneksi->query("SELECT * FROM admin WHERE uname != 'admin' OR level != 'Administrator'");
                     while ($data = $sql->fetch_assoc()) {
                     ?>
 
@@ -50,9 +49,6 @@ if($_SESSION['level'] == "Kadis" || $_SESSION['level'] == "Admin"){
                         </td>
                         <td>
                             <?php echo $data['uname']; ?>
-                        </td>
-                        <td>
-                            <?php echo $data['nama_jenus']; ?>
                         </td>
                         <td>
                             <?php echo $data['level']; ?>

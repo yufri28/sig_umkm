@@ -4,12 +4,6 @@ if (isset($_GET['kode'])) {
     $sql_cek = $Usaha->getById($_GET['kode']);
     $data_cek = mysqli_fetch_array($sql_cek, MYSQLI_BOTH);
 }
-
-function formatRupiah($angka) {
-    // Ensure that the input is a valid number
-    $angka = (int)$angka;
-    return 'Rp. ' . number_format($angka, 0, ',', '.');
-}
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -60,7 +54,7 @@ function formatRupiah($angka) {
                                 <b>Nama Klasifikasi Usaha</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['nm_su']; ?>
+                                <?php echo $data_cek['nm_ku']; ?>
                             </td>
                         </tr>
                         <tr>
@@ -93,6 +87,14 @@ function formatRupiah($angka) {
                             </td>
                             <td>:
                                 <?php echo $data_cek['nm_pemilik']; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                <b>NIK Pemilik</b>
+                            </td>
+                            <td>:
+                                <?php echo $data_cek['nik']??'-'; ?>
                             </td>
                         </tr>
                         <tr>

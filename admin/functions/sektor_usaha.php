@@ -31,7 +31,7 @@ class Sektor
             }
             
             $insert = $this->db->query(
-                        "INSERT INTO sektor_usaha (id_su,nm_su) VALUES(0,'$nama_su')"
+                        "INSERT INTO sektor_usaha (nm_su) VALUES('$nama_su')"
                         );
 
             if($insert){

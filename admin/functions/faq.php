@@ -30,7 +30,7 @@ class Faq
             $id_admin = $data['id_admin'];
 
             $insert = $this->db->query(
-                "INSERT INTO faq (id_faq,pertanyaan,jawaban,id_admin) VALUES(0,'$pertanyaan','$jawaban','$id_admin')"
+                "INSERT INTO faq (pertanyaan,jawaban,id_admin) VALUES('$pertanyaan','$jawaban','$id_admin')"
             );
 
             if ($insert) {

@@ -23,6 +23,12 @@ $data_klasifikasi = $Klasifikasi->get();
                     <tr>
                         <th>No</th>
                         <th>Nama Klasifikasi Usaha</th>
+                        <th>Min Tenaga Kerja</th>
+                        <th>Max Tenaga Kerja</th>
+                        <th>Min Aset</th>
+                        <th>Max Aset</th>
+                        <th>Min Omset</th>
+                        <th>Max Omset</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -38,6 +44,24 @@ $data_klasifikasi = $Klasifikasi->get();
                         </td>
                         <td>
                             <?php echo $klasifikasi['nm_ku']; ?>
+                        </td>
+                        <td>
+                            <?php echo $klasifikasi['min_tk']; ?>
+                        </td>
+                        <td>
+                            <?php echo $klasifikasi['max_tk']; ?>
+                        </td>
+                        <td>
+                            <?php echo formatRupiah($klasifikasi['min_aset']); ?>
+                        </td>
+                        <td>
+                            <?php echo formatRupiah($klasifikasi['max_aset']); ?>
+                        </td>
+                        <td>
+                            <?php echo formatRupiah($klasifikasi['min_omset']); ?>
+                        </td>
+                        <td>
+                            <?php echo formatRupiah($klasifikasi['max_omset']); ?>
                         </td>
                         <td>
                             <a href="?page=view-ku&kode=<?php echo $klasifikasi['id_ku']; ?>" title="Detail"

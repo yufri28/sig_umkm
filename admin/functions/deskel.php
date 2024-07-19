@@ -33,7 +33,7 @@ class Deskel
             }
 
             $insert = $this->db->query(
-                "INSERT INTO deskel (id_deskel,nm_deskel,id_kec) VALUES(0,'$nama_deskel','$id_kec')"
+                "INSERT INTO deskel (nm_deskel,id_kec) VALUES('$nama_deskel','$id_kec')"
             );
 
             if ($insert) {

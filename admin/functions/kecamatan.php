@@ -35,7 +35,7 @@ class Kecamatan
             }
             
             $insert = $this->db->query(
-                        "INSERT INTO kecamatan (id_kec,nm_kec,polygon,warna) VALUES(0,'$nama_kecamatan','$polygon','$warna')"
+                        "INSERT INTO kecamatan (nm_kec,polygon,warna) VALUES('$nama_kecamatan','$polygon','$warna')"
                         );
 
             if($insert){

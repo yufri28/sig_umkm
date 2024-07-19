@@ -13,18 +13,12 @@ $data_sektor = $Sektor->get();
 $data_klasifikasi = $Klasifikasi->get();
 $data_jenus = $Jenus->get();
 
-function cleanRupiah($rupiah) {
-    // Remove "Rp.", spaces, and dots
-    $cleaned = str_replace(['Rp', '.', ' '], '', $rupiah);
-    return intval($cleaned);
-}
-
 if (isset($_POST['Simpan'])) {
     $data = array();
     $nama_usaha = htmlspecialchars($_POST['nama_usaha']);
     $id_deskel = htmlspecialchars($_POST['id_deskel']);
     $id_su = htmlspecialchars($_POST['id_su']);
-    $id_ku = htmlspecialchars($_POST['id_ku']);
+    // $id_ku = htmlspecialchars($_POST['id_ku']);
     $tahun_pembentukan = htmlspecialchars($_POST['tahun_pembentukan']);
     $jenis_usaha = htmlspecialchars($_POST['jenis_usaha']);
     $no_izin = htmlspecialchars($_POST['no_izin']);
@@ -36,10 +30,13 @@ if (isset($_POST['Simpan'])) {
     $modal_luar = cleanRupiah(htmlspecialchars($_POST['modal_luar']));
     $asset = cleanRupiah(htmlspecialchars($_POST['asset']));
     $omset = cleanRupiah(htmlspecialchars($_POST['omset']));
+    $jumlahKaryawan = ($tk_laki + $tk_perempuan);
+    $id_ku = tentukanKategoriBisnis($jumlahKaryawan, $asset, $omset, $data_klasifikasi);
     $latitude = htmlspecialchars($_POST['latitude']);
     $longitude = htmlspecialchars($_POST['longitude']);
     $no_telepon = htmlspecialchars($_POST['no_telepon']);
     $polygon = htmlspecialchars($_POST['polygon']);
+    $nik = htmlspecialchars($_POST['nik']);
 
     // Upload gambar
     // if (!empty($_FILES['gambar_konten']['name'])) {
@@ -103,62 +100,66 @@ if (isset($_POST['Simpan'])) {
     //         'gambar' => NULL,
     //     ];
     // }
-
-    $upload_dir_gk = "../assets/images/";
-    $upload_dir_sk = "../assets/file/";
-    $uploads = [
-        'gambar_konten' => null,
-        'surat_izin_usaha' => null,
-        'ktp' => null
-    ];
-    
-    // Function to handle file upload
-    function handleUpload($file_key, &$uploads, $upload_dir) {
-        if (!empty($_FILES[$file_key]['name'])) {
-            $file_name = $_FILES[$file_key]['name'];
-            $file_tmp = $_FILES[$file_key]['tmp_name'];
-            $unique_file_name = time() . '_' . $file_name;
-            
-            if (move_uploaded_file($file_tmp, $upload_dir . $unique_file_name)) {
-                $uploads[$file_key] = $unique_file_name;
-            } else {
-                return $_SESSION['error'] = "Gagal mengupload $file_key!";
+    if(!$id_ku){
+        $_SESSION['error'] = 'Terjadi kesalahan saat menentukan klasifikasi usaha. Silahkan cek kembali inputan anda!';
+    }else{
+        $upload_dir_gk = "../assets/images/";
+        $upload_dir_sk = "../assets/file/";
+        $uploads = [
+            'gambar_konten' => null,
+            'surat_izin_usaha' => null,
+            'ktp' => null
+        ];
+        
+        // Function to handle file upload
+        function handleUpload($file_key, &$uploads, $upload_dir) {
+            if (!empty($_FILES[$file_key]['name'])) {
+                $file_name = $_FILES[$file_key]['name'];
+                $file_tmp = $_FILES[$file_key]['tmp_name'];
+                $unique_file_name = time() . '_' . $file_name;
+                
+                if (move_uploaded_file($file_tmp, $upload_dir . $unique_file_name)) {
+                    $uploads[$file_key] = $unique_file_name;
+                } else {
+                    return $_SESSION['error'] = "Gagal mengupload $file_key!";
+                }
             }
         }
+        
+        // Handle each file upload
+        handleUpload('gambar_konten', $uploads, $upload_dir_gk);
+        handleUpload('surat_izin_usaha', $uploads, $upload_dir_sk);
+        handleUpload('ktp', $uploads, $upload_dir_sk);
+        
+        // Data array with optional file uploads
+        $data = [
+            'nama_usaha' => $nama_usaha,
+            'id_deskel' => $id_deskel,
+            'id_su' => $id_su,
+            'id_ku' => $id_ku,
+            'tahun_pembentukan' => $tahun_pembentukan,
+            'jenis_usaha' => $jenis_usaha,
+            'no_izin' => $no_izin,
+            'nama_pemilik' => $nama_pemilik,
+            'alamat' => $alamat,
+            'tk_laki' => $tk_laki,
+            'tk_perempuan' => $tk_perempuan,
+            'modal_sendiri' => $modal_sendiri,
+            'modal_luar' => $modal_luar,
+            'asset' => $asset,
+            'omset' => $omset,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'no_telpon' => $no_telepon,
+            'gambar' => $uploads['gambar_konten'],
+            'polygon' => $polygon,
+            'ktp' => $uploads['ktp'],
+            'surat_izin_usaha' => $uploads['surat_izin_usaha'],
+            'nik' => $nik
+        ];
+    
+        $Usaha->add($data);
     }
-    
-    // Handle each file upload
-    handleUpload('gambar_konten', $uploads, $upload_dir_gk);
-    handleUpload('surat_izin_usaha', $uploads, $upload_dir_sk);
-    handleUpload('ktp', $uploads, $upload_dir_sk);
-    
-    // Data array with optional file uploads
-    $data = [
-        'nama_usaha' => $nama_usaha,
-        'id_deskel' => $id_deskel,
-        'id_su' => $id_su,
-        'id_ku' => $id_ku,
-        'tahun_pembentukan' => $tahun_pembentukan,
-        'jenis_usaha' => $jenis_usaha,
-        'no_izin' => $no_izin,
-        'nama_pemilik' => $nama_pemilik,
-        'alamat' => $alamat,
-        'tk_laki' => $tk_laki,
-        'tk_perempuan' => $tk_perempuan,
-        'modal_sendiri' => $modal_sendiri,
-        'modal_luar' => $modal_luar,
-        'asset' => $asset,
-        'omset' => $omset,
-        'latitude' => $latitude,
-        'longitude' => $longitude,
-        'no_telpon' => $no_telepon,
-        'gambar' => $uploads['gambar_konten'],
-        'polygon' => $polygon,
-        'ktp' => $uploads['ktp'],
-        'surat_izin_usaha' => $uploads['surat_izin_usaha']
-    ];
-    
-    $Usaha->add($data);
 }
 
 ?>
@@ -204,6 +205,7 @@ Swal.fire({
 <?php unset($_SESSION['error']); // Menghapus session setelah ditampilkan 
     ?>
 <?php endif; ?>
+
 <div class="card card-primary">
     <div class="card-header">
         <h3 class="card-title">
@@ -244,7 +246,7 @@ Swal.fire({
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Klasifikasi Usaha</label>
                 <div class="col-sm-5">
                     <select name="id_ku" id="id_ku" class="form-control">
@@ -254,7 +256,7 @@ Swal.fire({
                         <?php endforeach; ?>
                     </select>
                 </div>
-            </div>
+            </div> -->
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tahun Pembentukan</label>
@@ -278,22 +280,31 @@ Swal.fire({
                 </div>
             </div>
 
-
-
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Izin Usaha Yang Dimiliki</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="no_izin" name="no_izin" placeholder="Nomor Izin"
-                        required>
+                    <select id="no_izin" name="no_izin" required class="form-control">
+                        <option value="">- Pilih -</option>
+                        <option value="Punya">Punya</option>
+                        <option value="Tidak Punya">Tidak Punya</option>
+                    </select>
+                    <!-- <input type="text" class="form-control" id="no_izin" name="no_izin" placeholder="Nomor Izin"
+                            required> -->
                 </div>
             </div>
-
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nama Pemilik</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" id="nama_pemilik" name="nama_pemilik"
                         placeholder="Nama Pemilik" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">NIK Pemilik</label>
+                <div class="col-sm-5">
+                    <input type="number" class="form-control" id="nik" name="nik" placeholder="NIK Pemilik" required>
                 </div>
             </div>
 
@@ -380,10 +391,10 @@ Swal.fire({
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">KTP <i><small>(Optional)</small></i></label>
+                <label class="col-sm-2 col-form-label">KTP</label>
                 <div class="col-sm-5">
                     <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="ktp"
-                        name="ktp" placeholder="KTP">
+                        name="ktp" placeholder="KTP" required>
                 </div>
             </div>
             <div class="form-group row">
@@ -404,19 +415,19 @@ Swal.fire({
 /* Dengan Rupiah */
 var modal_luar = document.getElementById('modal_luar');
 modal_luar.addEventListener('keyup', function(e) {
-    modal_luar.value = formatRupiah(this.value, 'Rp. ');
+    modal_luar.value = formatRupiah(this.value, 'Rp');
 });
 var modal_sendiri = document.getElementById('modal_sendiri');
 modal_sendiri.addEventListener('keyup', function(e) {
-    modal_sendiri.value = formatRupiah(this.value, 'Rp. ');
+    modal_sendiri.value = formatRupiah(this.value, 'Rp');
 });
 var asset = document.getElementById('asset');
 asset.addEventListener('keyup', function(e) {
-    asset.value = formatRupiah(this.value, 'Rp. ');
+    asset.value = formatRupiah(this.value, 'Rp');
 });
 var omset = document.getElementById('omset');
 omset.addEventListener('keyup', function(e) {
-    omset.value = formatRupiah(this.value, 'Rp. ');
+    omset.value = formatRupiah(this.value, 'Rp');
 });
 
 /* Fungsi */
@@ -433,6 +444,6 @@ function formatRupiah(angka, prefix) {
     }
 
     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp' + rupiah : '');
 }
 </script>
