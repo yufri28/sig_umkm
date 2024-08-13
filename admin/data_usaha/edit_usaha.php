@@ -140,8 +140,7 @@ if (isset($_POST['Ubah'])) {
     $modal_luar = cleanRupiah(htmlspecialchars($_POST['modal_luar']));
     $asset = cleanRupiah(htmlspecialchars($_POST['asset']));
     $omset = cleanRupiah(htmlspecialchars($_POST['omset']));
-    $jumlahKaryawan = ($tk_laki + $tk_perempuan);
-    $id_ku = tentukanKategoriBisnis($jumlahKaryawan, $asset, $omset, $data_klasifikasi);
+    $id_ku = tentukanKategoriBisnis($omset, $data_klasifikasi);
     $latitude = htmlspecialchars($_POST['latitude']);
     $longitude = htmlspecialchars($_POST['longitude']);
     $no_telepon = htmlspecialchars($_POST['no_telepon']);

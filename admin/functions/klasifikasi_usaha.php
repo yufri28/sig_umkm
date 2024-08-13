@@ -25,10 +25,6 @@ class Klasifikasi
     public function add($data)
     {
         $nama_ku = $data['nama_klasifikasi'];
-        $min_tk = $data['min_tk'];
-        $max_tk = $data['max_tk'];
-        $min_aset = $data['min_aset'];
-        $max_aset = $data['max_aset'];
         $min_omset = $data['min_omset'];
         $max_omset = $data['max_omset'];
         
@@ -41,9 +37,9 @@ class Klasifikasi
             $insert = $this->db->query(
                 "INSERT INTO 
                         `klasifikasi_usaha`
-                        (nm_ku,min_tk,max_tk,min_aset,max_aset,min_omset,max_omset)
+                        (nm_ku,min_omset,max_omset)
                 VALUES
-                        ('$nama_ku','$min_tk','$max_tk','$min_aset','$max_aset','$min_omset','$max_omset')"
+                        ('$nama_ku','$min_omset','$max_omset')"
             );
 
             if ($insert) {
@@ -61,10 +57,6 @@ class Klasifikasi
         if (!empty($data)) {
             $id_ku = $data['id_ku'];
             $nama_ku = $data['nama_ku'];
-            $min_tk = $data['min_tk'];
-            $max_tk = $data['max_tk'];
-            $min_aset = $data['min_aset'];
-            $max_aset = $data['max_aset'];
             $min_omset = $data['min_omset'];
             $max_omset = $data['max_omset'];
             
@@ -77,11 +69,7 @@ class Klasifikasi
                 "UPDATE 
                     klasifikasi_usaha 
                 SET 
-                    nm_ku = '$nama_ku',
-                    min_tk = '$min_tk', 
-                    max_tk = '$max_tk', 
-                    min_aset = '$min_aset', 
-                    max_aset = '$max_aset', 
+                    nm_ku = '$nama_ku', 
                     min_omset = '$min_omset', 
                     max_omset = '$max_omset'
                  WHERE 

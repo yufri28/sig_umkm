@@ -37,11 +37,9 @@ function formatRupiah($angka) {
     return 'Rp' . number_format($angka, 0, ',', '.');
 }
 
-function tentukanKategoriBisnis($jumlahKaryawan, $aset, $omset, $klasifikasi_usaha) {
+function tentukanKategoriBisnis($omset, $klasifikasi_usaha) {
     foreach ($klasifikasi_usaha as $kategori) {
-        if ($jumlahKaryawan >= $kategori['min_tk'] && $jumlahKaryawan <= $kategori['max_tk'] &&
-            $aset >= $kategori['min_aset'] && $aset <= $kategori['max_aset'] &&
-            $omset >= $kategori['min_omset'] && $omset <= $kategori['max_omset']) {
+        if ($omset >= $kategori['min_omset'] && $omset <= $kategori['max_omset']) {
             return $kategori['id_ku'];
         }
     }

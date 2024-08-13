@@ -27,38 +27,6 @@ if (isset($_GET['kode'])) {
                         </tr>
                         <tr>
                             <td style="width: 150px">
-                                <b>Minimal Tenaga Kerja</b>
-                            </td>
-                            <td>:
-                                <?php echo $data_cek['min_tk']; ?> Orang
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 150px">
-                                <b>Maksimal Tenaga Kerja</b>
-                            </td>
-                            <td>:
-                                <?php echo $data_cek['max_tk']; ?> Orang
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 150px">
-                                <b>Minimal Aset</b>
-                            </td>
-                            <td>:
-                                <?php echo formatRupiah($data_cek['min_aset']); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 150px">
-                                <b>Maksimal Aset</b>
-                            </td>
-                            <td>:
-                                <?php echo formatRupiah($data_cek['max_aset']); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 150px">
                                 <b>Minimal Omset</b>
                             </td>
                             <td>:
