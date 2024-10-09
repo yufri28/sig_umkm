@@ -111,6 +111,36 @@ class Usaha
         );
     }
 
+    public function filterBy($kecamatan, $tahun_pembentukan, $jenus, $sektor_usaha, $klasifikasi_usaha) {
+        $query = "SELECT *, u.polygon AS polygon_usaha 
+                FROM usaha u 
+                JOIN deskel d ON u.id_deskel = d.id_deskel 
+                JOIN sektor_usaha su ON u.id_su = su.id_su 
+                JOIN kecamatan k ON d.id_kec = k.id_kec 
+                JOIN klasifikasi_usaha ku ON u.id_ku = ku.id_ku
+                JOIN jenus ju ON u.jns_ush = ju.id_ju WHERE 1=1";
+        
+        if ($kecamatan != '') {
+            $query .= " AND k.id_kec = '$kecamatan'";
+        }
+        if ($tahun_pembentukan != '') {
+            $query .= " AND u.thn_pmtkn = '$tahun_pembentukan'";
+        }
+        if ($jenus != '') {
+            $query .= " AND u.jns_ush = '$jenus'";
+        }
+        if ($sektor_usaha != '') {
+            $query .= " AND u.id_su = '$sektor_usaha'";
+        }
+        if ($klasifikasi_usaha != '') {
+            $query .= " AND u.id_ku = '$klasifikasi_usaha'";
+        }
+        
+        // Jalankan query dan kembalikan hasil
+        return $this->db->query($query);
+    }
+    
+
     public function add($data)
     {
         if (!empty($data)) {

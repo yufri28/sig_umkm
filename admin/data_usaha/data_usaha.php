@@ -13,6 +13,8 @@
                 <a href="?page=add-usaha" class="btn btn-primary mr-2">
                     <i class="fa fa-plus"></i> Tambah Data Usaha</a>
                 <?php endif;?>
+            </div>
+            <div class="d-lg-flex">
                 <!-- <a href="./../report/cetak_usaha.php" target="_blank" class="btn btn-success">
                     <i class="fa fa-print"></i> Cetak Data Usaha</a> -->
                 <!-- <a href="./report/cetak-pegawai.php" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i> Laporan</a> -->
@@ -35,9 +37,9 @@
 
                     </ul>
                 </div> -->
-                <form class="ml-auto overflow-scroll d-lg-flex" method="post" action="./../report/cetak_data_usaha.php">
-                    <div class="ml-auto overflow-scroll d-lg-flex">
-                        <div class="ml-lg-2 mt-lg-0 mt-2">
+                <form class="mt-3 overflow-scroll d-lg-flex" method="post" action="./../report/cetak_data_usaha.php">
+                    <div class="overflow-scroll d-lg-flex">
+                        <div class="mt-lg-0 mt-2">
                             <?php 
                              $data_kecamatan = $Kecamatan->get();
                             ?>
@@ -49,6 +51,48 @@
                             </select>
                         </div>
                         <div class="ml-lg-2 mt-lg-0 mt-2">
+                            <?php 
+                             $data_jenus = $Jenus->get();
+                            ?>
+                            <select class="form-control" name="jenus" id="jenus">
+                                <option value="">-- Pilih Jenis Usaha --</option>
+                                <?php foreach ($data_jenus as $key => $jenus):?>
+                                <?php if($jenus['nama_jenus'] != 'Default'):?>
+                                <option value="<?=$jenus['id_ju'];?>"><?=$jenus['nama_jenus'];?></option>
+                                <?php endif;?>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
+                        <div class="ml-lg-2 mt-lg-0 mt-2">
+                            <?php 
+                             $data_sektor = $Sektor->get();
+                            ?>
+                            <select class="form-control" name="sektor_usaha" id="sektor_usaha">
+                                <option value="">-- Pilih Sektor Usaha --</option>
+                                <?php foreach ($data_sektor as $key => $sektor):?>
+                                <option value="<?=$sektor['id_su'];?>"><?=$sektor['nm_su'];?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
+                        <div class="ml-lg-2 mt-lg-0 mt-2">
+                            <?php 
+                             $data_klasifikasi = $Klasifikasi->get();
+                            ?>
+                            <select class="form-control" name="klasifikasi_usaha" id="klasifikasi_usaha">
+                                <option value="">-- Pilih Klasifikasi Usaha --</option>
+                                <?php foreach ($data_klasifikasi as $key => $klasifikasi):?>
+                                <option value="<?=$klasifikasi['id_ku'];?>"><?=$klasifikasi['nm_ku'];?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
+                        <div class="ml-lg-2 mt-lg-0 mt-2">
+                            <label for="tahun_pembentukan">Tahun Pembentukan : </label>
+                        </div>
+                        <div class="ml-lg-2 mt-lg-0 mt-2">
+                            <input type="number" min="1900" max="2100" placeholder="YYYY" name="tahun_pembentukan"
+                                id="tahun_pembentukan" class="form-control">
+                        </div>
+                        <!-- <div class="ml-lg-2 mt-lg-0 mt-2">
                             <label for="tanggal_awal">Tanggal Awal :</label>
                         </div>
                         <div class="ml-lg-2 mt-lg-0 mt-2">
@@ -59,7 +103,7 @@
                         </div>
                         <div class="ml-lg-2 mt-lg-0 mt-2">
                             <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control">
-                        </div>
+                        </div> -->
                         <div class="ml-lg-2 mt-lg-0 mt-2">
                             <button class="btn btn-success" name="cetak_usaha" type="submit">
                                 <i class="fa fa-print"></i> Cetak

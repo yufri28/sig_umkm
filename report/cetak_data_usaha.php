@@ -5,27 +5,45 @@ require_once '../config.php';
 include '../admin/functions/usaha.php';
 
 $sql =array();
-if(isset($_POST['cetak_usaha'])){
-    $kecamatan = htmlspecialchars($_POST['kecamatan']);
-    $tanggal_awal = htmlspecialchars($_POST['tanggal_awal']);
-    $tanggal_akhir = htmlspecialchars($_POST['tanggal_akhir']);
+// if(isset($_POST['cetak_usaha'])){
+//     $kecamatan = htmlspecialchars($_POST['kecamatan']);
+//     $tanggal_awal = htmlspecialchars($_POST['tanggal_awal']);
+//     $tanggal_akhir = htmlspecialchars($_POST['tanggal_akhir']);
 
-    if($kecamatan != '' && $tanggal_awal != '' && $tanggal_akhir != ''){
-        $sql = $Usaha->getBy($kecamatan, $tanggal_awal, $tanggal_akhir);
-    }elseif($tanggal_awal != '' && $tanggal_akhir != ''){
-        $sql = $Usaha->getByDate($tanggal_awal, $tanggal_akhir);
-    }elseif($kecamatan != ''){
-        $sql = $Usaha->getByKecamatan($kecamatan);
-    }else{
-        if($tanggal_awal != '' && $tanggal_akhir == ''){
-            echo "<script>alert('Tanggal akhir tidak boleh kosong jika tanggal awal terisi!');window.location.href='../admin/index.php?page=data-usaha'</script>";
-        }
-        elseif($tanggal_awal == '' && $tanggal_akhir != ''){
-            echo "<script>alert('Tanggal awal tidak boleh kosong jika tanggal akhir terisi!');window.location.href='../admin/index.php?page=data-usaha'</script>";
-        }
+//     if($kecamatan != '' && $tanggal_awal != '' && $tanggal_akhir != ''){
+//         $sql = $Usaha->getBy($kecamatan, $tanggal_awal, $tanggal_akhir);
+//     }elseif($tanggal_awal != '' && $tanggal_akhir != ''){
+//         $sql = $Usaha->getByDate($tanggal_awal, $tanggal_akhir);
+//     }elseif($kecamatan != ''){
+//         $sql = $Usaha->getByKecamatan($kecamatan);
+//     }else{
+//         if($tanggal_awal != '' && $tanggal_akhir == ''){
+//             echo "<script>alert('Tanggal akhir tidak boleh kosong jika tanggal awal terisi!');window.location.href='../admin/index.php?page=data-usaha'</script>";
+//         }
+//         elseif($tanggal_awal == '' && $tanggal_akhir != ''){
+//             echo "<script>alert('Tanggal awal tidak boleh kosong jika tanggal akhir terisi!');window.location.href='../admin/index.php?page=data-usaha'</script>";
+//         }
+//         $sql = $Usaha->get();
+//     }
+// }
+if (isset($_POST['cetak_usaha'])) {
+    $kecamatan = htmlspecialchars($_POST['kecamatan']);
+    $tahun_pembentukan = htmlspecialchars($_POST['tahun_pembentukan']);
+    $jenus = htmlspecialchars($_POST['jenus']);
+    $sektor_usaha = htmlspecialchars($_POST['sektor_usaha']);
+    $klasifikasi_usaha = htmlspecialchars($_POST['klasifikasi_usaha']);
+
+    // Inisialisasi query
+    if ($kecamatan != '' || $tahun_pembentukan != '' || $jenus != '' || $sektor_usaha != '' || $klasifikasi_usaha != '') {
+        // Jika semua kriteria terisi
+        $sql = $Usaha->filterBy($kecamatan, $tahun_pembentukan, $jenus, $sektor_usaha, $klasifikasi_usaha);
+    } else {
+        // Jika tidak ada kriteria terisi, tampilkan semua data
         $sql = $Usaha->get();
     }
 }
+
+
 
 ?>
 
